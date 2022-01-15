@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NammaMetroMVVM</string>
+    <string name="checking_for_update">Checking For Update</string>
+</resources>
