@@ -14,8 +14,9 @@ class UserRepository(
 
 
 
-    suspend fun checkForUpdate(): JSONObject {
+    suspend fun checkForUpdate(): String {
         return apiRequest { api.checkForUpdate(reqCheckForUpdate, BuildConfig.VERSION_NAME) }
+        //return "{\"status\":\"OK\",\"msg\":\"\",\"data\":{\"new_version\":\"1.9\",\"upgrade_flag\":\"1\"}}\n"
     }
 
 }

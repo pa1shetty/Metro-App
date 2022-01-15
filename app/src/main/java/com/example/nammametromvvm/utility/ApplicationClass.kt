@@ -46,7 +46,7 @@ class ApplicationClass : Application(), KodeinAware {
                 instance(),
                 instance(),
                 instance(),
-                instance()
+                instance(), instance()
             )
         }
     }

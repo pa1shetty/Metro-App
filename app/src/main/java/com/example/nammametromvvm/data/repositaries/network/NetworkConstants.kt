@@ -7,9 +7,6 @@ object NetworkConstants {
     const val READ_TIME_OUT = 1000 * 12
 
 
-    const val emailLbl = "email"
-    const val passwordLbl = "password"
-    const val nameLbl = "name"
     const val requestTypeLbl = "requestType"
     const val versionLbl = "version"
 

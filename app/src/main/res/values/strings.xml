@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">NammaMetroMVVM</string>
     <string name="checking_for_update">Checking For Update</string>
+    <string name="update_available">Update Available!</string>
+    <string name="update_info">There is a new version of app available,\nWith new features and bug fixes.\nWould you like to update the App?</string>
+    <string name="update">Update</string>
+    <string name="no_thanks">No Thanks</string>
+    <string name="close_app">Close  App</string>
+    <string name="retry">Retry</string>
+    <string name="something_went_wrong">"Something went wrong! "</string>
+    <string name="something_went_wrong_info">"Something went wrong! \nWould you like to try again ?                       "</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.codingwithjks.datastorepreferences.dataStoreSetting.PreferencesKeys
+import com.example.nammametromvvm.splashscreen.enumReturn.UpdateEnum
 import com.example.nammametromvvm.utility.AesLibrary
 import com.example.nammametromvvm.utility.AppConstants.dataStoreDefaultValue
 import com.example.nammametromvvm.utility.AppConstants.dataStoreName
@@ -26,39 +27,55 @@ class DataStoreSetting(context: Context, private var aesLibrary: AesLibrary) {
         }
     }
 
-    /*private  fun getStringData(key: Preferences.Key<String>): Flow<String> =
+    private fun getStringDataOld(key: Preferences.Key<String>): Flow<String> =
         dataStore.data
             .catch {
                 if (this is IOException) {
                     emit(emptyPreferences())
                 }
             }.map { preference ->
-                var value = "none"
+                var value = dataStoreDefaultValue
                 preference[key]?.let {
                     value = aesLibrary.decryptData(
                         it
                     )
                 }
                 value
-            }*/
+            }
 
     suspend fun saveLastAppUpdateDate(lastAppUpdateDateValue: String) {
         saveStringData(PreferencesKeys.lastAppUpdateDate, lastAppUpdateDateValue)
     }
 
-    suspend fun getLastAppUpdateDate():String{
-      return  getStringData(PreferencesKeys.lastAppUpdateDate)
+    suspend fun saveUpgradeFlag(upgradeFlag: String) {
+        saveStringData(PreferencesKeys.upgradeFlag, upgradeFlag)
     }
 
-    private suspend fun getStringData(key: Preferences.Key<String>): String {
+    suspend fun getUpgradeFlag(): String {
+        return getStringData(
+            PreferencesKeys.upgradeFlag,
+            UpdateEnum.NO_UPDATE.update.toString()
+        )
+    }
+
+
+    suspend fun getLastAppUpdateCheckedTime(): String {
+        return getStringData(PreferencesKeys.lastAppUpdateDate)
+    }
+
+    private suspend fun getStringData(
+        key: Preferences.Key<String>,
+        defaultValue: String = dataStoreDefaultValue
+    ): String {
         val preferences = dataStore.data.first()
-        var value = dataStoreDefaultValue
+        var value = defaultValue
         preferences[key]?.let {
             value = aesLibrary.decryptData(
                 it
             )
         }
-        return value;
+        return value
     }
+
 
 }

@@ -3,10 +3,9 @@ package com.example.mymvvmsample.data
 
 import com.google.gson.annotations.SerializedName
 
-data class updateData(
-  
-    @SerializedName("new_version")
-    val newVersion: String,
+data class UpdateData(
     @SerializedName("upgrade_flag")
-    val upgradeFlag: String
+    var upgradeFlag: Int,
+    @SerializedName("new_version")
+    val newVersion: String=""
 )

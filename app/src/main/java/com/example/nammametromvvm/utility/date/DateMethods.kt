@@ -22,4 +22,35 @@ class DateMethods {
         }
     }
 
+    fun findDifferenceBetweenDates(
+        d1: Date,
+        d2: Date,
+        differenceType: Int = DateDifferenceTypeEnum.HOURS.DifferenceType
+    ): Long {
+        val differenceInTime: Long = d2.time - d1.time
+        val differenceInSeconds = ((differenceInTime
+                / 1000)
+                % 60)
+        val differenceInMinutes = ((differenceInTime
+                / (1000 * 60))
+                % 60)
+        val differenceInHours = ((differenceInTime
+                / (1000 * 60 * 60))
+                % 24)
+        val differenceInYears = (differenceInTime
+                / (1000L * 60 * 60 * 24 * 365))
+        val differenceInDays = ((differenceInTime
+                / (1000 * 60 * 60 * 24))
+                % 365)
+        return when (differenceType) {
+            DateDifferenceTypeEnum.YEARS.DifferenceType -> differenceInYears
+            DateDifferenceTypeEnum.DAYS.DifferenceType -> differenceInDays
+            DateDifferenceTypeEnum.HOURS.DifferenceType -> differenceInHours
+            DateDifferenceTypeEnum.MINUTES.DifferenceType -> differenceInMinutes
+            DateDifferenceTypeEnum.SECONDS.DifferenceType -> differenceInSeconds
+            else -> {
+                differenceInHours
+            }
+        }
+    }
 }
