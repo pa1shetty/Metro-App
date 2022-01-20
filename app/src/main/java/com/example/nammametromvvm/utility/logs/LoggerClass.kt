@@ -1,7 +1,6 @@
 package com.example.nammametromvvm.utility.logs
 
 import android.util.Log
-import com.example.nammametromvvm.utility.AppConstants.logs
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
@@ -15,7 +14,6 @@ import java.lang.Exception
  */
 class LoggerClass(override val kodein: Kodein) : KodeinAware {
     private val logs: Logs by instance()
-
     fun info(text: String) {
         val fullClassName = Thread.currentThread().stackTrace[3].className
         val className = fullClassName.substring(fullClassName.lastIndexOf('.') + 1)

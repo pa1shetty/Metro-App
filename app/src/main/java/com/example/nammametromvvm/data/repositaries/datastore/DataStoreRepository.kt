@@ -5,11 +5,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.codingwithjks.datastorepreferences.dataStoreSetting.PreferencesKeys
-import com.example.nammametromvvm.splashscreen.enumReturn.UpdateEnum
+import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum
 import com.example.nammametromvvm.utility.AesLibrary
 import com.example.nammametromvvm.utility.AppConstants.dataStoreDefaultValue
 import com.example.nammametromvvm.utility.AppConstants.dataStoreName
+import com.example.nammametromvvm.utility.AppConstants.defaultModifiedOn
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
@@ -18,7 +18,7 @@ import java.io.IOException
 
 private val Context.dataStore by preferencesDataStore(dataStoreName)
 
-class DataStoreSetting(context: Context, private var aesLibrary: AesLibrary) {
+class DataStoreRepository(context: Context, private var aesLibrary: AesLibrary) {
     private val dataStore = context.dataStore
 
     private suspend fun saveStringData(key: Preferences.Key<String>, value: String) {
@@ -54,7 +54,18 @@ class DataStoreSetting(context: Context, private var aesLibrary: AesLibrary) {
     suspend fun getUpgradeFlag(): String {
         return getStringData(
             PreferencesKeys.upgradeFlag,
-            UpdateEnum.NO_UPDATE.update.toString()
+            SplashScreenEnum.UpdateEnum.NO_UPDATE.update.toString()
+        )
+    }
+
+    suspend fun saveConfigLastModifiedOn(lastConfigLastModifiedOnValue: String) {
+        saveStringData(PreferencesKeys.configLastModifiedOn, lastConfigLastModifiedOnValue)
+    }
+
+    suspend fun getConfigLastModifiedOn(): String {
+        return getStringData(
+            PreferencesKeys.configLastModifiedOn,
+            defaultModifiedOn
         )
     }
 
@@ -77,5 +88,26 @@ class DataStoreSetting(context: Context, private var aesLibrary: AesLibrary) {
         return value
     }
 
+    fun isUserLoggedIn() = dataStore.data.catch { exception -> // 1
+        if (exception is IOException) { // 2
+            emit(emptyPreferences())
+        } else {
+            throw exception
+        }
+    }.map { it[PreferencesKeys.userLoggedIn] ?: false }
+
+    suspend fun userLoggedIn() {
+        saveUserLogInData(true)
+    }
+
+    suspend fun userLoggedOut() {
+        saveUserLogInData(false)
+    }
+
+    suspend fun saveUserLogInData(loginBoolean: Boolean) {
+        dataStore.edit {
+            it[PreferencesKeys.userLoggedIn] = loginBoolean
+        }
+    }
 
 }

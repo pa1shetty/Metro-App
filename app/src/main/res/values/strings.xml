@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">NammaMetroMVVM</string>
     <string name="checking_for_update">Checking For Update</string>
+    <string name="checking_for_configuration">Checking For Configuration</string>
+    <string name="checking_for_login_details">Checking For Login Details</string>
+
     <string name="update_available">Update Available!</string>
     <string name="update_info">There is a new version of app available,\nWith new features and bug fixes.\nWould you like to update the App?</string>
     <string name="update">Update</string>
@@ -8,5 +11,18 @@
     <string name="close_app">Close  App</string>
     <string name="retry">Retry</string>
     <string name="something_went_wrong">"Something went wrong! "</string>
-    <string name="something_went_wrong_info">"Something went wrong! \nWould you like to try again ?                       "</string>
+    <string name="something_went_wrong_info">"Something went wrong! \nWould you like to try again ?"</string>
+
+    <string name="no_internet">No Internet connection! </string>
+    <string name="no_internet_info">No Internet connection! \nPlease Check the connection and try again</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
 </resources>

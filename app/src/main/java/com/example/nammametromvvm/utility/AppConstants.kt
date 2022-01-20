@@ -1,7 +1,6 @@
 package com.example.nammametromvvm.utility
 
 import com.example.nammametromvvm.utility.date.DateDifferenceTypeEnum
-import com.example.nammametromvvm.utility.logs.Logs
 
 object AppConstants {
     const val FILE_EXTENSION = ".log"
@@ -10,9 +9,10 @@ object AppConstants {
     const val LOG_FOLDER_NAME = "Logs"
 
     const val FILE_NAME = "NAMMA_METRO_LOGS"
-    var INTERNAL_LOG_PATH:String = ""
+    lateinit var INTERNAL_LOG_PATH: String
     const val dataStoreName = "user_specific_details"
     const val dataStoreDefaultValue = "none"
+    const val defaultModifiedOn = "NA"
 
     const val appUpdateCheckTime = 1
     val appUpdateTimeDifferenceType = DateDifferenceTypeEnum.SECONDS.DifferenceType

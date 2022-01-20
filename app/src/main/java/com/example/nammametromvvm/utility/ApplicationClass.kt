@@ -3,11 +3,13 @@
 package com.example.nammametromvvm.utility
 
 import android.app.Application
-import com.example.mymvvmsample.data.network.MyApi
+import com.example.mymvvmsample.data.db.entites.AppDatabase
 import com.example.mymvvmsample.data.network.NetworkConnectionInterceptor
-import com.example.mymvvmsample.data.repositaries.UserRepository
-import com.example.nammametromvvm.data.repositaries.datastore.DataStoreSetting
-import com.example.nammametromvvm.splashscreen.SplashScreenViewModelFactory
+import com.example.mymvvmsample.data.repositaries.DataBaseRepository
+import com.example.mymvvmsample.data.repositaries.NetworkRepository
+import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
+import com.example.nammametromvvm.data.repositaries.network.MyApi
+import com.example.nammametromvvm.ui.splashscreen.SplashScreenViewModelFactory
 import com.example.nammametromvvm.utility.AppConstants.INTERNAL_LOG_PATH
 import com.example.nammametromvvm.utility.AppConstants.LOG_FOLDER_NAME
 import com.example.nammametromvvm.utility.date.DateMethods
@@ -34,19 +36,22 @@ class ApplicationClass : Application(), KodeinAware {
 
         bind() from singleton { LoggerClass(kodein) }
         bind() from singleton { Logs(kodein) }
-        bind() from singleton { AesLibrary()}
-        bind() from singleton { DataStoreSetting(instance(),instance()) }
+        bind() from singleton { AesLibrary() }
+        bind() from singleton { DataStoreRepository(instance(), instance()) }
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
         bind() from singleton { DateMethods() }
         bind() from singleton { MyApi(instance()) }
-        bind() from singleton { UserRepository(instance()) }
+        bind() from singleton { AppDatabase(instance()) }
+
+        bind() from singleton { DataBaseRepository(instance()) }
+        bind() from singleton { NetworkRepository(instance(), instance(), instance()) }
         bind() from provider {
             SplashScreenViewModelFactory(
                 instance(),
                 instance(),
                 instance(),
                 instance(),
-                instance(), instance()
+                instance(), instance(), instance()
             )
         }
     }
