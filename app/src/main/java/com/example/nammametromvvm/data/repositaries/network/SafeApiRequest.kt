@@ -1,12 +1,12 @@
 package com.example.mymvvmsample.data.network
 
-import com.example.nammametromvvm.data.repositaries.network.ErrorException
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.okLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.errorCodeLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.messageLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.msgLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.statusLbl
 import com.example.nammametromvvm.utility.ApiException
+import com.example.nammametromvvm.utility.ErrorException
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
@@ -21,7 +21,7 @@ abstract class SafeApiRequest {
                 return response.body().toString()
             } else {
                 if (jsonObject.has(errorCodeLbl)) {
-                    throw ErrorException(
+                    throw   ErrorException(
                         jsonObject.getString(msgLbl),
                         jsonObject.getInt(errorCodeLbl)
                     )

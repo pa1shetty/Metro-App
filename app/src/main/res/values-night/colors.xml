@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="splashscreen_bg">#FF000000</color>
 
-    <color name="bmrcl_color">#800080</color>
+    <color name="bmrcl_color">#EC74EC</color>
     <color name="colorSplashScreenBg">#1D1C1C</color>
+    <color name="colorOnPrimary">@color/white</color>
+    <color name="textColor">@color/white</color>
+    <color name="lightGray">#D3D3D3</color>
 </resources>

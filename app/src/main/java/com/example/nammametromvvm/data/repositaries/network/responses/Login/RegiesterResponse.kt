@@ -1,12 +1,11 @@
+package com.example.nammametromvvm.data.repositaries.network.responses.Login
 
 
 import com.google.gson.annotations.SerializedName
 
-data class ErrorResponse(
+data class RegiesterResponse(
     @SerializedName("data")
-    val `data`: String,
-    @SerializedName("errorCode")
-    val errorCode: String,
+    val `data`: Data,
     @SerializedName("msg")
     val msg: String,
     @SerializedName("status")

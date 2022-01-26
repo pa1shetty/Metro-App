@@ -11,8 +11,7 @@ import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.con
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.dataLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.modifiedOnLbl
 import com.example.nammametromvvm.data.repositaries.network.RequestTypeEnum
-import com.example.nammametromvvm.utility.ApiException
-import com.example.nammametromvvm.utility.NoInternetException
+import com.example.nammametromvvm.data.repositaries.network.responses.Login.RegiesterResponse
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
@@ -85,6 +84,15 @@ class NetworkRepository(
         dataStoreRepository.saveConfigLastModifiedOn(
             JSONObject(test).getJSONObject(dataLbl).getString(modifiedOnLbl)
         )
+    }
+
+    suspend fun registerUser(phoneNumber: String): RegiesterResponse {
+        return gson.fromJson(apiRequest {
+            api.registerUser(
+                RequestTypeEnum.Regiester.requestType,
+                phoneNumber,
+            )
+        }, RegiesterResponse::class.java)
     }
 
 }

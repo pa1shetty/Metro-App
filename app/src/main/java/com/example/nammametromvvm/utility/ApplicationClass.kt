@@ -9,6 +9,9 @@ import com.example.mymvvmsample.data.repositaries.DataBaseRepository
 import com.example.mymvvmsample.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.data.repositaries.network.MyApi
+import com.example.nammametromvvm.ui.login.data.LoginDataSource
+import com.example.nammametromvvm.ui.login.data.LoginRepository
+import com.example.nammametromvvm.ui.login.ui.login.LoginViewModelFactory
 import com.example.nammametromvvm.ui.splashscreen.SplashScreenViewModelFactory
 import com.example.nammametromvvm.utility.AppConstants.INTERNAL_LOG_PATH
 import com.example.nammametromvvm.utility.AppConstants.LOG_FOLDER_NAME
@@ -42,7 +45,7 @@ class ApplicationClass : Application(), KodeinAware {
         bind() from singleton { DateMethods() }
         bind() from singleton { MyApi(instance()) }
         bind() from singleton { AppDatabase(instance()) }
-
+        bind() from singleton { GenericMethods() }
         bind() from singleton { DataBaseRepository(instance()) }
         bind() from singleton { NetworkRepository(instance(), instance(), instance()) }
         bind() from provider {
@@ -54,5 +57,18 @@ class ApplicationClass : Application(), KodeinAware {
                 instance(), instance(), instance()
             )
         }
+        bind() from singleton { LoginDataSource() }
+        bind() from singleton { LoginRepository(instance()) }
+        bind() from provider {
+            LoginViewModelFactory(
+                instance(),
+                instance(),
+                instance(),
+                instance(),
+                instance(), instance(), instance(), instance(), instance()
+            )
+        }
     }
+
+
 }

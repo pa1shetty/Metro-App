@@ -24,5 +24,9 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="need_help">Need Help?</string>
+    <string name="we_will_send_an_otp_to_your_number">We will send an OTP to your number</string>
 
 </resources>

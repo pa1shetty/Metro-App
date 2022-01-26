@@ -16,8 +16,10 @@ import com.example.nammametromvvm.databinding.ActivitySplashScreenBinding
 import com.example.nammametromvvm.databinding.BottomSheetDialogLayoutBinding
 import com.example.nammametromvvm.ui.homescreen.HomeActivity
 import com.example.nammametromvvm.ui.login.ui.login.LoginActivity
-import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum
+import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum
+import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum.*
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum
+import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.*
 import com.example.nammametromvvm.utility.GeneralException
 import com.example.nammametromvvm.utility.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -44,9 +46,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
-        viewModel = ViewModelProvider(this, factory).get(
-            SplashViewModel::class.java
-        )
+        viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
         viewModel.setUpLogs()
         checkIfUpdateCheckNeeded()
 
@@ -81,11 +81,11 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
             val updateResponse = viewModel.checkForUpdate()
             loadingInfo(false)
             when (updateResponse.upgradeFlag) {
-                UpdateEnum.NO_UPDATE.update -> proceedAfterUpdateCheck()
-                UpdateEnum.OPTIONAL.update -> updateAvailableDialogue(updateResponse)
-                UpdateEnum.MANDATORY.update -> updateAvailableDialogue(updateResponse)
+                NO_UPDATE.update -> proceedAfterUpdateCheck()
+                OPTIONAL.update -> updateAvailableDialogue(updateResponse)
+                MANDATORY.update -> updateAvailableDialogue(updateResponse)
                 else -> {
-                    if (viewModel.getUpgradeFlag() == UpdateEnum.MANDATORY.update) {
+                    if (viewModel.getUpgradeFlag() == MANDATORY.update) {
                         updateAvailableDialogue(updateResponse)
                     } else {
                         proceedAfterUpdateCheck()
@@ -110,13 +110,14 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
             val configDownloadReturn = viewModel.configDownload()
             loadingInfo(false)
             when (configDownloadReturn) {
-                SplashScreenEnum.ConfigEnum.UPDATED.configReturn,
-                SplashScreenEnum.ConfigEnum.UP_TO_DATE.configReturn,
-                SplashScreenEnum.ConfigEnum.ERROR_BUT_PROCEED.configReturn ->
+                UPDATED.configReturn,
+                UP_TO_DATE.configReturn,
+                ERROR_BUT_PROCEED.configReturn ->
                     proceedAfterConfigCheck()
-                SplashScreenEnum.ConfigEnum.ERROR.configReturn,
-                SplashScreenEnum.ConfigEnum.NO_INTERNET.configReturn ->
+                ConfigEnum.ERROR.configReturn,
+                NO_INTERNET.configReturn -> {
                     configErrorDialog(configDownloadReturn)
+                }
 
             }
         }
@@ -175,11 +176,11 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
         updateDialogueBinding.positiveButton.text =
             getString(R.string.retry)
         when (configError) {
-            SplashScreenEnum.ConfigEnum.ERROR.configReturn -> {
+            ConfigEnum.ERROR.configReturn -> {
                 updateDialogueBinding.tvHeader.text = getString(R.string.something_went_wrong)
                 updateDialogueBinding.tvInfo.text = getString(R.string.something_went_wrong_info)
             }
-            SplashScreenEnum.ConfigEnum.NO_INTERNET.configReturn -> {
+            NO_INTERNET.configReturn -> {
                 updateDialogueBinding.tvHeader.text = getString(R.string.no_internet)
                 updateDialogueBinding.tvInfo.text = getString(R.string.no_internet_info)
             }
@@ -203,7 +204,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
         bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetDialog.show()
         when (updateResponse.upgradeFlag) {
-            UpdateEnum.MANDATORY.update -> updateDialogueBinding.negativeButton.text =
+            MANDATORY.update -> updateDialogueBinding.negativeButton.text =
                 getString(R.string.close_app)
             UpdateEnum.ERROR.update -> {
                 updateDialogueBinding.positiveButton.text =
@@ -219,10 +220,10 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
         updateDialogueBinding.negativeButton.setOnClickListener {
             bottomSheetDialog.cancel()
             when (updateResponse.upgradeFlag) {
-                UpdateEnum.MANDATORY.update, UpdateEnum.ERROR.update -> {
+                MANDATORY.update, UpdateEnum.ERROR.update -> {
                     onBackPressed()
                 }
-                UpdateEnum.OPTIONAL.update -> {
+                OPTIONAL.update -> {
                     proceedAfterUpdateCheck()
                 }
             }
@@ -230,7 +231,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
         updateDialogueBinding.positiveButton.setOnClickListener {
             bottomSheetDialog.cancel()
             when (updateResponse.upgradeFlag) {
-                UpdateEnum.MANDATORY.update, UpdateEnum.OPTIONAL.update -> {
+                MANDATORY.update, OPTIONAL.update -> {
                     gotoPlayStore()
                 }
                 UpdateEnum.ERROR.update -> {
@@ -248,7 +249,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
                     Uri.parse("market://details?id=com.aum.nammametro")
                 )
             )
-        } catch (anfe: ActivityNotFoundException) {
+        } catch (activityNotFoundException: ActivityNotFoundException) {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,

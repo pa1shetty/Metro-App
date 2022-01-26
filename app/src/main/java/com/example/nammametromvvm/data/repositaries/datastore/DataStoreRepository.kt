@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.nammametromvvm.ui.login.ui.login.enumClass.LoginScreenEnum
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum
 import com.example.nammametromvvm.utility.AesLibrary
 import com.example.nammametromvvm.utility.AppConstants.dataStoreDefaultValue
@@ -60,6 +61,15 @@ class DataStoreRepository(context: Context, private var aesLibrary: AesLibrary) 
 
     suspend fun saveConfigLastModifiedOn(lastConfigLastModifiedOnValue: String) {
         saveStringData(PreferencesKeys.configLastModifiedOn, lastConfigLastModifiedOnValue)
+    }
+
+    suspend fun saveCToken(cToken: String) {
+        saveStringData(PreferencesKeys.cToken, cToken)
+    }
+    suspend fun getCToken(): String {
+        return getStringData(
+            PreferencesKeys.cToken
+        )
     }
 
     suspend fun getConfigLastModifiedOn(): String {

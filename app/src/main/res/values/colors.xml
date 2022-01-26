@@ -10,4 +10,8 @@
     <color name="splashscreen_bg">#FFFFFFFF</color>
     <color name="bmrcl_color">#800080</color>
     <color name="colorSplashScreenBg">#F8F8F8</color>
+    <color name="colorOnPrimary">@color/white</color>
+    <color name="textColor">@color/black</color>
+    <color name="lightGray">#D3D3D3</color>
+
 </resources>

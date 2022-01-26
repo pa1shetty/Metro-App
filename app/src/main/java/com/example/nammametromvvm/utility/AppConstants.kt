@@ -14,7 +14,7 @@ object AppConstants {
     const val dataStoreDefaultValue = "none"
     const val defaultModifiedOn = "NA"
 
-    const val appUpdateCheckTime = 1
-    val appUpdateTimeDifferenceType = DateDifferenceTypeEnum.SECONDS.DifferenceType
+    const val appUpdateCheckTime = 24
+    val appUpdateTimeDifferenceType = DateDifferenceTypeEnum.HOURS.DifferenceType
 
 }

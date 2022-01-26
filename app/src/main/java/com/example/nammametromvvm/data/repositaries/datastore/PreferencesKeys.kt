@@ -10,5 +10,6 @@ object PreferencesKeys {
     val upgradeFlag = stringPreferencesKey("upgradeFlag")
     val configLastModifiedOn = stringPreferencesKey("configLastModifiedOn")
     val userLoggedIn = booleanPreferencesKey("userLoggedIn")
+    val cToken = stringPreferencesKey("cToken")
 
 }

@@ -7,15 +7,14 @@ import com.example.mymvvmsample.data.repositaries.DataBaseRepository
 import com.example.mymvvmsample.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.data.repositaries.entites.User
-import com.example.nammametromvvm.data.repositaries.network.ErrorException
-import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum
-import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum
+import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.*
 import com.example.nammametromvvm.utility.ApiException
 import com.example.nammametromvvm.utility.AppConstants
 import com.example.nammametromvvm.utility.AppConstants.appUpdateCheckTime
 import com.example.nammametromvvm.utility.AppConstants.appUpdateTimeDifferenceType
 import com.example.nammametromvvm.utility.AppConstants.dataStoreDefaultValue
 import com.example.nammametromvvm.utility.AppConstants.defaultModifiedOn
+import com.example.nammametromvvm.utility.ErrorException
 import com.example.nammametromvvm.utility.NoInternetException
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.logs.LoggerClass

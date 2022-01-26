@@ -5,6 +5,7 @@ import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.CON
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.READ_TIME_OUT
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.getBaseUrl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.modifiedOnLbl
+import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.phoneNumberLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.requestTypeLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.typeIdLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.versionLbl
@@ -36,6 +37,11 @@ interface MyApi {
         @Query(modifiedOnLbl) modifiedOn: String,
     ): Response<JsonObject>
 
+    @POST("mserver")
+    suspend fun registerUser(
+        @Query(requestTypeLbl) requestType: String,
+        @Query(phoneNumberLbl) phoneNumber: String,
+    ): Response<JsonObject>
     companion object {
         var gson: Gson = GsonBuilder()
             .setLenient()
@@ -51,7 +57,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okHttpClient.build())
-                .baseUrl(getBaseUrl(BaseUrlTypeEnum.Uat.baseUrlType))
+                .baseUrl(getBaseUrl(BaseUrlTypeEnum.ONE_NOT_ONE.baseUrlType))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build().create(MyApi::class.java)

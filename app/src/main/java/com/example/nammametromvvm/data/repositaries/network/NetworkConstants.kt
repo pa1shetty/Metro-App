@@ -17,12 +17,14 @@ object NetworkConstants {
     const val configLbl = "config"
 
 
-
     const val modifiedOnLbl = "modified_on"
     const val typeIdLbl = "type_id"
+    const val phoneNumberLbl="phoneNumber"
     fun getBaseUrl(urlType: Int = BaseUrlTypeEnum.Uat.baseUrlType): String {
         return when (urlType) {
             BaseUrlTypeEnum.PavanLocal.baseUrlType -> "http://10.8.0.10:8084//bwi_mobile/"
+            BaseUrlTypeEnum.ONE_NOT_ONE.baseUrlType -> "https://auminfotech.in/bwi_mobile/"
+
             else -> {
                 "http://uatmetrolocal.auminfotech.in:7004/bwi_mobile/"
             }
@@ -34,6 +36,8 @@ object NetworkConstants {
 enum class RequestTypeEnum(val requestType: String) {
     CheckForUpdate("115"),
     Download("113"),
+    Regiester("103"),
+
 }
 
 enum class DownloadTypeEnum(val downloadType: String) {
@@ -43,4 +47,5 @@ enum class DownloadTypeEnum(val downloadType: String) {
 enum class BaseUrlTypeEnum(val baseUrlType: Int) {
     Uat(0),
     PavanLocal(1),
+    ONE_NOT_ONE(2),
 }
