@@ -10,9 +10,10 @@ import com.example.mymvvmsample.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.example.nammametromvvm.utility.logs.Logs
+import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
-class SplashScreenViewModelFactory(
+class SplashScreenViewModelFactory @Inject constructor(
     private val application: Application,
     private val logs: Logs,
     private val networkRepository: NetworkRepository,

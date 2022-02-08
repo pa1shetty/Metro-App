@@ -16,10 +16,11 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.io.IOException
+import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore(dataStoreName)
 
-class DataStoreRepository(context: Context, private var aesLibrary: AesLibrary) {
+class DataStoreRepository @Inject constructor(context: Context, private var aesLibrary: AesLibrary) {
     private val dataStore = context.dataStore
 
     private suspend fun saveStringData(key: Preferences.Key<String>, value: String) {

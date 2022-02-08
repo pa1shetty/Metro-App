@@ -1,20 +1,17 @@
 package com.example.nammametromvvm.utility.logs
 
 import android.util.Log
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.lang.Exception
+import javax.inject.Inject
 
 
 /**
  * Created by USER on 02-07-2020.
  */
-class LoggerClass(override val kodein: Kodein) : KodeinAware {
-    private val logs: Logs by instance()
+class LoggerClass  @Inject constructor(private val logs: Logs) {
     fun info(text: String) {
+
         val fullClassName = Thread.currentThread().stackTrace[3].className
         val className = fullClassName.substring(fullClassName.lastIndexOf('.') + 1)
         val methodName = Thread.currentThread().stackTrace[3].methodName

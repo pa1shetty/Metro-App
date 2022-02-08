@@ -35,13 +35,6 @@ class SplashViewModel(
     private val loggerClass: LoggerClass,
     private val dataBaseRepository: DataBaseRepository
 ) : AndroidViewModel(application) {
-    fun setUpLogs() {
-        logs.toFile(
-            AppConstants.INTERNAL_LOG_PATH + File.separator + AppConstants.FILE_NAME,
-            AppConstants.NO_OF_FILES
-        )
-    }
-
     suspend fun checkForUpdate() =
         withContext(Dispatchers.IO) {
             try {

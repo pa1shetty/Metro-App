@@ -19,17 +19,15 @@ import com.example.nammametromvvm.utility.logs.Logs
 
 @Suppress("UNCHECKED_CAST")
 class LoginViewModelFactory(
-    private val application: Application,
-    private val logs: Logs,
     private val networkRepository: NetworkRepository,
     private val dataStoreRepository: DataStoreRepository,
-    private val dateMethods: DateMethods,
-    private val loggerClass: LoggerClass,
-    private val dataBaseRepository: DataBaseRepository,
-    private val  loginRepository: LoginRepository,
-    private val dataSource: LoginDataSource
+    private val loginRepository: LoginRepository
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return LoginViewModel(application, logs, networkRepository,dataStoreRepository,dateMethods,loggerClass,dataBaseRepository,loginRepository,dataSource) as T
+        return LoginViewModel(
+            networkRepository,
+            dataStoreRepository,
+            loginRepository
+        ) as T
     }
 }

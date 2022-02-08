@@ -19,15 +19,9 @@ import com.example.nammametromvvm.utility.logs.Logs
 
 
 class LoginViewModel(
-    private val application: Application,
-    private val logs: Logs,
     private val networkRepository: NetworkRepository,
     private val dataStoreRepository: DataStoreRepository,
-    private val dateMethods: DateMethods,
-    private val loggerClass: LoggerClass,
-    private val dataBaseRepository: DataBaseRepository,
-    private val loginRepository: LoginRepository,
-    private val dataSource: LoginDataSource
+    private val loginRepository: LoginRepository
 ) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()

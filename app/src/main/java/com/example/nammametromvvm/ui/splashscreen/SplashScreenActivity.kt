@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -21,23 +22,29 @@ import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.Co
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.*
 import com.example.nammametromvvm.utility.GeneralException
+import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.example.nammametromvvm.utility.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
+import javax.inject.Inject
 
 
 @SuppressLint("CustomSplashScreen")
-class SplashScreenActivity : AppCompatActivity(), KodeinAware {
-    override val kodein by kodein()
+@AndroidEntryPoint
+class SplashScreenActivity : AppCompatActivity() {
     private lateinit var viewModel: SplashViewModel
-    private val factory: SplashScreenViewModelFactory by instance()
-    private val loggerClass: com.example.nammametromvvm.utility.logs.LoggerClass by instance()
 
+
+    @Inject
+    lateinit var factory: SplashScreenViewModelFactory
+    @Inject
+    lateinit var loggerClass: LoggerClass
+
+    @Inject
+    lateinit var testString: String
     private lateinit var binding: ActivitySplashScreenBinding
     private lateinit var updateDialogueBinding: BottomSheetDialogLayoutBinding
 
@@ -47,9 +54,7 @@ class SplashScreenActivity : AppCompatActivity(), KodeinAware {
         val view: View = binding.root
         setContentView(view)
         viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
-        viewModel.setUpLogs()
         checkIfUpdateCheckNeeded()
-
         saveUser()
     }
 

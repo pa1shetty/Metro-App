@@ -22,7 +22,7 @@ import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 
-interface MyApi {
+interface MyApi  {
 
     @POST("mserver")
     suspend fun checkForUpdate(

@@ -2,11 +2,9 @@ package com.example.nammametromvvm.utility.logs
 
 import android.annotation.TargetApi
 import android.os.Build
+import com.example.nammametromvvm.utility.AppConstants
 import com.example.nammametromvvm.utility.AppConstants.FILE_EXTENSION
 import com.example.nammametromvvm.utility.AppConstants.MAX_FILE_SIZE
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
 import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -23,22 +21,15 @@ import java.util.*
 /**
  * Created by USER on 02-07-2020.
  */
-class Logs(override val kodein: Kodein) :   KodeinAware {
+class Logs {
     //constants
     private var files2Retain = 10
-    private val logs: Logs by instance()
-    private val loggerClass: LoggerClass by instance()
 
     //variables
-    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS",Locale.getDefault())
+    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
     private var fileLogged = false
-    private var fileName: String? = null
+    private var fileName: String? = AppConstants.INTERNAL_LOG_PATH + File.separator + AppConstants.FILE_NAME
     private var logFile: TextFile? = null
-    fun toFile(fileName: String?, files2Retain: Int) {
-        this.fileName = fileName
-        this.files2Retain = files2Retain
-        init()
-    }
 
     @Throws(Throwable::class)
     protected fun finalize() {
@@ -53,7 +44,6 @@ class Logs(override val kodein: Kodein) :   KodeinAware {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.O)
     @Synchronized
     fun init() {
         try {
@@ -90,20 +80,14 @@ class Logs(override val kodein: Kodein) :   KodeinAware {
             }
         } catch (ex: Exception) {
             warn(ex.toString())
-            loggerClass.error(ex);
         }
     }
 
     @Synchronized
     private fun log(message: String): String {
-        try {
-            init()
-            if (fileLogged) {
-                logFile!!.writeLine(message)
-            }
-            //System.out.println(message);
-        } catch (ex: Exception) {
-            loggerClass.error(ex)
+        init()
+        if (fileLogged) {
+            logFile!!.writeLine(message)
         }
         return message
     }

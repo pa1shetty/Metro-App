@@ -14,9 +14,10 @@ import com.example.nammametromvvm.data.repositaries.network.RequestTypeEnum
 import com.example.nammametromvvm.data.repositaries.network.responses.Login.RegiesterResponse
 import org.json.JSONObject
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class NetworkRepository(
+class NetworkRepository @Inject constructor(
     private val api: MyApi,
     private val dataBaseRepository: DataBaseRepository,
     private val dataStoreRepository: DataStoreRepository

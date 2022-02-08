@@ -22,22 +22,23 @@ import com.example.nammametromvvm.databinding.FragmentLoginUserDetailsBinding
 import com.example.nammametromvvm.ui.login.ui.login.LoggedInUserView
 import com.example.nammametromvvm.ui.login.ui.login.LoginViewModel
 import com.example.nammametromvvm.ui.login.ui.login.LoginViewModelFactory
-import com.example.nammametromvvm.ui.login.ui.login.enumClass.LoginScreenEnum.*
+import com.example.nammametromvvm.ui.login.ui.login.enumClass.LoginScreenEnum.ButtonStatusEnum
 import com.example.nammametromvvm.utility.GenericMethods
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login_user_details.*
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
-import java.util.*
+import javax.inject.Inject
 
-class LoginUserDetailsFragment : Fragment(), KodeinAware {
+@AndroidEntryPoint
+class LoginUserDetailsFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginUserDetailsBinding
-    override val kodein: Kodein by kodein()
-    private val genericMethods: GenericMethods by instance()
-    private val factory: LoginViewModelFactory by instance()
+
+    @Inject
+    lateinit var genericMethods: GenericMethods
+
+    @Inject
+    lateinit var factory: LoginViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

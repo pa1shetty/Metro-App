@@ -6,8 +6,9 @@ import android.net.NetworkCapabilities
 import com.example.nammametromvvm.utility.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class NetworkConnectionInterceptor(
+class NetworkConnectionInterceptor @Inject constructor(
     context: Context
 ) : Interceptor {
     private val applicationContext = context.applicationContext
