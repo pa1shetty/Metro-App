@@ -3,8 +3,11 @@ package com.example.nammametromvvm.data.repositaries.network
 import com.example.mymvvmsample.data.network.NetworkConnectionInterceptor
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.CONNECTION_TIME_OUT
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.READ_TIME_OUT
+import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.cTokenLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.getBaseUrl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.modifiedOnLbl
+import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.mserver
+import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.otpLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.phoneNumberLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.requestTypeLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.typeIdLbl
@@ -22,26 +25,35 @@ import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 
-interface MyApi  {
+interface MyApi {
 
-    @POST("mserver")
+    @POST(mserver)
     suspend fun checkForUpdate(
         @Query(requestTypeLbl) requestType: String,
         @Query(versionLbl) splTkn: String,
     ): Response<JsonObject>
 
-    @POST("mserver")
+    @POST(mserver)
     suspend fun commonDownload(
         @Query(requestTypeLbl) requestType: String,
         @Query(typeIdLbl) downloadType: String,
         @Query(modifiedOnLbl) modifiedOn: String,
     ): Response<JsonObject>
 
-    @POST("mserver")
-    suspend fun registerUser(
+    @POST(mserver)
+    suspend fun requestForOtp(
         @Query(requestTypeLbl) requestType: String,
         @Query(phoneNumberLbl) phoneNumber: String,
     ): Response<JsonObject>
+
+    @POST(mserver)
+    suspend fun verifyOtp(
+        @Query(requestTypeLbl) requestType: String,
+        @Query(otpLbl) otp: String,
+        @Query(cTokenLbl) cToken: String
+    ): Response<JsonObject>
+
+
     companion object {
         var gson: Gson = GsonBuilder()
             .setLenient()

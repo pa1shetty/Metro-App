@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.ui.login.OtpDetails.LoginOtpDetails">
+    android:padding="18dp"
+    android:background="@color/colorSplashScreenBg"
+    tools:context=".ui.login.ui.activity.LoginActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:id="@+id/tv_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/need_help"
+        android:textColor="@color/bmrcl_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/iv_smartphone"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:src="@drawable/ic_otp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_start_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:contentDescription="@string/smartphone" />
+
+    <TextView
+        android:id="@+id/tv_start_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/great_thanks"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_otp_sent_to"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_smartphone" />
+
+    <TextView
+        android:id="@+id/tv_otp_sent_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/we_will_send_an_otp_to_your_number"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/etOtp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_mobile_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_header" />
+    <TextView
+        android:id="@+id/tv_mobile_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/textColor"
+        app:layout_constraintTop_toTopOf="@+id/tv_otp_sent_to"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_otp_sent_to"
+        app:layout_constraintStart_toEndOf="@+id/tv_otp_sent_to"
+        app:layout_constraintEnd_toStartOf="@+id/tv_edit"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_header" />
+    <TextView
+        android:id="@+id/tv_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:textSize="12sp"
+        android:textColor="@color/bmrcl_color"
+        app:layout_constraintStart_toEndOf="@+id/tv_mobile_number"
+        app:layout_constraintBottom_toTopOf="@+id/etOtp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_header" />
+
+    <EditText
+        android:id="@+id/etOtp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/transparent_square_button"
+        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="5"
+        android:padding="4dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:selectAllOnFocus="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/tv_t_n_c"
+        app:layout_constraintEnd_toStartOf="@+id/cv_proceed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_otp_sent_to"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_proceed"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="2dp"
+        android:background="@color/colorSplashScreenBg"
+        android:clickable="false"
+        app:cardCornerRadius="250dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toBottomOf="@id/etOtp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etOtp"
+        app:layout_constraintTop_toTopOf="@+id/etOtp">
+
+        <ImageView
+            android:id="@+id/iv_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_navigate_next_24"
+            app:tint="@color/lightGray"
+            android:contentDescription="@string/proceed"/>
+
+        <ProgressBar
+            android:id="@+id/pb_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
+            app:layout_constraintStart_toStartOf="@+id/etPhoneNumber"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_t_n_c"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/did_not_receive_otp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_resend"
+        app:layout_constraintTop_toBottomOf="@+id/etOtp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/tv_resend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:text="@string/resend_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_t_n_c"
+        app:layout_constraintBottom_toBottomOf="@id/tv_t_n_c"
+        app:layout_constraintStart_toEndOf="@id/tv_t_n_c"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

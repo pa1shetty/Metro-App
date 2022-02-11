@@ -22,11 +22,31 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_phone_number">Phone number must be of %1$s digit.</string>
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="need_help">Need Help?</string>
-    <string name="we_will_send_an_otp_to_your_number">We will send an OTP to your number</string>
+    <string name="we_will_send_an_otp_to_your_number">We will send an OTP to your number\t\t</string>
+    <string name="great_thanks">Great, Thanks!</string>
+    <string name="did_not_receive_otp">Didn\'t receive OTP?</string>
+    <string name="resend_in">\tResend in %1$s seconds</string>
+    <string name="resend">\tResend</string>
+
+    <string name="edit">\tEdit</string>
+    <string name="otp_mismatch">"Otp Mismatch, Please Renter OTP"</string>
+    <string name="otp_time_out">"Otp Time Out, Requested for new OTP"</string>
+    <string name="invalid_mobile_number">Please Enter valid mobile number</string>
+    <string name="enter_valid_otp">Please Enter valid OTP</string>
+    <string name="skip">SKIP</string>
+    <string name="home_screen_welcome">Hello, %1$s</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="logo">Logo</string>
+    <string name="smartphone">Smartphone</string>
+    <string name="proceed">Proceed</string>
+    <string name="let_s_get_started">Let\'s Get Started</string>
+    <string name="by_proceeding_you_accept">By proceeding you accept</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
 
 </resources>

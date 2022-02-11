@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -15,12 +14,12 @@ import com.example.nammametromvvm.R
 import com.example.nammametromvvm.data.repositaries.entites.User
 import com.example.nammametromvvm.databinding.ActivitySplashScreenBinding
 import com.example.nammametromvvm.databinding.BottomSheetDialogLayoutBinding
-import com.example.nammametromvvm.ui.homescreen.HomeActivity
-import com.example.nammametromvvm.ui.login.ui.login.LoginActivity
+import com.example.nammametromvvm.ui.homescreen.activity.HomeActivity
+import com.example.nammametromvvm.ui.login.ui.activity.LoginActivity
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum
-import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum.*
-import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum
+import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum.UP_TO_DATE
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.*
+import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GeneralException
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.example.nammametromvvm.utility.toast
@@ -40,6 +39,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: SplashScreenViewModelFactory
+
     @Inject
     lateinit var loggerClass: LoggerClass
 
@@ -47,6 +47,9 @@ class SplashScreenActivity : AppCompatActivity() {
     lateinit var testString: String
     private lateinit var binding: ActivitySplashScreenBinding
     private lateinit var updateDialogueBinding: BottomSheetDialogLayoutBinding
+
+    @Inject
+    lateinit var configurationsClass: Configurations
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,7 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
         checkIfUpdateCheckNeeded()
         saveUser()
+
     }
 
     private fun saveUser() {
@@ -115,29 +119,37 @@ class SplashScreenActivity : AppCompatActivity() {
             val configDownloadReturn = viewModel.configDownload()
             loadingInfo(false)
             when (configDownloadReturn) {
-                UPDATED.configReturn,
+                ConfigEnum.UPDATED.configReturn,
                 UP_TO_DATE.configReturn,
-                ERROR_BUT_PROCEED.configReturn ->
+                ConfigEnum.ERROR_BUT_PROCEED.configReturn ->
                     proceedAfterConfigCheck()
                 ConfigEnum.ERROR.configReturn,
-                NO_INTERNET.configReturn -> {
+                ConfigEnum.NO_INTERNET.configReturn -> {
                     configErrorDialog(configDownloadReturn)
                 }
-
             }
         }
-
     }
 
     private suspend fun proceedAfterConfigCheck() {
-        viewModel.userLoggedOut()
         loadingInfo(true, getString(R.string.checking_for_login_details))
         viewModel.isUserLoggedIn().collect { isUserLoggedIn ->
             loadingInfo(false)
             if (isUserLoggedIn) {
                 navigateToHomeScreen()
             } else {
-                navigateToLoginScreen()
+                if (viewModel.isMandatoryLogin()) {
+                    navigateToLoginScreen()
+                } else {
+                    viewModel.isLoginSkipped().collect { isLoginSkipped ->
+                        if (isLoginSkipped) {
+                            navigateToHomeScreen()
+                        } else {
+                            navigateToLoginScreen()
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -185,7 +197,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 updateDialogueBinding.tvHeader.text = getString(R.string.something_went_wrong)
                 updateDialogueBinding.tvInfo.text = getString(R.string.something_went_wrong_info)
             }
-            NO_INTERNET.configReturn -> {
+            ConfigEnum.NO_INTERNET.configReturn -> {
                 updateDialogueBinding.tvHeader.text = getString(R.string.no_internet)
                 updateDialogueBinding.tvInfo.text = getString(R.string.no_internet_info)
             }
@@ -211,7 +223,7 @@ class SplashScreenActivity : AppCompatActivity() {
         when (updateResponse.upgradeFlag) {
             MANDATORY.update -> updateDialogueBinding.negativeButton.text =
                 getString(R.string.close_app)
-            UpdateEnum.ERROR.update -> {
+            ERROR.update -> {
                 updateDialogueBinding.positiveButton.text =
                     getString(R.string.close_app)
                 updateDialogueBinding.negativeButton.text =
@@ -225,7 +237,7 @@ class SplashScreenActivity : AppCompatActivity() {
         updateDialogueBinding.negativeButton.setOnClickListener {
             bottomSheetDialog.cancel()
             when (updateResponse.upgradeFlag) {
-                MANDATORY.update, UpdateEnum.ERROR.update -> {
+                MANDATORY.update, ERROR.update -> {
                     onBackPressed()
                 }
                 OPTIONAL.update -> {
@@ -239,7 +251,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 MANDATORY.update, OPTIONAL.update -> {
                     gotoPlayStore()
                 }
-                UpdateEnum.ERROR.update -> {
+                ERROR.update -> {
                     checkIfUpdateCheckNeeded()
                 }
             }

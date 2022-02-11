@@ -7,22 +7,30 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mymvvmsample.data.repositaries.DataBaseRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.mymvvmsample.data.repositaries.NetworkRepository
+import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.logs.LoggerClass
-import com.example.nammametromvvm.utility.logs.Logs
 import javax.inject.Inject
-
+@Suppress("UNCHECKED_CAST")
 @SuppressLint("CustomSplashScreen")
 class SplashScreenViewModelFactory @Inject constructor(
     private val application: Application,
-    private val logs: Logs,
     private val networkRepository: NetworkRepository,
     private val dataStoreRepository: DataStoreRepository,
     private val dateMethods: DateMethods,
     private val loggerClass: LoggerClass,
-    private val dataBaseRepository: DataBaseRepository
+    private val dataBaseRepository: DataBaseRepository,
+    private val configurations: Configurations
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return SplashViewModel(application, logs, networkRepository,dataStoreRepository,dateMethods,loggerClass,dataBaseRepository) as T
+        return SplashViewModel(
+            application,
+            networkRepository,
+            dataStoreRepository,
+            dateMethods,
+            loggerClass,
+            dataBaseRepository,
+            configurations
+        ) as T
     }
 }

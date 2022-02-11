@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import com.example.nammametromvvm.R
 
 class GenericMethods {
     fun showKeyPad(activity: Activity, view: View?) {
@@ -14,6 +15,7 @@ class GenericMethods {
             0
         )
     }
+
     fun hideKeypad(activity: Activity) {
         val inputManager = activity
             .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -25,4 +27,22 @@ class GenericMethods {
             )
         }
     }
+
+    fun showSnackBar(root: View, error: Int, activity: Activity) {
+        when (error) {
+            StatusEnum.OTP_MISMATCH.statusReturn -> {
+                root.snackBar(activity.getString(R.string.otp_mismatch))
+            }
+            StatusEnum.OTP_TIME_OUT.statusReturn -> {
+                root.snackBar(activity.getString(R.string.otp_time_out))
+            }
+            StatusEnum.NO_INTERNET.statusReturn -> {
+                root.snackBar(activity.getString(R.string.no_internet))
+            }
+            else -> {
+                root.snackBar(activity.getString(R.string.something_went_wrong))
+            }
+        }
+    }
+
 }

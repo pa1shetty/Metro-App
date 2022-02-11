@@ -1,5 +1,6 @@
 package com.example.nammametromvvm.utility
 
+import com.example.nammametromvvm.data.repositaries.entites.Config
 import com.example.nammametromvvm.utility.date.DateDifferenceTypeEnum
 
 object AppConstants {
@@ -13,6 +14,7 @@ object AppConstants {
     const val dataStoreName = "user_specific_details"
     const val dataStoreDefaultValue = "none"
     const val defaultModifiedOn = "NA"
+    lateinit var configurations: List<Config>
 
     const val appUpdateCheckTime = 24
     val appUpdateTimeDifferenceType = DateDifferenceTypeEnum.HOURS.DifferenceType

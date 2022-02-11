@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorSplashScreenBg"
 
-    tools:context=".ui.login.ui.login.LoginActivity">
+    tools:context=".ui.login.ui.activity.LoginActivity">
 
 
     <androidx.fragment.app.FragmentContainerView

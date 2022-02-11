@@ -5,6 +5,7 @@ object NetworkConstants {
     const val CONNECTION_TIME_OUT = 1000 * 4
     const val READ_TIME_OUT = 1000 * 12
 
+    const val mserver = "mserver"
 
     const val requestTypeLbl = "requestType"
     const val statusLbl = "status"
@@ -16,10 +17,13 @@ object NetworkConstants {
     const val dataLbl = "data"
     const val configLbl = "config"
 
-
     const val modifiedOnLbl = "modified_on"
     const val typeIdLbl = "type_id"
     const val phoneNumberLbl="phoneNumber"
+
+    const val otpLbl="otp"
+    const val cTokenLbl="cToken"
+
     fun getBaseUrl(urlType: Int = BaseUrlTypeEnum.Uat.baseUrlType): String {
         return when (urlType) {
             BaseUrlTypeEnum.PavanLocal.baseUrlType -> "http://10.8.0.10:8084//bwi_mobile/"
@@ -37,6 +41,7 @@ enum class RequestTypeEnum(val requestType: String) {
     CheckForUpdate("115"),
     Download("113"),
     Regiester("103"),
+    VerifyOtp("104"),
 
 }
 

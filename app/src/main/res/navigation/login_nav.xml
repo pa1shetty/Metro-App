@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginUserDetailsFragment"
-        android:name="com.example.nammametromvvm.ui.login.ui.login.UserDetails.LoginUserDetailsFragment"
+        android:name="com.example.nammametromvvm.ui.login.ui.fragments.LoginUserDetailsFragment"
         android:label="LoginUserDetailsFragment">
         <action
             android:id="@+id/action_loginUserDetailsFragment_to_loginOtpDetails"
@@ -29,17 +29,28 @@
     </fragment>
     <fragment
         android:id="@+id/loginOtpDetails"
-        android:name="com.example.nammametromvvm.ui.login.ui.login.OtpDetails.LoginOtpDetails"
+        android:name="com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragment"
         android:label="fragment_login_otp_details"
-        tools:layout="@layout/fragment_login_otp_details" />
+        tools:layout="@layout/fragment_login_otp_details" >
+        <action
+            android:id="@+id/action_loginOtpDetails_to_loginHelpFragment"
+            app:destination="@id/loginHelpFragment"
+            app:enterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"/>
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"
+            android:defaultValue="0"
+            />
+    </fragment>
     <fragment
         android:id="@+id/loginHelpFragment"
-        android:name="com.example.nammametromvvm.ui.login.ui.login.LoginHelpFragment"
+        android:name="com.example.nammametromvvm.ui.login.ui.fragments.LoginHelpFragment"
         android:label="fragment_login_help"
         tools:layout="@layout/fragment_login_help" />
     <fragment
         android:id="@+id/termAndConditionFragment"
-        android:name="com.example.nammametromvvm.ui.login.ui.login.TermAndConditionFragment"
+        android:name="com.example.nammametromvvm.ui.login.ui.fragments.TermAndConditionFragment"
         android:label="fragment_term_and_condition"
         tools:layout="@layout/fragment_term_and_condition" />
 </navigation>

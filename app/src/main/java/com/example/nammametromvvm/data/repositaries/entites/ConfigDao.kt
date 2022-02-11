@@ -1,6 +1,5 @@
 package com.example.nammametromvvm.data.repositaries.entites
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -10,10 +9,17 @@ interface ConfigDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveConfig(config: List<Config>)
 
+
+    @Query("SELECT configValue FROM config WHERE configName = :configName")
+    fun getConfig(configName: String): String
+
     @Query("SELECT * FROM config")
     @JvmSuppressWildcards
-    fun getUser(): LiveData<Config>
+    fun getConfigs(): List<Config>
+
+
 
     @Query("DELETE FROM config")
-    fun nukeTConfigable()
+    fun nukeConfigurable()
+
 }

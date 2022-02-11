@@ -5,8 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.nammametromvvm.ui.login.ui.login.enumClass.LoginScreenEnum
-import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum
+import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.NO_UPDATE
 import com.example.nammametromvvm.utility.AesLibrary
 import com.example.nammametromvvm.utility.AppConstants.dataStoreDefaultValue
 import com.example.nammametromvvm.utility.AppConstants.dataStoreName
@@ -20,7 +19,10 @@ import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore(dataStoreName)
 
-class DataStoreRepository @Inject constructor(context: Context, private var aesLibrary: AesLibrary) {
+class DataStoreRepository @Inject constructor(
+    context: Context,
+    private var aesLibrary: AesLibrary
+) {
     private val dataStore = context.dataStore
 
     private suspend fun saveStringData(key: Preferences.Key<String>, value: String) {
@@ -56,7 +58,7 @@ class DataStoreRepository @Inject constructor(context: Context, private var aesL
     suspend fun getUpgradeFlag(): String {
         return getStringData(
             PreferencesKeys.upgradeFlag,
-            SplashScreenEnum.UpdateEnum.NO_UPDATE.update.toString()
+            NO_UPDATE.update.toString()
         )
     }
 
@@ -67,11 +69,45 @@ class DataStoreRepository @Inject constructor(context: Context, private var aesL
     suspend fun saveCToken(cToken: String) {
         saveStringData(PreferencesKeys.cToken, cToken)
     }
+
+
     suspend fun getCToken(): String {
         return getStringData(
             PreferencesKeys.cToken
         )
     }
+
+
+    suspend fun saveCKey(cKey: String) {
+        saveStringData(PreferencesKeys.cKey, cKey)
+    }
+
+    suspend fun getCKey(): String {
+        return getStringData(
+            PreferencesKeys.cKey
+        )
+    }
+
+    suspend fun saveUserName(userName: String) {
+        saveStringData(PreferencesKeys.userName, userName)
+    }
+
+    suspend fun getUserName(): String {
+        return getStringData(
+            PreferencesKeys.userName
+        )
+    }
+
+    suspend fun saveUserEmail(userName: String) {
+        saveStringData(PreferencesKeys.userEmail, userName)
+    }
+
+    suspend fun getUserEmail(): String {
+        return getStringData(
+            PreferencesKeys.userEmail
+        )
+    }
+
 
     suspend fun getConfigLastModifiedOn(): String {
         return getStringData(
@@ -107,6 +143,14 @@ class DataStoreRepository @Inject constructor(context: Context, private var aesL
         }
     }.map { it[PreferencesKeys.userLoggedIn] ?: false }
 
+    fun isLoginSkipped() = dataStore.data.catch { exception -> // 1
+        if (exception is IOException) { // 2
+            emit(emptyPreferences())
+        } else {
+            throw exception
+        }
+    }.map { it[PreferencesKeys.loginSkipped] ?: false }
+
     suspend fun userLoggedIn() {
         saveUserLogInData(true)
     }
@@ -115,10 +159,39 @@ class DataStoreRepository @Inject constructor(context: Context, private var aesL
         saveUserLogInData(false)
     }
 
-    suspend fun saveUserLogInData(loginBoolean: Boolean) {
+    private suspend fun saveUserLogInData(loginBoolean: Boolean) {
         dataStore.edit {
             it[PreferencesKeys.userLoggedIn] = loginBoolean
         }
     }
 
+    suspend fun setLoginSkipped() {
+        saveLoginSkipped(true)
+    }
+
+    suspend fun clearLoginSkipped() {
+        saveLoginSkipped(false)
+    }
+
+    private suspend fun saveLoginSkipped(loginSkipBoolean: Boolean) {
+        dataStore.edit {
+            it[PreferencesKeys.loginSkipped] = loginSkipBoolean
+        }
+    }
+
+    fun getUserNameFlow()=getStringAsFlow(PreferencesKeys.userName)
+
+    private fun getStringAsFlow(
+        key: Preferences.Key<String>
+    ): Flow<String> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map {
+            it[key]?.let { it1 -> aesLibrary.decryptData(it1) } ?: dataStoreDefaultValue
+        }
 }

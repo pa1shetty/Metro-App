@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.nammametromvvm">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NammaMetroMVVM"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m"
+        tools:ignore="DataExtractionRules">
         <activity
             android:name="com.example.nammametromvvm.ui.splashscreen.SplashScreenActivity"
             android:exported="true"
@@ -23,15 +26,14 @@
             android:theme="@style/Theme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.nammametromvvm.ui.homescreen.HomeActivity"
+            android:name="com.example.nammametromvvm.ui.homescreen.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.nammametromvvm.ui.login.ui.login.LoginActivity"
+            android:name="com.example.nammametromvvm.ui.login.ui.activity.LoginActivity"
             android:noHistory="true"
             android:exported="false" />
     </application>

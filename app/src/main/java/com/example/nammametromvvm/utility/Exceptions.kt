@@ -7,7 +7,7 @@ class NoInternetException(message: String):IOException(message)
 class ApiError(message: String): Exception(message)
 class GeneralException(message: String): Exception(message)
 class ErrorException : java.lang.Exception {
-    private val code: Int
+    val code: Int
 
     constructor(code: Int) : super() {
         this.code = code
@@ -26,6 +26,6 @@ class ErrorException : java.lang.Exception {
     }
 
     constructor(message: String?) : super(message) {
-        this.code = 0
+        this.code = -1
     }
 }
