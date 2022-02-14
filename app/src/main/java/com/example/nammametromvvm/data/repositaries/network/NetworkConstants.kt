@@ -38,13 +38,14 @@ object NetworkConstants {
 }
 
 enum class RequestTypeEnum(val requestType: String) {
+    @Suppress("unused")
     CheckForUpdate("115"),
     Download("113"),
     Regiester("103"),
     VerifyOtp("104"),
 
 }
-
+@Suppress("unused")
 enum class DownloadTypeEnum(val downloadType: String) {
     Configuration("3"),
 }

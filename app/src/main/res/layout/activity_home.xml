@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorSplashScreenBg"
     android:padding="12dp"
-    tools:context=".ui.homescreen.activity.HomeActivity">
+    tools:context=".ui.homescreen.activity.HomeActivity"
+    tools:ignore="Overdraw">
 
 
     <androidx.fragment.app.FragmentContainerView

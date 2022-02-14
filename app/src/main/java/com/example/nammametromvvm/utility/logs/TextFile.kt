@@ -1,8 +1,6 @@
 package com.example.nammametromvvm.utility.logs
 
 import java.io.*
-import java.lang.Exception
-import java.util.ArrayList
 
 
 /**
@@ -15,9 +13,9 @@ class TextFile(fileName: String) {
     private var `in`: BufferedReader? = null
     private var out: BufferedWriter? = null
     private var fileOperation = 0
-    var curPos = 0
-        private set
+    private var curPos = 0
     private val aline: MutableList<String> = ArrayList()
+    @Suppress("unused")
     val totalLines: Int
         get() = aline.size
 
@@ -68,19 +66,19 @@ class TextFile(fileName: String) {
             aline.add(line)
         }
     }
-
+    @Suppress("unused")
     fun prevLine(): String? {
         return if (curPos > 1) aline[--curPos - 1] else null
     }
-
+    @Suppress("unused")
     fun nextLine(): String? {
         return if (curPos < aline.size) aline[++curPos - 1] else null
     }
-
+    @Suppress("unused")
     fun curLine(): String? {
         return if (curPos > 0 && curPos <= aline.size) aline[curPos - 1] else null
     }
-
+    @Suppress("unused")
     fun getLine(lineNumber: Int): String? {
         return if (lineNumber > 0 && lineNumber <= aline.size) aline[lineNumber - 1] else null
     }

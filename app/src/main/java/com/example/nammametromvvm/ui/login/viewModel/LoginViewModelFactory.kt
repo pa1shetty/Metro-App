@@ -2,7 +2,7 @@ package com.example.nammametromvvm.ui.login.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mymvvmsample.data.repositaries.NetworkRepository
+import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.logs.LoggerClass

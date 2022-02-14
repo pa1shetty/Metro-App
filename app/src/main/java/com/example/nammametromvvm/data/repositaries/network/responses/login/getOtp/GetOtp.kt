@@ -1,11 +1,11 @@
-package com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification
+package com.example.nammametromvvm.data.repositaries.network.responses.login.getOtp
 
 
 import com.google.gson.annotations.SerializedName
 
-data class OtpVerification(
+data class GetOtp(
     @SerializedName("data")
-    val `data`: OtpVerificationData,
+    val `data`: GetOtpData,
     @SerializedName("msg")
     val msg: String,
     @SerializedName("status")

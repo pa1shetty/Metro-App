@@ -1,7 +1,5 @@
 package com.example.nammametromvvm.utility.logs
 
-import android.annotation.TargetApi
-import android.os.Build
 import com.example.nammametromvvm.utility.AppConstants
 import com.example.nammametromvvm.utility.AppConstants.FILE_EXTENSION
 import com.example.nammametromvvm.utility.AppConstants.MAX_FILE_SIZE

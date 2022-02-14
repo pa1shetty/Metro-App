@@ -30,7 +30,7 @@ class DataStoreRepository @Inject constructor(
             preference[key] = aesLibrary.encryptData(value)
         }
     }
-
+    @Suppress("unused")
     private fun getStringDataOld(key: Preferences.Key<String>): Flow<String> =
         dataStore.data
             .catch {
@@ -81,7 +81,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun saveCKey(cKey: String) {
         saveStringData(PreferencesKeys.cKey, cKey)
     }
-
+    @Suppress("unused")
     suspend fun getCKey(): String {
         return getStringData(
             PreferencesKeys.cKey
@@ -91,7 +91,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun saveUserName(userName: String) {
         saveStringData(PreferencesKeys.userName, userName)
     }
-
+    @Suppress("unused")
     suspend fun getUserName(): String {
         return getStringData(
             PreferencesKeys.userName
@@ -101,7 +101,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun saveUserEmail(userName: String) {
         saveStringData(PreferencesKeys.userEmail, userName)
     }
-
+    @Suppress("unused")
     suspend fun getUserEmail(): String {
         return getStringData(
             PreferencesKeys.userEmail
@@ -154,7 +154,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun userLoggedIn() {
         saveUserLogInData(true)
     }
-
+    @Suppress("unused")
     suspend fun userLoggedOut() {
         saveUserLogInData(false)
     }
@@ -168,7 +168,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun setLoginSkipped() {
         saveLoginSkipped(true)
     }
-
+    @Suppress("unused")
     suspend fun clearLoginSkipped() {
         saveLoginSkipped(false)
     }

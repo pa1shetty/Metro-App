@@ -1,4 +1,4 @@
-package com.example.mymvvmsample.data.network
+package com.example.nammametromvvm.data.repositaries.network
 
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.okLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.errorCodeLbl

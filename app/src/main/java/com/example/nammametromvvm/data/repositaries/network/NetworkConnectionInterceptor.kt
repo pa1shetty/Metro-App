@@ -1,4 +1,4 @@
-package com.example.mymvvmsample.data.network
+package com.example.nammametromvvm.data.repositaries.network
 
 import android.content.Context
 import android.net.ConnectivityManager

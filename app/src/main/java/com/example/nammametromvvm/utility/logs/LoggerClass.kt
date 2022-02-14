@@ -10,8 +10,8 @@ import javax.inject.Inject
  * Created by USER on 02-07-2020.
  */
 class LoggerClass  @Inject constructor(private val logs: Logs) {
+    @Suppress("unused")
     fun info(text: String) {
-
         val fullClassName = Thread.currentThread().stackTrace[3].className
         val className = fullClassName.substring(fullClassName.lastIndexOf('.') + 1)
         val methodName = Thread.currentThread().stackTrace[3].methodName

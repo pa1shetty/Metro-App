@@ -1,19 +1,17 @@
-package com.example.myretrofit.TicketDetails
+package com.example.nammametromvvm.data.repositaries.network.responses.ticketDetails
 
 
 import com.google.gson.annotations.SerializedName
 
-data class ExpiredTicket(
-    @SerializedName("expiredOn")
-    val expiredOn: String,
+data class UsedTicket(
     @SerializedName("fromStop")
     val fromStop: String,
     @SerializedName("nmbrOfPssngrs")
     val nmbrOfPssngrs: String,
-    @SerializedName("numberOfExpiredTickets")
-    val numberOfExpiredTickets: String,
     @SerializedName("paymentID")
     val paymentID: String,
+    @SerializedName("pssngr_data")
+    val pssngrData: List<PssngrData>,
     @SerializedName("toStop")
     val toStop: String,
     @SerializedName("totalFare")
@@ -23,5 +21,11 @@ data class ExpiredTicket(
     @SerializedName("txnID")
     val txnID: String,
     @SerializedName("txnStatus")
-    val txnStatus: String
+    val txnStatus: String,
+    @SerializedName("usedOn")
+    val usedOn: String,
+    @SerializedName("validFrom")
+    val validFrom: String,
+    @SerializedName("validTill")
+    val validTill: String
 )

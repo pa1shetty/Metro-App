@@ -2,11 +2,12 @@ package com.example.nammametromvvm.ui.splashscreen
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.mymvvmsample.data.UpdateData
-import com.example.mymvvmsample.data.repositaries.DataBaseRepository
-import com.example.mymvvmsample.data.repositaries.NetworkRepository
+import androidx.lifecycle.viewModelScope
+import com.example.nammametromvvm.data.repositaries.DataBaseRepository
+import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.data.repositaries.entites.User
+import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.UpdateData
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum.*
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum
 import com.example.nammametromvvm.utility.ApiException
@@ -19,9 +20,9 @@ import com.example.nammametromvvm.utility.ErrorException
 import com.example.nammametromvvm.utility.NoInternetException
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.logs.LoggerClass
-import com.example.nammametromvvm.utility.logs.Logs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
 
@@ -33,7 +34,7 @@ class SplashViewModel(
     private val loggerClass: LoggerClass,
     private val dataBaseRepository: DataBaseRepository,
     private val configurations: Configurations,
-    ) : AndroidViewModel(application) {
+) : AndroidViewModel(application) {
     suspend fun checkForUpdate() =
         withContext(Dispatchers.IO) {
             try {
@@ -109,12 +110,16 @@ class SplashViewModel(
         return ERROR_BUT_PROCEED.configReturn
     }
 
-    suspend fun saveLoggedInUser(user: User) =
-        withContext(Dispatchers.IO) { dataBaseRepository.saveUser(user) }
-    suspend fun isUserLoggedIn(): Flow<Boolean> = withContext(Dispatchers.IO) { dataStoreRepository.isUserLoggedIn() }
+    fun saveLoggedInUser(user: User) {
+        viewModelScope.launch { dataBaseRepository.saveUser(user) }
+    }
+
+    suspend fun isUserLoggedIn(): Flow<Boolean> =
+        withContext(Dispatchers.IO) { dataStoreRepository.isUserLoggedIn() }
 
     fun isMandatoryLogin(): Boolean = configurations.isLoginMandatory()
-    suspend fun isLoginSkipped(): Flow<Boolean> = withContext(Dispatchers.IO) { dataStoreRepository.isLoginSkipped() }
+    suspend fun isLoginSkipped(): Flow<Boolean> =
+        withContext(Dispatchers.IO) { dataStoreRepository.isLoginSkipped() }
 
 
 }

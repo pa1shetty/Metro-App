@@ -1,4 +1,4 @@
-package com.example.mymvvmsample.data
+package com.example.nammametromvvm.data.repositaries.network.responses.appUpdate
 
 
 import com.google.gson.annotations.SerializedName

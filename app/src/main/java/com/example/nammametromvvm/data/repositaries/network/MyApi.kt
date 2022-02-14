@@ -1,6 +1,5 @@
 package com.example.nammametromvvm.data.repositaries.network
 
-import com.example.mymvvmsample.data.network.NetworkConnectionInterceptor
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.CONNECTION_TIME_OUT
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.READ_TIME_OUT
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.cTokenLbl
@@ -26,7 +25,7 @@ import java.util.concurrent.TimeUnit
 
 
 interface MyApi {
-
+    @Suppress("unused")
     @POST(mserver)
     suspend fun checkForUpdate(
         @Query(requestTypeLbl) requestType: String,

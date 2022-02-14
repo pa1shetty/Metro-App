@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,7 +88,11 @@ class LoginUserDetailsFragment : Fragment() {
             }
         })
 
-
+        loginViewModel.OtpRequestResult.observe(viewLifecycleOwner) {
+            it.let {
+                Log.d("test45", "setUpObserver: $it")
+            }
+        }
     }
 
     private fun setUpProceedButton() {

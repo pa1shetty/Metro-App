@@ -1,16 +1,14 @@
 package com.example.nammametromvvm.utility.logs
 
 import android.app.Activity
-import android.content.Context
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import com.example.nammametromvvm.R
-import com.example.nammametromvvm.utility.logs.LoginScreenEnum.*
+import com.example.nammametromvvm.utility.logs.LoginScreenEnum.ButtonStatusEnum
 
 class CustomButton (
     private val cvProceed: CardView,
@@ -84,7 +82,7 @@ class CustomButton (
         }
     }
 }
-
+@Suppress("unused")
 class LoginScreenEnum {
     enum class ButtonStatusEnum(val status: Int) {
         ENABLE(0),

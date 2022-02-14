@@ -1,13 +1,17 @@
-package com.example.myretrofit.TicketDetails
+package com.example.nammametromvvm.data.repositaries.network.responses.ticketDetails
 
 
 import com.google.gson.annotations.SerializedName
 
-data class FailedTicket(
+data class ExpiredTicket(
+    @SerializedName("expiredOn")
+    val expiredOn: String,
     @SerializedName("fromStop")
     val fromStop: String,
     @SerializedName("nmbrOfPssngrs")
     val nmbrOfPssngrs: String,
+    @SerializedName("numberOfExpiredTickets")
+    val numberOfExpiredTickets: String,
     @SerializedName("paymentID")
     val paymentID: String,
     @SerializedName("toStop")

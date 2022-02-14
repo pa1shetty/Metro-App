@@ -1,8 +1,8 @@
 package com.example.nammametromvvm.utility.di
 
 import android.app.Application
-import com.example.mymvvmsample.data.repositaries.DataBaseRepository
-import com.example.mymvvmsample.data.repositaries.NetworkRepository
+import com.example.nammametromvvm.data.repositaries.DataBaseRepository
+import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.ui.splashscreen.SplashScreenViewModelFactory
 import com.example.nammametromvvm.utility.Configurations

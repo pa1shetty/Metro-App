@@ -1,4 +1,4 @@
-package com.example.nammametromvvm.ui.login.ui.activity
+package com.example.nammametromvvm.ui.login.data
 
 import com.example.nammametromvvm.utility.StatusEnum
 

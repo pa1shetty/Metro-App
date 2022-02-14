@@ -1,6 +1,6 @@
 package com.example.nammametromvvm.utility
 
-import com.example.mymvvmsample.data.repositaries.DataBaseRepository
+import com.example.nammametromvvm.data.repositaries.DataBaseRepository
 import com.example.nammametromvvm.data.repositaries.entites.Config
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -37,7 +37,7 @@ class Configurations @Inject constructor(
         }
         return defaultValue
     }
-
+    @Suppress("unused")
     fun getMaxPassengerCount(): Int {
         return Integer.valueOf(getConfiguration(MAX_PASSENGER_COUNT, MAX_PASSENGER_COUNT_DEF))
     }

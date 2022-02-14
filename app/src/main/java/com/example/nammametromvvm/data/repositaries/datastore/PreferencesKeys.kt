@@ -1,7 +1,6 @@
 package com.example.nammametromvvm.data.repositaries.datastore
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 
 object PreferencesKeys {

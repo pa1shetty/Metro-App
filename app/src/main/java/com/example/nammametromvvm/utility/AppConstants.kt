@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.example.nammametromvvm.utility
 
 import com.example.nammametromvvm.data.repositaries.entites.Config
@@ -5,6 +7,7 @@ import com.example.nammametromvvm.utility.date.DateDifferenceTypeEnum
 
 object AppConstants {
     const val FILE_EXTENSION = ".log"
+    @Suppress("unused")
     const val NO_OF_FILES = 10
     const val MAX_FILE_SIZE = 1024 * 1024 * 2 //2 MB
     const val LOG_FOLDER_NAME = "Logs"

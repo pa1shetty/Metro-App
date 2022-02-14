@@ -1,4 +1,4 @@
-package com.example.mymvvmsample.data.repositaries
+package com.example.nammametromvvm.data.repositaries
 
 import com.example.nammametromvvm.data.repositaries.entites.AppDatabase
 import com.example.nammametromvvm.data.repositaries.entites.Config
@@ -17,8 +17,9 @@ class DataBaseRepository @Inject constructor(
     }
 
     fun getConfigs() = db.getConfigDao().getConfigs()
+    @Suppress("unused")
     fun getConfig(key: String) = db.getConfigDao().getConfig(key)
     suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
-
+    @Suppress("unused")
     fun getUser() = db.getUserDao().getUser()
 }

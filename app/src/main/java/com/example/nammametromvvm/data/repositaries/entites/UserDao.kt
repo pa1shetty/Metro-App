@@ -1,9 +1,7 @@
-package com.example.mymvvmsample.data.db.entites
+package com.example.nammametromvvm.data.repositaries.entites
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.nammametromvvm.data.repositaries.entites.CURRENT_USER_ID
-import com.example.nammametromvvm.data.repositaries.entites.User
 
 @Dao
 @Entity

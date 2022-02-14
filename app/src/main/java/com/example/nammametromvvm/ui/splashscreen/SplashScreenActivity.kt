@@ -9,9 +9,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.mymvvmsample.data.UpdateData
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.data.repositaries.entites.User
+import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.UpdateData
 import com.example.nammametromvvm.databinding.ActivitySplashScreenBinding
 import com.example.nammametromvvm.databinding.BottomSheetDialogLayoutBinding
 import com.example.nammametromvvm.ui.homescreen.activity.HomeActivity
@@ -19,7 +19,6 @@ import com.example.nammametromvvm.ui.login.ui.activity.LoginActivity
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum.UP_TO_DATE
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.*
-import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GeneralException
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.example.nammametromvvm.utility.toast
@@ -43,13 +42,8 @@ class SplashScreenActivity : AppCompatActivity() {
     @Inject
     lateinit var loggerClass: LoggerClass
 
-    @Inject
-    lateinit var testString: String
     private lateinit var binding: ActivitySplashScreenBinding
     private lateinit var updateDialogueBinding: BottomSheetDialogLayoutBinding
-
-    @Inject
-    lateinit var configurationsClass: Configurations
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,10 +57,8 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun saveUser() {
-        lifecycleScope.launch {
-            val user = User(1, "pavan@gmail.com", "Pavan", "email_verified", "test", "test")
-            viewModel.saveLoggedInUser(user)
-        }
+        val user = User(1, "pavan@gmail.com", "Pavan", "email_verified", "test", "test")
+        viewModel.saveLoggedInUser(user)
     }
 
     private fun checkIfUpdateCheckNeeded() {

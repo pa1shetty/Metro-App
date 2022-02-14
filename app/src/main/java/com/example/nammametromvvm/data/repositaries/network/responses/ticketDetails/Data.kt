@@ -1,8 +1,8 @@
-package com.example.myretrofit.TicketDetails
+package com.example.nammametromvvm.data.repositaries.network.responses.ticketDetails
 
 
 import com.google.gson.annotations.SerializedName
-
+@Suppress("unused")
 data class Data(
     @SerializedName("active_tickets")
     val activeTickets: ActiveTickets,

@@ -4,10 +4,10 @@ import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mymvvmsample.data.repositaries.NetworkRepository
+import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
-import com.example.nammametromvvm.ui.login.ui.activity.LoginFormState
-import com.example.nammametromvvm.ui.login.ui.activity.LoginResult
+import com.example.nammametromvvm.ui.login.data.LoginFormState
+import com.example.nammametromvvm.ui.login.data.LoginResult
 import com.example.nammametromvvm.utility.ApiException
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.ErrorException
@@ -29,6 +29,7 @@ class LoginViewModel(
 
     private val _phoneNumberForm = MutableLiveData<LoginFormState>()
     private val _otpForm = MutableLiveData<LoginFormState>()
+    private val _otpRequestResult = MutableLiveData<Int>()
 
     val loginFormState: LiveData<LoginFormState> = _phoneNumberForm
     val otpFormState: LiveData<LoginFormState> = _otpForm
@@ -37,6 +38,8 @@ class LoginViewModel(
     var mutableLiveDataResendTime = MutableLiveData(configurations.getMaxOTPResendWait())
     private var isTimerRunning = false
 
+    val OtpRequestResult: LiveData<Int>
+        get() = _otpRequestResult
 
     fun phoneNumberDataChanged(mobileNumber: String) {
         if (!isPhoneNumberValid(mobileNumber)) {
