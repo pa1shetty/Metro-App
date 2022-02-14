@@ -23,7 +23,6 @@ class ApplicationClass : Application() {
         INTERNAL_LOG_PATH =
             applicationContext.getExternalFilesDir(LOG_FOLDER_NAME).toString() + File.separator
         GlobalScope.launch { configurations = configurationsClass.getConfigurationsFromDb() }
-
     }
 
 

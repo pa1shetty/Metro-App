@@ -6,6 +6,7 @@ import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.logs.LoggerClass
+import javax.inject.Inject
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
@@ -13,7 +14,7 @@ import com.example.nammametromvvm.utility.logs.LoggerClass
  */
 
 @Suppress("UNCHECKED_CAST")
-class LoginViewModelFactory(
+class LoginViewModelFactory @Inject constructor(
     private val networkRepository: NetworkRepository,
     private val dataStoreRepository: DataStoreRepository,
     private val configurations: Configurations,
