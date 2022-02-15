@@ -43,7 +43,7 @@ Clone the repository on your machine. Open the project on your IDE and connect i
 
 ||||
 |:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
-| ![](media/1.jpg) | ![](media/2.jpg) | ![](media/3.pnjpgg) |
+| ![](media/1.jpg) | ![](media/2.jpg) | ![](media/3.jpg) |
 | ![](media/4.jpg)  | ![](media/5.jpg) | ![](media/6.jpg)    |
 | ![](media/7.jpg) 
 
