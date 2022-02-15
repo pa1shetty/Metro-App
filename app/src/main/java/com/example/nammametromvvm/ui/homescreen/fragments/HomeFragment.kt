@@ -1,6 +1,7 @@
 package com.example.nammametromvvm.ui.homescreen.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,20 +58,31 @@ class HomeFragment : Fragment() {
     private fun setUpUserName() {
         lifecycleScope.launch {
             homeActivityViewModel.getUserName().collect { userName ->
+                Log.d("test11", "setUpUserName: " + userName)
                 if (userName == AppConstants.dataStoreDefaultValue) {
                     binding.tvUserName.visibility = View.INVISIBLE
                 } else {
                     binding.tvUserName.text = getString(R.string.home_screen_welcome, userName)
-                    binding.tvUserName.startAnimation(
+                    /*binding.tvUserName.startAnimation(
                         AnimationUtils.loadAnimation(
                             requireContext(),
                             android.R.anim.fade_in
-                        )
-                    )
+                        )*/
+                   // )
+                    fadeinAnimation(binding.root)
                 }
             }
         }
 
+    }
+
+    private fun fadeinAnimation(view: View) {
+        view.startAnimation(
+            AnimationUtils.loadAnimation(
+                requireContext(),
+                android.R.anim.fade_in
+            )
+        )
     }
 
 }

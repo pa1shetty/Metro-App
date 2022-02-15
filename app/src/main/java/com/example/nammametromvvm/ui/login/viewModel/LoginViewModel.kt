@@ -1,44 +1,50 @@
 package com.example.nammametromvvm.ui.login.viewModel
 
+import android.app.Application
 import android.os.CountDownTimer
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.nammametromvvm.data.repositaries.NetworkRepository
+import androidx.lifecycle.viewModelScope
+import com.example.mymvvmsample.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
-import com.example.nammametromvvm.ui.login.data.LoginFormState
-import com.example.nammametromvvm.ui.login.data.LoginResult
-import com.example.nammametromvvm.utility.ApiException
-import com.example.nammametromvvm.utility.Configurations
-import com.example.nammametromvvm.utility.ErrorException
-import com.example.nammametromvvm.utility.NoInternetException
+import com.example.nammametromvvm.ui.login.ui.activity.LoginFormState
+import com.example.nammametromvvm.ui.login.ui.activity.LoginResult
+import com.example.nammametromvvm.utility.*
 import com.example.nammametromvvm.utility.StatusEnum.*
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
 
 class LoginViewModel(
+    application: Application,
     private val networkRepository: NetworkRepository,
     private val dataStoreRepository: DataStoreRepository,
     private val configurations: Configurations,
-    private val loggerClass: LoggerClass
-) : ViewModel() {
+    private val loggerClass: LoggerClass,
+    private val userRegistration: UserRegistration
+) : AndroidViewModel(application) {
 
     private val _phoneNumberForm = MutableLiveData<LoginFormState>()
     private val _otpForm = MutableLiveData<LoginFormState>()
-    private val _otpRequestResult = MutableLiveData<Int>()
+    private val _otpRequestResult = MutableLiveData<Event<Int>>()
 
     val loginFormState: LiveData<LoginFormState> = _phoneNumberForm
     val otpFormState: LiveData<LoginFormState> = _otpForm
 
-    private var countDownTimerOtpResend: CountDownTimer? = null
-    var mutableLiveDataResendTime = MutableLiveData(configurations.getMaxOTPResendWait())
-    private var isTimerRunning = false
+    private var _countDownTimerOtpResend: CountDownTimer? = null
+    private var _mutableLiveDataResendTime = MutableLiveData(configurations.getMaxOTPResendWait())
+    private var _isTimerRunning = false
 
-    val OtpRequestResult: LiveData<Int>
+    val mutableLiveDataResendTime: LiveData<Int>
+        get() = _mutableLiveDataResendTime
+
+
+    val otpRequestResult: LiveData<Event<Int>>
         get() = _otpRequestResult
 
     fun phoneNumberDataChanged(mobileNumber: String) {
@@ -67,34 +73,31 @@ class LoginViewModel(
         return otp.length == configurations.getMaxOTPLength()
     }
 
-    suspend fun requestForOtp(otp: String) =
-        withContext(Dispatchers.IO) {
+    fun requestForOtp(otp: String) {
+        viewModelScope.launch {
             try {
                 dataStoreRepository.saveCToken(networkRepository.requestForOtp(otp).data.cToken)
-                return@withContext SUCCESS.statusReturn
+                _otpRequestResult.postValue(Event(SUCCESS.statusReturn))
             } catch (e: ApiException) {
                 loggerClass.error(e)
-                return@withContext ERROR.statusReturn
+                _otpRequestResult.postValue(Event(ERROR.statusReturn))
             } catch (e: NoInternetException) {
                 loggerClass.error(e)
-                return@withContext NO_INTERNET.statusReturn
+                _otpRequestResult.postValue(Event(NO_INTERNET.statusReturn))
             } catch (e: ErrorException) {
                 loggerClass.error(e)
-                return@withContext ERROR.statusReturn
+                _otpRequestResult.postValue(Event(ERROR.statusReturn))
             } catch (e: SocketTimeoutException) {
                 loggerClass.error(e)
-                return@withContext ERROR.statusReturn
+                _otpRequestResult.postValue(Event(ERROR.statusReturn))
             }
         }
+    }
 
     suspend fun verifyOtp(otp: String) =
         withContext(Dispatchers.IO) {
             try {
-                val otpVerificationData = networkRepository.verifyOtp(otp)
-                dataStoreRepository.saveCKey(otpVerificationData.cKey)
-                dataStoreRepository.saveUserName(otpVerificationData.name)
-                dataStoreRepository.saveUserEmail(otpVerificationData.email)
-                dataStoreRepository.userLoggedIn()
+                userRegistration.userLoggedIn(networkRepository.verifyOtp(otp))
                 return@withContext LoginResult(success = true)
             } catch (e: ApiException) {
                 loggerClass.error(e)
@@ -113,29 +116,29 @@ class LoginViewModel(
 
 
     fun startResendTimer() {
-        if (!isTimerRunning) {
-            countDownTimerOtpResend = object :
+        if (!_isTimerRunning) {
+            _countDownTimerOtpResend = object :
                 CountDownTimer(configurations.getMaxOTPResendWait() * 1000L, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    isTimerRunning = true
-                    mutableLiveDataResendTime.value =
+                    _isTimerRunning = true
+                    _mutableLiveDataResendTime.value =
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished + 1000).toInt()
                 }
 
                 override fun onFinish() {
-                    mutableLiveDataResendTime.value = 0
+                    _mutableLiveDataResendTime.value = 0
                 }
             }.start()
         }
     }
 
     fun stopResendTimer() {
-        isTimerRunning = false
-        countDownTimerOtpResend!!.cancel()
+        _isTimerRunning = false
+        _countDownTimerOtpResend!!.cancel()
     }
 
     fun getMaxPhoneNumberDigit() = configurations.getMaxMobileNumberDigit()
     fun isMandatoryLogin() = configurations.isLoginMandatory()
-    suspend fun setLogInSkipped()= dataStoreRepository.setLoginSkipped()
+    suspend fun setLogInSkipped() = dataStoreRepository.setLoginSkipped()
 
 }

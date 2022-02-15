@@ -11,6 +11,7 @@ import com.example.nammametromvvm.data.repositaries.network.MyApi
 import com.example.nammametromvvm.utility.AesLibrary
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GenericMethods
+import com.example.nammametromvvm.utility.UserRegistration
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.example.nammametromvvm.utility.logs.Logs
@@ -112,5 +113,11 @@ object AppModule {
         provideDataBaseRepository: DataBaseRepository,
     ) = Configurations(provideDataBaseRepository)
 
+    @Provides
+    @Singleton
+    fun provideUserRegistration(
+        dataBaseRepository: DataBaseRepository,
+        dataStoreRepository: DataStoreRepository
+    ) = UserRegistration(dataBaseRepository, dataStoreRepository)
 
 }

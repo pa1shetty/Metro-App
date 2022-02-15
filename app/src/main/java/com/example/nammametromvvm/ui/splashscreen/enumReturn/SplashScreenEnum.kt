@@ -14,4 +14,9 @@ class SplashScreenEnum {
         ERROR_BUT_PROCEED(3),
         ERROR(4),
     }
+    enum class NavigationStatus() {
+        NO_NAVIGATION,
+        NAVIGATE_TO_LOGIN_SCREEN,
+        NAVIGATE_TO_HOME_SCREEN
+    }
 }

@@ -26,11 +26,11 @@ object NetworkConstants {
 
     fun getBaseUrl(urlType: Int = BaseUrlTypeEnum.Uat.baseUrlType): String {
         return when (urlType) {
-            BaseUrlTypeEnum.PavanLocal.baseUrlType -> "http://10.8.0.10:8084//bwi_mobile/"
-            BaseUrlTypeEnum.ONE_NOT_ONE.baseUrlType -> "https://auminfotech.in/bwi_mobile/"
+            BaseUrlTypeEnum.PavanLocal.baseUrlType -> ""
+            BaseUrlTypeEnum.ONE_NOT_ONE.baseUrlType -> ""
 
             else -> {
-                "http://uatmetrolocal.auminfotech.in:7004/bwi_mobile/"
+                ""
             }
         }
     }

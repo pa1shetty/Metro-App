@@ -10,5 +10,6 @@
     <color name="colorSplashScreenBg">#F8F8F8</color>
     <color name="textColor">@color/black</color>
     <color name="lightGray">#D3D3D3</color>
+    <color name="lightRed">#F50057</color>
 
 </resources>

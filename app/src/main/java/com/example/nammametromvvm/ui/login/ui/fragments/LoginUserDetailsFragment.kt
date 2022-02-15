@@ -6,7 +6,6 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +27,7 @@ import com.example.nammametromvvm.ui.login.ui.fragments.LoginUserDetailsFragment
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.GenericMethods
-import com.example.nammametromvvm.utility.StatusEnum.SUCCESS
+import com.example.nammametromvvm.utility.StatusEnum
 import com.example.nammametromvvm.utility.logs.CustomButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login_user_details.*
@@ -88,9 +87,23 @@ class LoginUserDetailsFragment : Fragment() {
             }
         })
 
-        loginViewModel.OtpRequestResult.observe(viewLifecycleOwner) {
-            it.let {
-                Log.d("test45", "setUpObserver: $it")
+        loginViewModel.otpRequestResult.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { otpRequestResponse ->
+                it.getContentIfNotHandled()
+                when (otpRequestResponse) {
+                    StatusEnum.SUCCESS.statusReturn -> {
+                        navigateToOtpScreen()
+                    }
+                    else -> {
+                        genericMethods.showSnackBar(
+                            binding.root,
+                            otpRequestResponse,
+                            requireActivity()
+                        )
+                    }
+                }
+                customButton.stopLoadingLoginButton()
+                genericMethods.hideKeypad(requireActivity())
             }
         }
     }
@@ -167,19 +180,7 @@ class LoginUserDetailsFragment : Fragment() {
     }
 
     private fun requestForOtp(phoneNumber: String) {
-        lifecycleScope.launch {
-            when (val requestOrpResponse = loginViewModel.requestForOtp(phoneNumber)) {
-                SUCCESS.statusReturn -> {
-                    navigateToOtpScreen()
-                }
-                else -> {
-                    genericMethods.showSnackBar(binding.root, requestOrpResponse, requireActivity())
-                }
-            }
-            customButton.stopLoadingLoginButton()
-            genericMethods.hideKeypad(requireActivity())
-
-        }
+        loginViewModel.requestForOtp(phoneNumber)
     }
 
     private fun navigateToOtpScreen() {

@@ -16,17 +16,17 @@
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/drawable/loading2_vector.xml" value="0.17314814814814813" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/drawable/transparent_square_button.xml" value="0.14114583333333333" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout-w936dp/activity_login.xml" value="0.134765625" />
-        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/activity_home.xml" value="0.11940298507462686" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/activity_home.xml" value="0.67" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/activity_login.xml" value="0.13072916666666667" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/activity_splash_screen.xml" value="0.16" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.25" />
-        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_home.xml" value="0.12291666666666666" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_help.xml" value="0.1" />
-        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_otp_details.xml" value="0.1" />
-        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_user_details.xml" value="0.1" />
-        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_profile.xml" value="0.1609375" />
-        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_settings.xml" value="0.1609375" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_otp_details.xml" value="0.1796875" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_user_details.xml" value="0.22" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_settings.xml" value="0.2" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_term_and_condition.xml" value="0.27291666666666664" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/settings_activity.xml" value="0.1765625" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/xml/root_preferences.xml" value="0.25" />
       </map>
     </option>
   </component>

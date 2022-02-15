@@ -78,7 +78,7 @@ class DataStoreRepository @Inject constructor(
     }
 
 
-    suspend fun saveCKey(cKey: String) {
+    suspend fun saveCKey(cKey: String = dataStoreDefaultValue) {
         saveStringData(PreferencesKeys.cKey, cKey)
     }
     @Suppress("unused")
@@ -88,7 +88,7 @@ class DataStoreRepository @Inject constructor(
         )
     }
 
-    suspend fun saveUserName(userName: String) {
+    suspend fun saveUserName(userName: String = dataStoreDefaultValue) {
         saveStringData(PreferencesKeys.userName, userName)
     }
     @Suppress("unused")
@@ -98,7 +98,7 @@ class DataStoreRepository @Inject constructor(
         )
     }
 
-    suspend fun saveUserEmail(userName: String) {
+    suspend fun saveUserEmail(userName: String = dataStoreDefaultValue) {
         saveStringData(PreferencesKeys.userEmail, userName)
     }
     @Suppress("unused")
@@ -179,7 +179,7 @@ class DataStoreRepository @Inject constructor(
         }
     }
 
-    fun getUserNameFlow()=getStringAsFlow(PreferencesKeys.userName)
+    fun getUserNameFlow() = getStringAsFlow(PreferencesKeys.userName)
 
     private fun getStringAsFlow(
         key: Preferences.Key<String>
@@ -194,4 +194,10 @@ class DataStoreRepository @Inject constructor(
         .map {
             it[key]?.let { it1 -> aesLibrary.decryptData(it1) } ?: dataStoreDefaultValue
         }
+
+    suspend fun clearDatastore() {
+        dataStore.edit {
+            it.clear()
+        }
+    }
 }

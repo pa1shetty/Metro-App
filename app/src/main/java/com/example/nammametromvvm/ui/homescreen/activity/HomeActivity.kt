@@ -1,9 +1,11 @@
 package com.example.nammametromvvm.ui.homescreen.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.ActivityHomeBinding
 import com.example.nammametromvvm.ui.homescreen.viewModels.HomeActivityViewModel
 import com.example.nammametromvvm.ui.homescreen.viewModels.HomeActivityViewModelFactory
@@ -26,4 +28,13 @@ class HomeActivity : AppCompatActivity() {
         setContentView(view)
 
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            onBackPressed()
+            return false
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

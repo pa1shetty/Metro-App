@@ -17,25 +17,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NammaMetroMVVM"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m"
-        tools:ignore="DataExtractionRules">
+        tools:ignore="DataExtractionRules"
+        tools:targetApi="m">
+
         <activity
-            android:name="com.example.nammametromvvm.ui.splashscreen.SplashScreenActivity"
+            android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true"
             android:noHistory="true"
             android:theme="@style/Theme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.nammametromvvm.ui.homescreen.activity.HomeActivity"
+            android:name=".ui.homescreen.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.nammametromvvm.ui.login.ui.activity.LoginActivity"
-            android:noHistory="true"
-            android:exported="false" />
+            android:name=".ui.login.ui.activity.LoginActivity"
+            android:exported="false"
+            android:noHistory="true" />
     </application>
 
 </manifest>
