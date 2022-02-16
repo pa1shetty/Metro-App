@@ -15,6 +15,22 @@ With following functionalities
     - [x] Download configuration
     - [x] Check for registartion
     
+ - [x] Login Screen
+    - [x] Login
+    - [ ] Auto fetch user phone number
+    - [ ] Auto fetch OTP
+
+ - [x] Settings screen
+    - [x] Logout
+    - [ ] Theme change
+    - [ ] Language change
+
+- [ ] Home Screen
+- [ ] Card functionality
+- [ ] Qr Ticket functionality
+
+Around 25% of development has been completed.
+    
  
  
 ## 📸 Screenshots
