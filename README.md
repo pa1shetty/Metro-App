@@ -9,11 +9,14 @@ With following functionalities
  Goal of this project is to practice the all new skills which i have learnt, build a app with clean code and follow maximum practices suggested by google.
  And build a app with good looking and user friendly UI/UX.
  
-
-### Insights into the app 🔎
-
-![QuizZon.gif](https://raw.githubusercontent.com/rohitjakhar/Quizzon/0b7e611653fd3d6b9f8aaa6657025f4c6d20667f/media/Quizzon.gif?token=AIPBJFJQMRV5MFOAU5LVEH3A4ZL4A)
-
+ ## 📸 Features
+[x] Splash screen
+    [x] App update
+    [x] Download configuration
+    [x] Check for registartion
+    
+ 
+ 
 ## 📸 Screenshots
 
 ||||
@@ -38,6 +41,8 @@ With following functionalities
 - [GSON](https://github.com/google/gson) - A modern JSON library for Kotlin and Java.
 - [GSON Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson) - A Converter which uses Moshi for serialization to and from JSON.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
+- [Navigation Component](https://developer.android.com/guide/navigation) - Navigation refers to the interactions that allow users to navigate across, into, and back out from the different pieces of content within your app.
+- [Live Data](https://developer.android.com/topic/libraries/architecture/livedata) - LiveData is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services. 
 
 
 
@@ -49,10 +54,9 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 ## Contact 📩
 
-Have an project? DM us at 👇<br>
 [![Mail](https://img.shields.io/badge/Gmail-green.svg?style=for-the-badge&logo=gmail)](mailto://spavanm1@gmail.com)
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-red.svg?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/rohitjakhar0/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-red.svg?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/pavan-m-shetty-79211068/)
 
 
 <br>
