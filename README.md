@@ -1,13 +1,13 @@
 # NammaMetroMVVM
-This is a practice project which is trying to build a app for metro user 
+This is a practice project which is trying to build an app for metro user 
 With following functionalities
-  * User can Regiester
-  * Allows user to add , see, recharge there metro card
-  * User can purchase qr ticket or pass and use it in metro station without and human interaction.
- App is built in sucha a way that it can be used for any transportaion with minimum tweaks and configuration changes.
+  * User can Register
+  * Allows the user to add, see, recharge their metro card
+  * User can purchase QR ticket or pass and use it in metro station without human interaction.
+ The app is built in such a way that it can be used for any transportation with minimum tweaks and configuration changes.
  
- Goal of this project is to practice the all new skills which i have learnt, build a app with clean code and follow good practices suggested by google.
- And build a app with good looking and user friendly UI/UX.
+ The goal of this project is to practice the all-new skills which I have learned, build an app with clean code, and follow good practices suggested by google.
+ And build an app with good-looking and user-friendly UI/UX.
  
  ##  Features
  - [x] Splash screen
@@ -29,7 +29,7 @@ With following functionalities
 - [ ] Card functionality
 - [ ] Qr Ticket functionality
 
-Around 25% of development has been completed.
+Around 25% of the development has been completed.
     
  
  
@@ -55,7 +55,7 @@ Around 25% of development has been completed.
 - Backend
 - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
 - [GSON](https://github.com/google/gson) - A modern JSON library for Kotlin and Java.
-- [GSON Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson) - A Converter which uses Moshi for serialization to and from JSON.
+- [GSON Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson) - A Converter that uses Moshi for serialization to and from JSON.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Navigation Component](https://developer.android.com/guide/navigation) - Navigation refers to the interactions that allow users to navigate across, into, and back out from the different pieces of content within your app.
 - [Live Data](https://developer.android.com/topic/libraries/architecture/livedata) - LiveData is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services. 
