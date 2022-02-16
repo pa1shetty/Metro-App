@@ -10,7 +10,7 @@ With following functionalities
  And build a app with good looking and user friendly UI/UX.
  
  ##  Features
-# - [x] Splash screen
+ - [x] Splash screen
     - [x] App update
     - [x] Download configuration
     - [x] Check for registartion
