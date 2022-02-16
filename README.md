@@ -1,4 +1,4 @@
-# NammaMetroMVVM
+# Metro App
 This is a practice project which is trying to build an app for metro user 
 With following functionalities
   * User can Register
