@@ -6,7 +6,7 @@ With following functionalities
   * User can purchase qr ticket or pass and use it in metro station without and human interaction.
  App is built in sucha a way that it can be used for any transportaion with minimum tweaks and configuration changes.
  
- Goal of this project is to practice the all new skills which i have learnt, build a app with clean code and follow maximum practices suggested by google.
+ Goal of this project is to practice the all new skills which i have learnt, build a app with clean code and follow good practices suggested by google.
  And build a app with good looking and user friendly UI/UX.
  
  ##  Features
@@ -37,9 +37,9 @@ Around 25% of development has been completed.
 
 ||||
 |:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
-| ![](media/1.jpg) | ![](media/2.jpg) | ![](media/3.jpg) |
-| ![](media/4.jpg)  | ![](media/5.jpg) | ![](media/6.jpg)    |
-| ![](media/7.jpg) 
+| ![Splash Screen](media/1.jpg) | ![Login Screen](media/2.jpg) | ![Otp Screen](media/3.jpg) |
+| ![Home Screen](media/4.jpg)  | ![Settings Screen - Light](media/5.jpg) | ![Home Screen - Light](media/6.jpg)    |
+| ![Settings Screen - Light](media/7.jpg) 
 
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
