@@ -2,12 +2,12 @@ package com.example.nammametromvvm.utility.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.nammametromvvm.data.repositaries.network.NetworkConnectionInterceptor
 import com.example.nammametromvvm.data.repositaries.DataBaseRepository
 import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.data.repositaries.entites.AppDatabase
 import com.example.nammametromvvm.data.repositaries.network.MyApi
+import com.example.nammametromvvm.data.repositaries.network.NetworkConnectionInterceptor
 import com.example.nammametromvvm.utility.AesLibrary
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GenericMethods

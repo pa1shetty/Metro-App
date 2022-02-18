@@ -1,17 +1,15 @@
 package com.example.nammametromvvm.ui.homescreen.viewModels
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.example.nammametromvvm.utility.UserRegistration
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
 class SettingsViewModel(
-    application: Application,
     private val userRegistration: UserRegistration,
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     suspend fun logOut(context: Context): Boolean =
         withContext(Dispatchers.IO) {

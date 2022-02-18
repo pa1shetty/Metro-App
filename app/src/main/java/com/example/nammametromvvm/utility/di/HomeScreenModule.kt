@@ -1,24 +1,21 @@
 package com.example.nammametromvvm.utility.di
 
-import android.app.Application
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.ui.homescreen.viewModels.HomeActivityViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ViewModelComponent::class)
 object HomeScreenModule {
     @Provides
-    @ActivityScoped
+    @ViewModelScoped
     fun provideHomeScreenViewModelFactory(
-        app: Application,
         dataStoreRepository: DataStoreRepository
     ) = HomeActivityViewModelFactory(
-        app,
         dataStoreRepository
     )
 }

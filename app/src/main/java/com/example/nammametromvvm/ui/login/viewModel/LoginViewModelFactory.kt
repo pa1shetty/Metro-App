@@ -26,7 +26,6 @@ class LoginViewModelFactory @Inject constructor(
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return LoginViewModel(
-            application,
             networkRepository,
             dataStoreRepository,
             configurations,

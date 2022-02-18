@@ -1,6 +1,7 @@
 package com.example.nammametromvvm.data.repositaries.network.responses.login.getOtp
 
 
+import com.example.nammametromvvm.data.repositaries.network.responses.Login.getOtp.GetOtpData
 import com.google.gson.annotations.SerializedName
 
 data class GetOtp(

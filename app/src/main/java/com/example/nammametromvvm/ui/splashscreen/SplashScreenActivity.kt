@@ -9,8 +9,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.mymvvmsample.data.UpdateData
 import com.example.nammametromvvm.R
+import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.UpdateData
 import com.example.nammametromvvm.databinding.ActivitySplashScreenBinding
 import com.example.nammametromvvm.databinding.BottomSheetDialogLayoutBinding
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum

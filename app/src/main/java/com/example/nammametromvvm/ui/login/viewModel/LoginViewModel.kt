@@ -1,15 +1,14 @@
 package com.example.nammametromvvm.ui.login.viewModel
 
-import android.app.Application
 import android.os.CountDownTimer
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mymvvmsample.data.repositaries.NetworkRepository
+import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
-import com.example.nammametromvvm.ui.login.ui.activity.LoginFormState
-import com.example.nammametromvvm.ui.login.ui.activity.LoginResult
+import com.example.nammametromvvm.ui.login.data.LoginFormState
+import com.example.nammametromvvm.ui.login.data.LoginResult
 import com.example.nammametromvvm.utility.*
 import com.example.nammametromvvm.utility.StatusEnum.*
 import com.example.nammametromvvm.utility.logs.LoggerClass
@@ -19,15 +18,13 @@ import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
-
 class LoginViewModel(
-    application: Application,
     private val networkRepository: NetworkRepository,
     private val dataStoreRepository: DataStoreRepository,
     private val configurations: Configurations,
     private val loggerClass: LoggerClass,
     private val userRegistration: UserRegistration
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     private val _phoneNumberForm = MutableLiveData<LoginFormState>()
     private val _otpForm = MutableLiveData<LoginFormState>()

@@ -11,14 +11,14 @@ import com.example.nammametromvvm.utility.logs.LoggerClass
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ViewModelComponent::class)
 object SplashScreenModule {
     @Provides
-    @ActivityScoped
+    @ViewModelScoped
     fun provideSplashScreenViewModelFactory(
         app: Application,
         networkRepository: NetworkRepository,

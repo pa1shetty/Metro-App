@@ -1,24 +1,21 @@
 package com.example.nammametromvvm.utility.di
 
-import android.app.Application
 import com.example.nammametromvvm.ui.homescreen.viewModels.SettingsViewModelFactory
 import com.example.nammametromvvm.utility.UserRegistration
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ViewModelComponent::class)
 object SettingsScreenModule {
     @Provides
-    @ActivityScoped
+    @ViewModelScoped
     fun provideSettingsScreenViewModelFactory(
-        app: Application,
         userRegistration: UserRegistration,
     ) = SettingsViewModelFactory(
-        app,
         userRegistration
     )
 }
