@@ -5,10 +5,14 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.UpdateData
 import com.example.nammametromvvm.databinding.ActivitySplashScreenBinding
@@ -18,8 +22,6 @@ import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.Co
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.*
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GeneralException
-import com.example.nammametromvvm.utility.NavigateScreen.Companion.navigateToHomeScreen
-import com.example.nammametromvvm.utility.NavigateScreen.Companion.navigateToLoginScreen
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.example.nammametromvvm.utility.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -32,7 +34,7 @@ import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : Fragment() {
     private lateinit var viewModel: SplashViewModel
 
     @Inject
@@ -49,18 +51,23 @@ class SplashScreenActivity : AppCompatActivity() {
     @Inject
     lateinit var configurationsClass: Configurations
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        val view: View = binding.root
-        setContentView(view)
-        viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
-        checkIfUpdateCheckNeeded()
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        return (binding.root)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        checkIfUpdateCheckNeeded()
     }
 
     private fun checkIfUpdateCheckNeeded() {
@@ -72,7 +79,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     proceedAfterUpdateCheck()
                 }
             } catch (e: GeneralException) {
-                toast(getString(R.string.something_went_wrong))
+                requireActivity().toast(getString(R.string.something_went_wrong))
                 loggerClass.error(e)
             }
         }
@@ -131,16 +138,16 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel.isUserLoggedIn().collect { isUserLoggedIn ->
             loadingInfo(false)
             if (isUserLoggedIn) {
-                navigateToHomeScreen(this)
+                navigateToHomeScreen()
             } else {
                 if (viewModel.isMandatoryLogin()) {
-                    navigateToLoginScreen(this)
+                    navigateToLoginUserDetailsScreen()
                 } else {
                     viewModel.isLoginSkipped().collect { isLoginSkipped ->
                         if (isLoginSkipped) {
-                            navigateToHomeScreen(this)
+                            navigateToHomeScreen()
                         } else {
-                            navigateToLoginScreen(this)
+                            navigateToLoginUserDetailsScreen()
                         }
                     }
                 }
@@ -162,7 +169,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun configErrorDialog(configError: Int) {
-        val bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetDialog = BottomSheetDialog(requireActivity())
         updateDialogueBinding = BottomSheetDialogLayoutBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(updateDialogueBinding.root)
         bottomSheetDialog.setCancelable(false)
@@ -185,7 +192,7 @@ class SplashScreenActivity : AppCompatActivity() {
         }
         updateDialogueBinding.negativeButton.setOnClickListener {
             bottomSheetDialog.cancel()
-            onBackPressed()
+            requireActivity().onBackPressed()
         }
         updateDialogueBinding.positiveButton.setOnClickListener {
             bottomSheetDialog.cancel()
@@ -194,7 +201,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun showBottomSheetDialog(updateResponse: UpdateData) {
-        val bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetDialog = BottomSheetDialog(requireActivity())
         updateDialogueBinding = BottomSheetDialogLayoutBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(updateDialogueBinding.root)
         bottomSheetDialog.setCancelable(false)
@@ -219,7 +226,7 @@ class SplashScreenActivity : AppCompatActivity() {
             bottomSheetDialog.cancel()
             when (updateResponse.upgradeFlag) {
                 MANDATORY.update, ERROR.update -> {
-                    onBackPressed()
+                    requireActivity().onBackPressed()
                 }
                 OPTIONAL.update -> {
                     proceedAfterUpdateCheck()
@@ -255,5 +262,26 @@ class SplashScreenActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+
+    private fun navigateToHomeScreen() {
+        navigateTo(
+            SplashScreenActivityDirections.actionSplashScreenActivityToHomeFragment(
+            )
+        )
+    }
+
+    private fun navigateToLoginUserDetailsScreen() {
+        navigateTo(
+            SplashScreenActivityDirections.actionSplashScreenActivityToLoginUserDetailsFragment(
+            )
+        )
+    }
+
+    private fun navigateTo(navDirections: NavDirections) {
+        findNavController().navigate(
+            navDirections
+        )
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorSplashScreenBg"
     android:padding="18dp"
-    tools:context=".ui.login.ui.activity.LoginActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
         android:id="@+id/tv_help"

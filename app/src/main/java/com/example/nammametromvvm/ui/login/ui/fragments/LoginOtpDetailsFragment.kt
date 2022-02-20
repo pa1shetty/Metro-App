@@ -1,7 +1,6 @@
 package com.example.nammametromvvm.ui.login.ui.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -18,8 +17,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentLoginOtpDetailsBinding
-import com.example.nammametromvvm.ui.homescreen.activity.HomeActivity
-import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentDirections.Companion.actionLoginOtpDetailsToLoginHelpFragment
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.Configurations
@@ -121,10 +118,9 @@ class LoginOtpDetailsFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
-        val intent = Intent(requireContext(), HomeActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        }
-        startActivity(intent)
+        findNavController().navigate(
+            LoginOtpDetailsFragmentDirections.actionLoginOtpDetailsFragmentToHomeFragment()
+        )
     }
 
     private fun setUpClick() {
@@ -137,7 +133,7 @@ class LoginOtpDetailsFragment : Fragment() {
         binding.tvEdit.setOnClickListener { requireActivity().onBackPressed() }
         binding.tvHelp.setOnClickListener {
             findNavController().navigate(
-                actionLoginOtpDetailsToLoginHelpFragment()
+                LoginOtpDetailsFragmentDirections.actionLoginOtpDetailsFragmentToLoginHelpFragment()
             )
         }
         binding.etOtp.apply {

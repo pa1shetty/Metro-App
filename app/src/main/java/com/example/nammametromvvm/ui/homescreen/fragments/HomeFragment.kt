@@ -69,14 +69,14 @@ class HomeFragment : Fragment() {
                             android.R.anim.fade_in
                         )*/
                    // )
-                    fadeinAnimation(binding.root)
+                    fadingAnimation(binding.root)
                 }
             }
         }
 
     }
 
-    private fun fadeinAnimation(view: View) {
+    private fun fadingAnimation(view: View) {
         view.startAnimation(
             AnimationUtils.loadAnimation(
                 requireContext(),

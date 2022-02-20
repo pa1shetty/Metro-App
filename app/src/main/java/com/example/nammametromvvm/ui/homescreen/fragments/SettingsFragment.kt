@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.R.string
 import com.example.nammametromvvm.databinding.FragmentSettingsBinding
 import com.example.nammametromvvm.ui.homescreen.viewModels.SettingsViewModel
 import com.example.nammametromvvm.ui.homescreen.viewModels.SettingsViewModelFactory
-import com.example.nammametromvvm.utility.NavigateScreen.Companion.navigateToSplashScreen
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -98,18 +99,31 @@ class SettingsFragment : Fragment() {
         binding.llLogOut.setOnClickListener {
             lifecycleScope.launch {
                 settingsViewModel.logOut(requireContext())
-                navigateToSplashScreen(requireActivity())
+                //action_homeFragment_to_splashScreenActivity
+                navigateToSplashScreen()
+
             }
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d("test111", "onOptionsItemSelected: " + item.itemId)
+        Log.d("test25", "onOptionsItemSelected: 2")
         if (item.itemId == R.id.home) {
             requireActivity().onBackPressed()
             return true
         }
         return super.onOptionsItemSelected(item)
     }
+    private fun navigateToSplashScreen() {
+        navigateTo(
+            SettingsFragmentDirections.actionSettingsFragmentToSplashScreenActivity(
+            )
+        )
+    }
 
+    private fun navigateTo(navDirections: NavDirections) {
+        findNavController().navigate(
+            navDirections
+        )
+    }
 }

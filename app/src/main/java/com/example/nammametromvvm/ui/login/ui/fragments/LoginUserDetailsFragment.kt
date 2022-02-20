@@ -1,6 +1,5 @@
 package com.example.nammametromvvm.ui.login.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -20,10 +19,6 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentLoginUserDetailsBinding
-import com.example.nammametromvvm.ui.homescreen.activity.HomeActivity
-import com.example.nammametromvvm.ui.login.ui.fragments.LoginUserDetailsFragmentDirections.Companion.actionLoginUserDetailsFragmentToLoginHelpFragment
-import com.example.nammametromvvm.ui.login.ui.fragments.LoginUserDetailsFragmentDirections.Companion.actionLoginUserDetailsFragmentToLoginOtpDetails
-import com.example.nammametromvvm.ui.login.ui.fragments.LoginUserDetailsFragmentDirections.Companion.actionLoginUserDetailsFragmentToTermAndConditionFragment
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.GenericMethods
@@ -126,10 +121,10 @@ class LoginUserDetailsFragment : Fragment() {
             binding.etPhoneNumber
         )
         binding.tvHelp.setOnClickListener {
-            navigateTo(actionLoginUserDetailsFragmentToLoginHelpFragment())
+            navigateTo(LoginUserDetailsFragmentDirections.actionLoginUserDetailsFragmentToLoginHelpFragment())
         }
         binding.tvTNCClick.setOnClickListener {
-            navigateTo(actionLoginUserDetailsFragmentToTermAndConditionFragment())
+            navigateTo(LoginUserDetailsFragmentDirections.actionLoginUserDetailsFragmentToTermAndConditionFragment())
         }
         binding.etPhoneNumber.apply {
             afterTextChanged {
@@ -166,10 +161,9 @@ class LoginUserDetailsFragment : Fragment() {
     private fun navigateToHomeScreen() {
         lifecycleScope.launch {
             loginViewModel.setLogInSkipped()
-            val intent = Intent(requireContext(), HomeActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            }
-            startActivity(intent)
+            navigateTo(
+                LoginUserDetailsFragmentDirections.actionLoginUserDetailsFragmentToHomeFragment()
+            )
         }
     }
 
@@ -185,7 +179,7 @@ class LoginUserDetailsFragment : Fragment() {
 
     private fun navigateToOtpScreen() {
         navigateTo(
-            actionLoginUserDetailsFragmentToLoginOtpDetails(
+            LoginUserDetailsFragmentDirections.actionLoginUserDetailsFragmentToLoginOtpDetailsFragment(
                 binding.etPhoneNumber.text.toString()
             )
         )
