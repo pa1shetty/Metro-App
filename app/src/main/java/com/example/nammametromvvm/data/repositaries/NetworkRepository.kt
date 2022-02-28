@@ -1,8 +1,6 @@
 package com.example.nammametromvvm.data.repositaries
 
 import android.util.Log
-import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.Update
-import com.example.nammametromvvm.data.repositaries.network.SafeApiRequest
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.data.repositaries.entites.Config
 import com.example.nammametromvvm.data.repositaries.network.MyApi
@@ -11,9 +9,11 @@ import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.con
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.dataLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.modifiedOnLbl
 import com.example.nammametromvvm.data.repositaries.network.RequestTypeEnum
-import com.example.nammametromvvm.data.repositaries.network.responses.login.getOtp.GetOtp
-import com.example.nammametromvvm.data.repositaries.network.responses.login.otpVerification.OtpVerification
-import com.example.nammametromvvm.data.repositaries.network.responses.login.otpVerification.OtpVerificationData
+import com.example.nammametromvvm.data.repositaries.network.SafeApiRequest
+import com.example.nammametromvvm.data.repositaries.network.responses.Login.getOtp.GetOtp
+import com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification.OtpVerification
+import com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification.OtpVerificationData
+import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.Update
 import com.example.nammametromvvm.utility.Configurations
 import org.json.JSONObject
 import java.util.*

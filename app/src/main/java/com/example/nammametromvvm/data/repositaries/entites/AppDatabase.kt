@@ -36,6 +36,5 @@ abstract class AppDatabase : RoomDatabase() {
 
      fun deleteDb(context: Context) {
         context.deleteDatabase("MyDb")
-
     }
 }

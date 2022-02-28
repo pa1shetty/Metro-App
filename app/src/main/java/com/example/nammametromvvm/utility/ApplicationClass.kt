@@ -17,6 +17,7 @@ import javax.inject.Inject
 class ApplicationClass : Application() {
     @Inject
     lateinit var configurationsClass: Configurations
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate() {
         super.onCreate()

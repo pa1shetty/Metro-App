@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentLoginUserDetailsBinding
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
@@ -25,7 +26,6 @@ import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.StatusEnum
 import com.example.nammametromvvm.utility.logs.CustomButton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_login_user_details.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,6 +34,7 @@ import javax.inject.Inject
 class LoginUserDetailsFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginUserDetailsBinding
+    private val safeArgs: LoginUserDetailsFragmentArgs by navArgs()
 
     @Inject
     lateinit var genericMethods: GenericMethods
@@ -161,16 +162,20 @@ class LoginUserDetailsFragment : Fragment() {
     private fun navigateToHomeScreen() {
         lifecycleScope.launch {
             loginViewModel.setLogInSkipped()
-            navigateTo(
-                LoginUserDetailsFragmentDirections.actionLoginUserDetailsFragmentToHomeFragment()
-            )
+            if (safeArgs.navigatedFrom == getString(R.string.navigated_from_splash_screen)) {
+                navigateTo(
+                    LoginUserDetailsFragmentDirections.actionLoginUserDetailsFragmentToHomeFragment()
+                )
+            } else {
+                requireActivity().onBackPressed()
+            }
         }
     }
 
     private fun proceedAfterLoginClick() {
         genericMethods.hideKeypad(requireActivity())
         customButton.loadingLoginButton()
-        requestForOtp(etPhoneNumber.text.toString())
+        requestForOtp(binding.etPhoneNumber.text.toString())
     }
 
     private fun requestForOtp(phoneNumber: String) {
@@ -180,7 +185,7 @@ class LoginUserDetailsFragment : Fragment() {
     private fun navigateToOtpScreen() {
         navigateTo(
             LoginUserDetailsFragmentDirections.actionLoginUserDetailsFragmentToLoginOtpDetailsFragment(
-                binding.etPhoneNumber.text.toString()
+                binding.etPhoneNumber.text.toString(), safeArgs.navigatedFrom
             )
         )
     }

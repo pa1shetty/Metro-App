@@ -20,12 +20,12 @@ import com.example.nammametromvvm.utility.ErrorException
 import com.example.nammametromvvm.utility.NoInternetException
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.logs.LoggerClass
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
+
 class SplashViewModel(
     application: Application,
     private val networkRepository: NetworkRepository,
@@ -33,7 +33,7 @@ class SplashViewModel(
     private val dateMethods: DateMethods,
     private val loggerClass: LoggerClass,
     private val dataBaseRepository: DataBaseRepository,
-    private val configurations: Configurations,
+    private val configurations: Configurations
 ) : AndroidViewModel(application) {
     suspend fun checkForUpdate() =
         withContext(Dispatchers.IO) {
@@ -115,7 +115,7 @@ class SplashViewModel(
     }
 
     suspend fun isUserLoggedIn(): Flow<Boolean> =
-        withContext(Dispatchers.IO) { dataStoreRepository.isUserLoggedIn() }
+        withContext(Dispatchers.IO) { dataStoreRepository.isUserLoggedInAsFlow() }
 
     fun isMandatoryLogin(): Boolean = configurations.isLoginMandatory()
     suspend fun isLoginSkipped(): Flow<Boolean> =

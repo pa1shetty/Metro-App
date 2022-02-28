@@ -35,6 +35,23 @@
             app:destination="@id/profileFragment"
             app:enterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_homeFragment_to_cardTopUpFragment"
+            app:destination="@id/cardTopUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_qrTicketsFragment"
+            app:destination="@id/qrTicketsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginUserDetailsFragment"
+            app:destination="@id/loginUserDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginUserDetailsFragment"
@@ -47,12 +64,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-
         <action
             android:id="@+id/action_loginUserDetailsFragment_to_loginHelpFragment"
             app:destination="@id/loginHelpFragment"
             app:enterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+
         <action
             android:id="@+id/action_loginUserDetailsFragment_to_termAndConditionFragment"
             app:destination="@id/termAndConditionFragment"
@@ -63,18 +80,19 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/loginUserDetailsFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="navigatedFrom"
+            android:defaultValue="splashscreen"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/loginOtpDetailsFragment"
         android:name="com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragment"
         android:label="LoginOtpDetailsFragment">
-        <argument
-            android:name="phoneNumber"
-            android:defaultValue="0"
-            app:argType="string" />
         <action
             android:id="@+id/action_loginOtpDetailsFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
             app:popUpTo="@id/loginUserDetailsFragment"
             app:popUpToInclusive="true" />
         <action
@@ -82,6 +100,40 @@
             app:destination="@id/loginHelpFragment"
             app:enterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_loginOtpDetailsFragment_to_qrTicketsFragment"
+            app:destination="@id/qrTicketsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginOtpDetailsFragment_to_cardTopUpFragment"
+            app:destination="@id/cardTopUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginOtpDetailsFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="phoneNumber"
+            android:defaultValue="0"
+            app:argType="string" />
+        <argument
+            android:name="navigatedFrom"
+            android:defaultValue="splashscreen"
+            app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -90,8 +142,8 @@
         <action
             android:id="@+id/action_settingsFragment_to_splashScreenActivity"
             app:destination="@id/splashScreenActivity"
-            app:popUpTo="@id/splashScreenActivity"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -107,4 +159,14 @@
         android:name="com.example.nammametromvvm.ui.login.ui.fragments.TermAndConditionFragment"
         android:label="fragment_term_and_condition"
         tools:layout="@layout/fragment_term_and_condition" />
+    <fragment
+        android:id="@+id/cardTopUpFragment"
+        android:name="com.example.nammametromvvm.CardTopUpFragment"
+        android:label="fragment_card_top_up"
+        tools:layout="@layout/fragment_card_top_up" />
+    <fragment
+        android:id="@+id/qrTicketsFragment"
+        android:name="com.example.nammametromvvm.QrTicketsFragment"
+        android:label="fragment_qr_tickets"
+        tools:layout="@layout/fragment_qr_tickets" />
 </navigation>

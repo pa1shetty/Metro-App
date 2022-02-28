@@ -9,52 +9,6 @@
     android:padding="18dp"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/need_help"
-        android:textColor="@color/bmrcl_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_smartphone"
-        android:layout_width="112dp"
-        android:layout_height="112dp"
-        android:src="@drawable/ic_smartphone"
-        app:layout_constraintBottom_toTopOf="@+id/tv_start_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="@string/smartphone"/>
-
-    <TextView
-        android:id="@+id/tv_start_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/let_s_get_started"
-        android:textColor="@color/textColor"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_start_details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_smartphone" />
-
-    <TextView
-        android:id="@+id/tv_start_details"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/we_will_send_an_otp_to_your_number"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/etPhoneNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_start_header" />
-
     <EditText
         android:id="@+id/etPhoneNumber"
         android:layout_width="0dp"
@@ -77,6 +31,67 @@
         app:layout_constraintVertical_chainStyle="packed"
         tools:ignore="LabelFor" />
 
+    <ImageView
+        android:id="@+id/iv_smartphone"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:contentDescription="@string/smartphone"
+        android:src="@drawable/ic_smartphone"
+        app:layout_constraintBottom_toTopOf="@+id/tv_start_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_start_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/let_s_get_started"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_start_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_smartphone" />
+
+    <TextView
+        android:id="@+id/tv_t_n_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/by_proceeding_you_accept"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_t_n_c_click"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_t_n_c_click"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/terms_and_conditions"
+        android:textColor="@color/bmrcl_color"
+        app:layout_constraintBottom_toBottomOf="@id/tv_t_n_c"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_t_n_c"
+        app:layout_constraintTop_toTopOf="@+id/tv_t_n_c" />
+
+
+    <TextView
+        android:id="@+id/tv_start_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/we_will_send_an_otp_to_your_number"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/etPhoneNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_header" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_proceed"
@@ -97,10 +112,10 @@
             android:id="@+id/iv_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/proceed"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_navigate_next_24"
-            app:tint="@color/lightGray"
-            android:contentDescription="@string/proceed"/>
+            app:tint="@color/lightGray" />
 
         <ProgressBar
             android:id="@+id/pb_login"
@@ -115,40 +130,29 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tv_t_n_c"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/by_proceeding_you_accept"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_t_n_c_click"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber"
-        app:layout_constraintVertical_chainStyle="packed" />
 
-
-    <TextView
-        android:id="@+id/tv_t_n_c_click"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/terms_and_conditions"
-        android:textColor="@color/bmrcl_color"
-        app:layout_constraintBottom_toBottomOf="@id/tv_t_n_c"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_t_n_c"
-        app:layout_constraintTop_toTopOf="@+id/tv_t_n_c" />
-
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/tv_skip"
-        android:visibility="gone"
+        style="?attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/skip"
         android:textColor="@color/bmrcl_color"
         android:textSize="16sp"
+        android:visibility="visible"
+        app:cornerRadius="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tv_help"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/need_help"
+        android:textColor="@color/bmrcl_color"
+        app:cornerRadius="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

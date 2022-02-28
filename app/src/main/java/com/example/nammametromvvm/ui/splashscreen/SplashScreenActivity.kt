@@ -23,6 +23,7 @@ import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.Up
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GeneralException
 import com.example.nammametromvvm.utility.logs.LoggerClass
+import com.example.nammametromvvm.utility.theme.HandleTheme
 import com.example.nammametromvvm.utility.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -39,6 +40,9 @@ class SplashScreenActivity : Fragment() {
 
     @Inject
     lateinit var factory: SplashScreenViewModelFactory
+
+    @Inject
+    lateinit var handleTheme: HandleTheme
 
     @Inject
     lateinit var loggerClass: LoggerClass
@@ -64,6 +68,7 @@ class SplashScreenActivity : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -275,6 +280,7 @@ class SplashScreenActivity : Fragment() {
     private fun navigateToLoginUserDetailsScreen() {
         navigateTo(
             SplashScreenActivityDirections.actionSplashScreenActivityToLoginUserDetailsFragment(
+                getString(R.string.navigated_from_splash_screen)
             )
         )
     }

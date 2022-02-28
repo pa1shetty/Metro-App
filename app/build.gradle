@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
@@ -10,6 +9,7 @@ plugins {
     id 'com.google.firebase.appdistribution'
     id 'androidx.navigation.safeargs.kotlin'
 }
+
 
 android {
     compileSdk 31
@@ -79,9 +79,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 
     //Android Room
-    implementation "androidx.room:room-runtime:2.4.1"
-    implementation "androidx.room:room-ktx:2.4.1"
-    kapt "androidx.room:room-compiler:2.4.1"
+    implementation "androidx.room:room-runtime:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
 
     //Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"

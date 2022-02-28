@@ -8,11 +8,11 @@ import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
 @SuppressLint("CustomSplashScreen")
-class HomeActivityViewModelFactory @Inject constructor(
+class HomeFragmentViewModelFactory @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeActivityViewModel(
+        return HomeFragmentViewModel(
             dataStoreRepository
         ) as T
     }

@@ -13,10 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentLoginOtpDetailsBinding
+import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentDirections.Companion.actionLoginOtpDetailsFragmentToCardTopUpFragment
+import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentDirections.Companion.actionLoginOtpDetailsFragmentToHomeFragment
+import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentDirections.Companion.actionLoginOtpDetailsFragmentToProfileFragment
+import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentDirections.Companion.actionLoginOtpDetailsFragmentToQrTicketsFragment
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.Configurations
@@ -118,9 +123,25 @@ class LoginOtpDetailsFragment : Fragment() {
     }
 
     private fun navigateToHomeScreen() {
-        findNavController().navigate(
-            LoginOtpDetailsFragmentDirections.actionLoginOtpDetailsFragmentToHomeFragment()
-        )
+        when (safeArgs.navigatedFrom) {
+            getString(R.string.navigated_from_homescreen_profile) -> navigateTo(
+                actionLoginOtpDetailsFragmentToProfileFragment()
+            )
+            getString(R.string.navigated_from_homescreen_top_up) -> navigateTo(
+                actionLoginOtpDetailsFragmentToCardTopUpFragment()
+            )
+            getString(R.string.navigated_from_homescreen_qr_tickets) -> navigateTo(
+                actionLoginOtpDetailsFragmentToQrTicketsFragment()
+            )
+            else -> navigateTo(
+                actionLoginOtpDetailsFragmentToHomeFragment()
+            )
+        }
+
+    }
+
+    private fun navigateTo(navDirections: NavDirections) {
+        findNavController().navigate(navDirections)
     }
 
     private fun setUpClick() {
@@ -132,7 +153,7 @@ class LoginOtpDetailsFragment : Fragment() {
         binding.tvResend.setOnClickListener { resendOtp() }
         binding.tvEdit.setOnClickListener { requireActivity().onBackPressed() }
         binding.tvHelp.setOnClickListener {
-            findNavController().navigate(
+            navigateTo(
                 LoginOtpDetailsFragmentDirections.actionLoginOtpDetailsFragmentToLoginHelpFragment()
             )
         }

@@ -13,7 +13,7 @@ With following functionalities
  - [x] Splash screen
     - [x] App update
     - [x] Download configuration
-    - [x] Check for registartion
+    - [x] Check for registration
     
  - [x] Login Screen
     - [x] Login

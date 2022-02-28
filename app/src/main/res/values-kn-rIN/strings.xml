@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ನಮ್ಮ ಮೆಟ್ರೋ</string>
+    <string name="checking_for_update">ನವೀಕರಣಕ್ಕಾಗಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="checking_for_configuration">ಸಂರಚನೆಗಾಗಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="checking_for_login_details">ಲಾಗಿನ್ ವಿವರಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="close_app">ಅಪ್ಲಿಕೇಶನ್ ಮುಚ್ಚಿ ಮುಚ್ಚಿ</string>
+    <string name="retry">ಮರುಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="something_went_wrong">ಏನೋ ತಪ್ಪಾಗಿದೆ!</string>
+    <string name="something_went_wrong_info">ಏನೋ ತಪ್ಪಾಗಿದೆ! ನೀವು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಲು ಬಯಸುವಿರಾ?</string>
+    <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ!</string>
+    <string name="no_internet_info">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ! ದಯವಿಟ್ಟು ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ಹಾಗೂ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="hello_blank_fragment">ಹಲೋ ಖಾಲಿ ತುಣುಕು</string>
+    <string name="resend_in">%1$s ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಮರುಕಳುಹಿಸಿ</string>
+    <string name="resend">ಮರುಕಳುಹಿಸಿ</string>
+    <string name="otp_mismatch">OTP ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ, ದಯವಿಟ್ಟು OTP ಅನ್ನು ಬಾಡಿಗೆಗೆ ನೀಡಿ, ದಯವಿಟ್ಟು OTP ಅನ್ನು ಬಾಡಿಗೆಗೆ ನೀಡಿ</string>
+    <string name="otp_time_out">OTP ಸಮಯ ಮೀರಿದೆ, ಹೊಸ OTP ಗಾಗಿ ವಿನಂತಿಸಲಾಗಿದೆ</string>
+    <string name="invalid_mobile_number">ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="enter_valid_otp">ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="home_screen_welcome">ಹಲೋ, %1$s</string>
+    <string name="version_build">ಆವೃತ್ತಿ: %1$s ಬಿಲ್ಡ್: %2$s</string>
+    <string name="update_available">ಅಪ್ಡೇಟ್ ಲಭ್ಯವಿದೆ!</string>
+    <string name="update_info">ಅಪ್ಲಿಕೇಶನ್‌ನ ಹೊಸ ಆವೃತ್ತಿ ಲಭ್ಯವಿದೆ, ಹೊಸ ವೈಶಿಷ್ಟ್ಯಗಳು ಮತ್ತು ದೋಷ ಪರಿಹಾರಗಳೊಂದಿಗೆ. ನೀವು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನವೀಕರಿಸಲು ಬಯಸುವಿರಾ?</string>
+    <string name="update">ನವೀಕರಿಸಿ</string>
+    <string name="no_thanks">ಬೇಡ ಧನ್ಯವಾದಗಳು</string>
+    <string name="action_sign_in_short">ಸೈನ್ ಇನ್ ಮಾಡಿ</string>
+    <string name="need_help">ಸಹಾಯ ಬೇಕೇ?</string>
+    <string name="we_will_send_an_otp_to_your_number">ನಾವು ನಿಮ್ಮ ಸಂಖ್ಯೆಗೆ OTP ಕಳುಹಿಸುತ್ತೇವೆ</string>
+    <string name="did_not_receive_otp">OTP ಸ್ವೀಕರಿಸಲಿಲ್ಲವೇ?</string>
+    <string name="great_thanks">ತುಂಬಾ ಧನ್ಯವಾದಗಳು!</string>
+    <string name="edit">ತಿದ್ದು</string>
+    <string name="skip">ಬಿಟ್ಟುಬಿಡಿ</string>
+    <string name="profile">ಪ್ರೊಫೈಲ್</string>
+    <string name="settings">ಸಂಯೋಜನೆಗಳು</string>
+    <string name="logo">ಲೋಗೋ</string>
+    <string name="proceed">ಮುಂದುವರೆಯಲು</string>
+    <string name="let_s_get_started">ನಾವೀಗ ಆರಂಭಿಸೋಣ</string>
+    <string name="by_proceeding_you_accept">ಮುಂದುವರಿಯುವ ಮೂಲಕ ನೀವು ಸ್ವೀಕರಿಸುತ್ತೀರಿ</string>
+    <string name="terms_and_conditions">ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳು</string>
+    <string name="log_out">ಲಾಗ್ ಔಟ್</string>
+    <string name="language">ಭಾಷೆ</string>
+    <string name="theme">ಥೀಮ್</string>
+    <string name="card_top_up">Card Top up</string>
+    <string name="click_here_to_add_top_up_a_card">Click here to Add,Top up a card.</string>
+    <string name="click_here_to_click_here_to_purchase_or_use_qr_tickets">Click here to Click here to Purchase or Use QR Tickets.</string>
+    <string name="qr_tickets">QR Tickets</string>
+</resources>

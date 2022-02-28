@@ -3,7 +3,7 @@ package com.example.nammametromvvm.utility
 import android.content.Context
 import com.example.nammametromvvm.data.repositaries.DataBaseRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
-import com.example.nammametromvvm.data.repositaries.network.responses.login.otpVerification.OtpVerificationData
+import com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification.OtpVerificationData
 
 class UserRegistration(
     private val dataBaseRepository: DataBaseRepository,

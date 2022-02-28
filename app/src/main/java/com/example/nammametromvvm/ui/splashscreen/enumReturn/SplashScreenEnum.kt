@@ -7,6 +7,7 @@ class SplashScreenEnum {
         MANDATORY(2),
         ERROR(3),
     }
+
     enum class ConfigEnum(val configReturn: Int) {
         UPDATED(0),
         UP_TO_DATE(1),
@@ -14,7 +15,8 @@ class SplashScreenEnum {
         ERROR_BUT_PROCEED(3),
         ERROR(4),
     }
-    enum class NavigationStatus() {
+
+    enum class NavigationStatus {
         NO_NAVIGATION,
         NAVIGATE_TO_LOGIN_SCREEN,
         NAVIGATE_TO_HOME_SCREEN

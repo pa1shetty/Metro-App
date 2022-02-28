@@ -1,4 +1,4 @@
-package com.example.nammametromvvm.data.repositaries.network.responses.login.otpVerification
+package com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification
 
 
 import com.google.gson.annotations.SerializedName

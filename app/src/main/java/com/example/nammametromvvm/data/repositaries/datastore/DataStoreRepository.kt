@@ -5,11 +5,15 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.nammametromvvm.data.repositaries.datastore.PreferencesKeys.currentLanguage
+import com.example.nammametromvvm.data.repositaries.datastore.PreferencesKeys.currentTheme
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.NO_UPDATE
 import com.example.nammametromvvm.utility.AesLibrary
 import com.example.nammametromvvm.utility.AppConstants.dataStoreDefaultValue
 import com.example.nammametromvvm.utility.AppConstants.dataStoreName
+import com.example.nammametromvvm.utility.AppConstants.defaultLanguageValue
 import com.example.nammametromvvm.utility.AppConstants.defaultModifiedOn
+import com.example.nammametromvvm.utility.AppConstants.defaultThemeValue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
@@ -30,6 +34,7 @@ class DataStoreRepository @Inject constructor(
             preference[key] = aesLibrary.encryptData(value)
         }
     }
+
     @Suppress("unused")
     private fun getStringDataOld(key: Preferences.Key<String>): Flow<String> =
         dataStore.data
@@ -81,6 +86,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun saveCKey(cKey: String = dataStoreDefaultValue) {
         saveStringData(PreferencesKeys.cKey, cKey)
     }
+
     @Suppress("unused")
     suspend fun getCKey(): String {
         return getStringData(
@@ -91,6 +97,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun saveUserName(userName: String = dataStoreDefaultValue) {
         saveStringData(PreferencesKeys.userName, userName)
     }
+
     @Suppress("unused")
     suspend fun getUserName(): String {
         return getStringData(
@@ -101,6 +108,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun saveUserEmail(userName: String = dataStoreDefaultValue) {
         saveStringData(PreferencesKeys.userEmail, userName)
     }
+
     @Suppress("unused")
     suspend fun getUserEmail(): String {
         return getStringData(
@@ -135,7 +143,21 @@ class DataStoreRepository @Inject constructor(
         return value
     }
 
-    fun isUserLoggedIn() = dataStore.data.catch { exception -> // 1
+    private suspend fun getBooleanData(
+        key: Preferences.Key<Boolean>,
+        defaultValue: Boolean = false
+    ): Boolean {
+        val preferences = dataStore.data.first()
+        var value = defaultValue
+        preferences[key]?.let {
+            value = it
+        }
+        return value
+    }
+
+    suspend fun isUserLoggedIn() = getBooleanData(PreferencesKeys.userLoggedIn)
+
+    fun isUserLoggedInAsFlow() = dataStore.data.catch { exception -> // 1
         if (exception is IOException) { // 2
             emit(emptyPreferences())
         } else {
@@ -154,6 +176,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun userLoggedIn() {
         saveUserLogInData(true)
     }
+
     @Suppress("unused")
     suspend fun userLoggedOut() {
         saveUserLogInData(false)
@@ -168,6 +191,7 @@ class DataStoreRepository @Inject constructor(
     suspend fun setLoginSkipped() {
         saveLoginSkipped(true)
     }
+
     @Suppress("unused")
     suspend fun clearLoginSkipped() {
         saveLoginSkipped(false)
@@ -181,8 +205,23 @@ class DataStoreRepository @Inject constructor(
 
     fun getUserNameFlow() = getStringAsFlow(PreferencesKeys.userName)
 
+    suspend fun saveCurrentTheme(currentTheme: String) {
+        saveStringData(PreferencesKeys.currentTheme, currentTheme)
+    }
+
+    suspend fun saveCurrentLanguage(currentLanguage: String = defaultLanguageValue) {
+        saveStringData(PreferencesKeys.currentLanguage, currentLanguage)
+    }
+
+    fun getCurrentThemeAsFlow() = getStringAsFlow(currentTheme, defaultThemeValue)
+    fun getCurrentLanguageAsFlow() = getStringAsFlow(currentLanguage, defaultLanguageValue)
+    suspend fun getCurrentLanguage() = getStringData(currentLanguage, defaultLanguageValue)
+    suspend fun getCurrentTheme() = getStringData(currentTheme, defaultThemeValue)
+
+
     private fun getStringAsFlow(
-        key: Preferences.Key<String>
+        key: Preferences.Key<String>,
+        defaultValue: String = dataStoreDefaultValue
     ): Flow<String> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -192,7 +231,7 @@ class DataStoreRepository @Inject constructor(
             }
         }
         .map {
-            it[key]?.let { it1 -> aesLibrary.decryptData(it1) } ?: dataStoreDefaultValue
+            it[key]?.let { it1 -> aesLibrary.decryptData(it1) } ?: defaultValue
         }
 
     suspend fun clearDatastore() {

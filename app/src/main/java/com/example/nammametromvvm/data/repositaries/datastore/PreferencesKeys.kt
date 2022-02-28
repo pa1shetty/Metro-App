@@ -14,5 +14,7 @@ object PreferencesKeys {
     val cToken = stringPreferencesKey("cToken")
     val cKey = stringPreferencesKey("cKey")
     val loginSkipped = booleanPreferencesKey("loginSkipped")
+    val currentTheme = stringPreferencesKey("theme")
+    val currentLanguage = stringPreferencesKey("language")
 
 }

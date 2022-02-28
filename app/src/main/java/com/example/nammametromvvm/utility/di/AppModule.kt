@@ -119,5 +119,4 @@ object AppModule {
         dataBaseRepository: DataBaseRepository,
         dataStoreRepository: DataStoreRepository
     ) = UserRegistration(dataBaseRepository, dataStoreRepository)
-
 }

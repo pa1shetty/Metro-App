@@ -1,24 +1,26 @@
 package com.example.nammametromvvm.ui.homescreen.fragments
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.example.nammametromvvm.BuildConfig
 import com.example.nammametromvvm.R
-import com.example.nammametromvvm.R.string
 import com.example.nammametromvvm.databinding.FragmentSettingsBinding
 import com.example.nammametromvvm.ui.homescreen.viewModels.SettingsViewModel
 import com.example.nammametromvvm.ui.homescreen.viewModels.SettingsViewModelFactory
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,81 +41,111 @@ class SettingsFragment : Fragment() {
         return (binding.root)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setUpActionBar()
-        setUpClick()
-        handleLanguage()
-        handleTheme()
-    }
-
-    private fun handleLanguage() {
-        val chip = Chip(requireActivity())
-        chip.text = getString(string.english)
-
-        binding.chipGroup.addView(chip)
-        val chip2 = Chip(requireActivity())
-        chip2.text = "ಕನ್ನಡ"
-        binding.chipGroup.addView(chip2)
-        binding.chipGroup.isSingleSelection = true
-        binding.chipGroup.childCount
-        binding.chipGroup.check(chip.id)
-    }
-
-    private fun handleTheme() {
-        val chip = Chip(requireActivity())
-        chip.text = getString(string.light)
-        binding.chipGroupTheme.addView(chip)
-        val chip2 = Chip(requireActivity())
-        chip2.text = getString(string.dark)
-        binding.chipGroupTheme.addView(chip2)
-        binding.chipGroupTheme.isSingleSelection = true
-        val chip3 = Chip(requireActivity())
-        chip3.text = getString(string.system)
-        binding.chipGroupTheme.addView(chip3)
-        binding.chipGroup.check(chip3.id)
-
-
-    }
-
-
-    private fun setUpActionBar() {
-        if (activity is AppCompatActivity) {
-            (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-            if ((activity as AppCompatActivity).supportActionBar != null) {
-                (activity as AppCompatActivity).supportActionBar!!.title =
-                    getString(string.settings)
-                (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(true)
-                (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-                (activity as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true)
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         settingsViewModel = ViewModelProvider(this, factory)[SettingsViewModel::class.java]
+
     }
 
-    private fun setUpClick() {
-        binding.llLogOut.setOnClickListener {
-            lifecycleScope.launch {
-                settingsViewModel.logOut(requireContext())
-                //action_homeFragment_to_splashScreenActivity
-                navigateToSplashScreen()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpClick()
+        handleLanguage()
+        handleTheme()
+        setUpVersionData()
+        setUpLoggedInUI()
+    }
 
+    private fun setUpLoggedInUI() {
+        binding.btnLogOut.visibility = View.GONE
+        lifecycleScope.launch {
+            settingsViewModel.isUserLoggedIn().collect { isUserLoggedIn ->
+                if (isUserLoggedIn) {
+                    binding.btnLogOut.visibility = View.VISIBLE
+                } else {
+                    binding.btnLogOut.visibility = View.GONE
+                }
             }
         }
     }
 
+    private fun setUpVersionData() {
+        binding.tvVersion.text = getString(
+            R.string.version_build,
+            BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toString()
+        )
+    }
+
+    private fun handleLanguage() {
+        val languages = settingsViewModel.getLanguages()
+        lifecycleScope.launch {
+            val currentLanguage = settingsViewModel.getCurrentLanguage()
+            languages.forEachIndexed { index, language ->
+                val chip = Chip(requireActivity())
+                chip.text = language.name
+                chip.id = index + 100
+                language.id = chip.id
+                if (language.code == currentLanguage) {
+                    chip.isChecked = true
+                }
+                binding.cgLanguage.addView(chip)
+            }
+        }
+        binding.cgLanguage.setOnCheckedChangeListener { _, checkedId ->
+            languages.forEach { language ->
+                if (language.id == checkedId) {
+                    setNewLocale(requireActivity(), language.code)
+                }
+            }
+        }
+    }
+
+
+    @SuppressLint("ResourceType")
+    private fun handleTheme() {
+        val themes = settingsViewModel.getThemes()
+        lifecycleScope.launch {
+            val currentTheme = settingsViewModel.getCurrentTheme()
+            themes.forEachIndexed { index, theme ->
+                val chip = Chip(requireActivity())
+                chip.text = theme.name
+                chip.id = index
+                theme.id = chip.id
+                if (theme.name == currentTheme) {
+                    chip.isChecked = true
+                }
+                binding.chipGroupTheme.addView(chip)
+            }
+        }
+
+        binding.chipGroupTheme.setOnCheckedChangeListener { _, checkedId ->
+            themes.forEach { theme ->
+                if (theme.id == checkedId) {
+                    settingsViewModel.saveCurrentTheme(theme.name)
+                }
+            }
+        }
+    }
+
+
+    private fun setUpClick() {
+        binding.btnLogOut.setOnClickListener {
+            lifecycleScope.launch {
+                settingsViewModel.logOut()
+                navigateToSplashScreen()
+            }
+        }
+        binding.ivBack.setOnClickListener { requireActivity().onBackPressed() }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d("test25", "onOptionsItemSelected: 2")
         if (item.itemId == R.id.home) {
             requireActivity().onBackPressed()
             return true
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
+
     private fun navigateToSplashScreen() {
         navigateTo(
             SettingsFragmentDirections.actionSettingsFragmentToSplashScreenActivity(
@@ -125,5 +157,11 @@ class SettingsFragment : Fragment() {
         findNavController().navigate(
             navDirections
         )
+    }
+
+    private fun setNewLocale(mContext: Activity, language: String) {
+        settingsViewModel.setNewLocale(requireActivity(), language)
+        val intent = mContext.intent
+        startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 }

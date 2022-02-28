@@ -6,21 +6,71 @@
     android:layout_height="match_parent"
     android:background="@color/colorSplashScreenBg">
 
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/version_build"
+        app:layout_constraintBottom_toTopOf="@+id/btn_log_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nsv_settings" />
 
-    <androidx.appcompat.widget.Toolbar
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/nsv_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?actionBarItemBackground"
+            android:clickable="true"
+            android:contentDescription="@string/profile"
+            android:focusable="true"
+            android:padding="4dp"
+            android:src="@drawable/ic_round_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_user_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/bmrcl_color"
+            tools:targetApi="m" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/settings"
+            android:textSize="@dimen/toolbar_text"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_back"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_settings"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/view_logout"
+        app:layout_constraintBottom_toTopOf="@+id/tv_version"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -43,16 +93,20 @@
                     android:textColor="@color/bmrcl_color" />
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chip_group"
+                    android:id="@+id/cg_language"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                </com.google.android.material.chip.ChipGroup>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -63,48 +117,30 @@
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chip_group_theme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="true"
+                    app:singleSelection="true" />
             </LinearLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view_logout"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_log_out"
+        style="?attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/log_out"
+        android:textColor="@color/lightRed"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/ic_round_power_settings"
+        app:iconGravity="textStart"
+        app:iconTint="@color/lightRed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_version"
 
-        <LinearLayout
-            android:id="@+id/ll_log_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="horizontal"
-            android:padding="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@string/log_out"
-                android:src="@drawable/ic_round_power_settings" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="6dp"
-                android:text="@string/log_out"
-                android:textColor="@color/lightRed"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:rippleColor="@color/lightRed" />
 </androidx.constraintlayout.widget.ConstraintLayout>

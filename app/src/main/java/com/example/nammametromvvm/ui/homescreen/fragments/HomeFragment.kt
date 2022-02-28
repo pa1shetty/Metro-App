@@ -1,7 +1,6 @@
 package com.example.nammametromvvm.ui.homescreen.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.nammametromvvm.CardTopUpFragment
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentHomeBinding
-import com.example.nammametromvvm.ui.homescreen.viewModels.HomeActivityViewModel
-import com.example.nammametromvvm.ui.homescreen.viewModels.HomeActivityViewModelFactory
+import com.example.nammametromvvm.ui.homescreen.viewModels.HomeFragmentViewModel
+import com.example.nammametromvvm.ui.homescreen.viewModels.HomeFragmentViewModelFactory
 import com.example.nammametromvvm.utility.AppConstants
+import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -22,15 +23,16 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-    private lateinit var homeActivityViewModel: HomeActivityViewModel
+    private lateinit var homeFragmentViewModel: HomeFragmentViewModel
 
     @Inject
-    lateinit var factory: HomeActivityViewModelFactory
+    lateinit var factory: HomeFragmentViewModelFactory
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeActivityViewModel = ViewModelProvider(this, factory)[HomeActivityViewModel::class.java]
+        homeFragmentViewModel = ViewModelProvider(this, factory)[HomeFragmentViewModel::class.java]
+
 
     }
 
@@ -47,29 +49,65 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpUserName()
         setUpClick()
+        fadingAnimation(binding.root)
+
     }
 
     private fun setUpClick() {
         binding.ivSettings.setOnClickListener { findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment()) }
-        binding.ivProfile.setOnClickListener { findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment()) }
+        binding.ivProfile.setOnClickListener {
+            lifecycleScope.launch {
+                if (homeFragmentViewModel.isUserLoggedIn()) {
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
+                } else {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToLoginUserDetailsFragment(
+                            getString(R.string.navigated_from_homescreen_profile)
+                        )
+                    )
+                }
+            }
+        }
+        binding.cvCardTopUp.setOnClickListener {
+            lifecycleScope.launch {
+                if (homeFragmentViewModel.isUserLoggedIn()) {
+                    val cardTopUpFragment = CardTopUpFragment()
+                    cardTopUpFragment.sharedElementEnterTransition = MaterialContainerTransform()
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToCardTopUpFragment()
+                    )
+                } else {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToLoginUserDetailsFragment(
+                            getString(R.string.navigated_from_homescreen_top_up)
+                        )
+                    )
+                }
+            }
+        }
+        binding.cvQrTickets.setOnClickListener {
+            lifecycleScope.launch {
+                if (homeFragmentViewModel.isUserLoggedIn()) {
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToQrTicketsFragment())
+                } else {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToLoginUserDetailsFragment(
+                            getString(R.string.navigated_from_homescreen_qr_tickets)
+                        )
+                    )
+                }
+            }
+        }
     }
 
 
     private fun setUpUserName() {
         lifecycleScope.launch {
-            homeActivityViewModel.getUserName().collect { userName ->
-                Log.d("test11", "setUpUserName: " + userName)
+            homeFragmentViewModel.getUserName().collect { userName ->
                 if (userName == AppConstants.dataStoreDefaultValue) {
                     binding.tvUserName.visibility = View.INVISIBLE
                 } else {
                     binding.tvUserName.text = getString(R.string.home_screen_welcome, userName)
-                    /*binding.tvUserName.startAnimation(
-                        AnimationUtils.loadAnimation(
-                            requireContext(),
-                            android.R.anim.fade_in
-                        )*/
-                   // )
-                    fadingAnimation(binding.root)
                 }
             }
         }

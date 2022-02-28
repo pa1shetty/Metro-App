@@ -35,33 +35,45 @@
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
     <string name="logo">Logo</string>
-    <string name="smartphone">Smartphone</string>
+    <string name="smartphone" translatable="false">Smartphone</string>
     <string name="proceed">Proceed</string>
     <string name="let_s_get_started">Let\'s Get Started</string>
     <string name="by_proceeding_you_accept">By proceeding you accept</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="log_out">Log Out</string>
     <string name="language">Language</string>
     <string name="theme">Theme</string>
-    <string name="light">Light</string>
-    <string name="dark">Dark</string>
-    <string name="system">System</string>
-    <string name="english">English</string>
+    <string name="light" translatable="false">Light</string>
+    <string name="dark" translatable="false">Dark</string>
+    <string name="system" translatable="false">System</string>
+    <string name="english" translatable="false">English</string>
+    <string name="kannada_kn" translatable="false">ಕನ್ನಡ</string>
+    <string name="chip_english_id" translatable="false">\@+id/chip_english</string>
+    <string name="version_build">Version: %1$s Build %2$s</string>
+    <string name="content_description_media" translatable="false">ontent_description_media</string>
+    <string name="navigated_from_homescreen_qr_tickets" translatable="false">homescreen_qr_tickets</string>
+    <string name="navigated_from_homescreen_top_up" translatable="false">homescreen_top_up</string>
+    <string name="navigated_from_splash_screen" translatable="false">splashscreen</string>
+    <string name="navigated_from_homescreen_profile" translatable="false">navigated_from_homescreen_profile</string>
+    <string name="card_top_up">Card Top up</string>
+    <string name="click_here_to_add_top_up_a_card">Click here to Add,Top up a card.</string>
+    <string name="click_here_to_click_here_to_purchase_or_use_qr_tickets">Click here to Click here to Purchase or Use QR Tickets.</string>
+    <string name="qr_tickets">QR Tickets</string>
 
 </resources>
