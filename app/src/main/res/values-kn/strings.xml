@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ನಮ್ಮ ಮೆಟ್ರೋ</string>
+    <string name="checking_for_update">ನವೀಕರಣಕ್ಕಾಗಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="checking_for_configuration">ಸಂರಚನೆಗಾಗಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="checking_for_login_details">ಲಾಗಿನ್ ವಿವರಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="close_app">ಅಪ್ಲಿಕೇಶನ್ ಮುಚ್ಚಿ</string>
+    <string name="retry">ಮರುಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="something_went_wrong">ಏನೋ ತಪ್ಪಾಗಿದೆ!</string>
+    <string name="something_went_wrong_info">ಏನೋ ತಪ್ಪಾಗಿದೆ! ನೀವು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಲು ಬಯಸುವಿರಾ?</string>
+    <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ!</string>
+    <string name="no_internet_info">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ! ದಯವಿಟ್ಟು ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ಹಾಗೂ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="hello_blank_fragment">ಹಲೋ ಖಾಲಿ ತುಣುಕು</string>
+    <string name="resend_in">%1$s ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಮರುಕಳುಹಿಸಿ</string>
+    <string name="resend">ಮರುಕಳುಹಿಸಿ</string>
+    <string name="otp_mismatch">OTP ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ, ದಯವಿಟ್ಟು OTP ಅನ್ನು ಬಾಡಿಗೆಗೆ ನೀಡಿ, ದಯವಿಟ್ಟು OTP ಅನ್ನು ಬಾಡಿಗೆಗೆ ನೀಡಿ</string>
+    <string name="otp_time_out">OTP ಸಮಯ ಮೀರಿದೆ, ಹೊಸ OTP ಗಾಗಿ ವಿನಂತಿಸಲಾಗಿದೆ</string>
+    <string name="invalid_mobile_number">ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="enter_valid_otp">ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="home_screen_welcome">ಹಲೋ, %1$s</string>
+    <string name="version_build">ಆವೃತ್ತಿ: %1$s ಬಿಲ್ಡ್: %2$s</string>
+</resources>
