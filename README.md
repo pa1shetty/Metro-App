@@ -61,7 +61,7 @@ Around 35% of the development has been completed.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Navigation Component](https://developer.android.com/guide/navigation) - Navigation refers to the interactions that allow users to navigate across, into, and back out from the different pieces of content within your app.
 - [Live Data](https://developer.android.com/topic/libraries/architecture/livedata) - LiveData is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services. 
-
+- [SMS User Consent API](https://developers.google.com/identity/sms-retriever/user-consent/overview) -The SMS User Consent API complements the SMS Retriever API by allowing an app to prompt the user to grant access to the content of a single SMS message. When a user gives consent, the app will then have access to the entire message body to automatically complete SMS verification.
 
 
 ## Architecture
