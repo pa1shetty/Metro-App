@@ -7,6 +7,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import com.example.nammametromvvm.R
 
+
 class GenericMethods {
     fun showKeyPad(activity: Activity, view: View?) {
         activity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
@@ -43,6 +44,12 @@ class GenericMethods {
                 root.snackBar(activity.getString(R.string.something_went_wrong))
             }
         }
+    }
+
+    fun getOTPFromMessage(message: String): String {
+        val otpLength = 6
+        return Regex("(\\d{$otpLength})").find(message)?.value ?: ""
+
     }
 
 }

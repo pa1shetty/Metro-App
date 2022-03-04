@@ -89,7 +89,7 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:transitionName="shared_element_container"
-                app:cardCornerRadius="12dp">
+                app:cardCornerRadius="@dimen/corner_radius">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

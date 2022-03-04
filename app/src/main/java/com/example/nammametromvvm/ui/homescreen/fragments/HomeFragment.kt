@@ -9,30 +9,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.nammametromvvm.CardTopUpFragment
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentHomeBinding
 import com.example.nammametromvvm.ui.homescreen.viewModels.HomeFragmentViewModel
 import com.example.nammametromvvm.ui.homescreen.viewModels.HomeFragmentViewModelFactory
 import com.example.nammametromvvm.utility.AppConstants
-import com.google.android.material.transition.MaterialContainerTransform
+import com.example.nammametromvvm.utility.interfaces.BottomSheetDialogueCallBackListener
+import com.example.nammametromvvm.utility.ui.BottomSheet
+import com.example.nammametromvvm.utility.ui.BottomSheet.BottomSheetCalledFrom.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), BottomSheetDialogueCallBackListener {
     private lateinit var homeFragmentViewModel: HomeFragmentViewModel
 
     @Inject
     lateinit var factory: HomeFragmentViewModelFactory
     private lateinit var binding: FragmentHomeBinding
-
+    private val bottomSheet: BottomSheet = BottomSheet(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeFragmentViewModel = ViewModelProvider(this, factory)[HomeFragmentViewModel::class.java]
-
 
     }
 
@@ -60,10 +60,9 @@ class HomeFragment : Fragment() {
                 if (homeFragmentViewModel.isUserLoggedIn()) {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
                 } else {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionHomeFragmentToLoginUserDetailsFragment(
-                            getString(R.string.navigated_from_homescreen_profile)
-                        )
+                    bottomSheet.bottomSheetLoginRequired(
+                        requireActivity(),
+                        HOME_PROFILE
                     )
                 }
             }
@@ -71,16 +70,13 @@ class HomeFragment : Fragment() {
         binding.cvCardTopUp.setOnClickListener {
             lifecycleScope.launch {
                 if (homeFragmentViewModel.isUserLoggedIn()) {
-                    val cardTopUpFragment = CardTopUpFragment()
-                    cardTopUpFragment.sharedElementEnterTransition = MaterialContainerTransform()
                     findNavController().navigate(
                         HomeFragmentDirections.actionHomeFragmentToCardTopUpFragment()
                     )
                 } else {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionHomeFragmentToLoginUserDetailsFragment(
-                            getString(R.string.navigated_from_homescreen_top_up)
-                        )
+                    bottomSheet.bottomSheetLoginRequired(
+                        requireActivity(),
+                        HOME_TOP_UP
                     )
                 }
             }
@@ -90,10 +86,9 @@ class HomeFragment : Fragment() {
                 if (homeFragmentViewModel.isUserLoggedIn()) {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToQrTicketsFragment())
                 } else {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionHomeFragmentToLoginUserDetailsFragment(
-                            getString(R.string.navigated_from_homescreen_qr_tickets)
-                        )
+                    bottomSheet.bottomSheetLoginRequired(
+                        requireActivity(),
+                        HOME_QR_TICKET
                     )
                 }
             }
@@ -123,4 +118,29 @@ class HomeFragment : Fragment() {
         )
     }
 
+    override fun onNegativeButtonClick(requestedFrom: BottomSheet.BottomSheetCalledFrom) {
+
+    }
+
+    override fun onPositiveButtonClick(requestedFrom: BottomSheet.BottomSheetCalledFrom) {
+        when (requestedFrom) {
+            HOME_PROFILE -> navigateLoginScreen(
+                getString(R.string.navigated_from_homescreen_profile)
+            )
+            HOME_TOP_UP -> navigateLoginScreen(
+                getString(R.string.navigated_from_homescreen_top_up)
+            )
+            HOME_QR_TICKET -> navigateLoginScreen(
+                getString(R.string.navigated_from_homescreen_qr_tickets)
+            )
+        }
+    }
+
+    private fun navigateLoginScreen(navigatedFrom: String) {
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToLoginUserDetailsFragment(
+                navigatedFrom
+            )
+        )
+    }
 }

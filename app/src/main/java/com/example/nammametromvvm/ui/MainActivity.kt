@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
         setUpTheme()
+
     }
 
     override fun onBackPressed() {
@@ -42,7 +43,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
     private fun setUpTheme() = mainViewModel.setUpTheme()
-
 }

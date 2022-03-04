@@ -23,7 +23,8 @@ class LoginViewModel(
     private val dataStoreRepository: DataStoreRepository,
     private val configurations: Configurations,
     private val loggerClass: LoggerClass,
-    private val userRegistration: UserRegistration
+    private val userRegistration: UserRegistration,
+    private val genericMethods: GenericMethods
 ) : ViewModel() {
 
     private val _phoneNumberForm = MutableLiveData<LoginFormState>()
@@ -138,4 +139,5 @@ class LoginViewModel(
     fun isMandatoryLogin() = configurations.isLoginMandatory()
     suspend fun setLogInSkipped() = dataStoreRepository.setLoginSkipped()
 
+    fun getOTPFromMessage(message: String) = genericMethods.getOTPFromMessage(message)
 }

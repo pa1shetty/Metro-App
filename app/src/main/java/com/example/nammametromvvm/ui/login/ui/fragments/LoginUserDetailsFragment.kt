@@ -1,5 +1,6 @@
 package com.example.nammametromvvm.ui.login.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -11,6 +12,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +29,9 @@ import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.StatusEnum
 import com.example.nammametromvvm.utility.logs.CustomButton
+import com.google.android.gms.auth.api.credentials.Credential
+import com.google.android.gms.auth.api.credentials.Credentials
+import com.google.android.gms.auth.api.credentials.HintRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -52,9 +59,39 @@ class LoginUserDetailsFragment : Fragment() {
         return (binding.root)
     }
 
+
+    private fun requestPhoneNumberHint() {
+        val hintRequest = HintRequest.Builder()
+            .setPhoneNumberIdentifierSupported(true)
+            //.setEmailAddressIdentifierSupported(true)
+            .build()
+        val intent = Credentials.getClient(requireActivity()).getHintPickerIntent(hintRequest)
+        val intentSenderRequest = IntentSenderRequest.Builder(intent.intentSender)
+        phoneNumberHintLauncher.launch(intentSenderRequest.build())
+    }
+
+    @SuppressLint("SetTextI18n")
+    var phoneNumberHintLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result: ActivityResult? ->
+        if (result != null && result.data != null) {
+            val data = result.data
+            val credential: Credential? = data?.getParcelableExtra(Credential.EXTRA_KEY)
+            if (credential != null) {
+                // var phoneNum: String = credential.id
+                var phoneNum = "+919741028810"
+                if (phoneNum.contains("+91")) phoneNum = phoneNum.replace("+91", "")
+                binding.etPhoneNumber.setText(phoneNum)
+                binding.etPhoneNumber.setSelection(binding.etPhoneNumber.length())
+            }
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+        requestPhoneNumberHint()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

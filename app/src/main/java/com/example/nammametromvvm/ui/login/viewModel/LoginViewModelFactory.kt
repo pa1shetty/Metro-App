@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.utility.Configurations
+import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.UserRegistration
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import javax.inject.Inject
@@ -22,7 +23,8 @@ class LoginViewModelFactory @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
     private val configurations: Configurations,
     private val loggerClass: LoggerClass,
-    private val userRegistration: UserRegistration
+    private val userRegistration: UserRegistration,
+    private val genericMethods: GenericMethods
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return LoginViewModel(
@@ -30,7 +32,8 @@ class LoginViewModelFactory @Inject constructor(
             dataStoreRepository,
             configurations,
             loggerClass,
-            userRegistration
+            userRegistration,
+            genericMethods
         ) as T
     }
 }

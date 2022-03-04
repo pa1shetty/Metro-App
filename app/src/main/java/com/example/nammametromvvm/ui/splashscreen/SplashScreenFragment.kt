@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,8 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.UpdateData
-import com.example.nammametromvvm.databinding.ActivitySplashScreenBinding
 import com.example.nammametromvvm.databinding.BottomSheetDialogLayoutBinding
+import com.example.nammametromvvm.databinding.FragmentSplashScreenBinding
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum.UP_TO_DATE
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum.*
@@ -25,6 +26,10 @@ import com.example.nammametromvvm.utility.GeneralException
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.example.nammametromvvm.utility.theme.HandleTheme
 import com.example.nammametromvvm.utility.toast
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.credentials.Credential
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +40,7 @@ import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
-class SplashScreenActivity : Fragment() {
+class SplashScreenFragment : Fragment() {
     private lateinit var viewModel: SplashViewModel
 
     @Inject
@@ -49,7 +54,7 @@ class SplashScreenActivity : Fragment() {
 
     @Inject
     lateinit var testString: String
-    private lateinit var binding: ActivitySplashScreenBinding
+    private lateinit var binding: FragmentSplashScreenBinding
     private lateinit var updateDialogueBinding: BottomSheetDialogLayoutBinding
 
     @Inject
@@ -60,13 +65,14 @@ class SplashScreenActivity : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        binding = FragmentSplashScreenBinding.inflate(layoutInflater)
         return (binding.root)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
+        savePhoneNumber()
     }
 
 
@@ -272,14 +278,14 @@ class SplashScreenActivity : Fragment() {
 
     private fun navigateToHomeScreen() {
         navigateTo(
-            SplashScreenActivityDirections.actionSplashScreenActivityToHomeFragment(
+            SplashScreenFragmentDirections.actionSplashScreenActivityToHomeFragment(
             )
         )
     }
 
     private fun navigateToLoginUserDetailsScreen() {
         navigateTo(
-            SplashScreenActivityDirections.actionSplashScreenActivityToLoginUserDetailsFragment(
+            SplashScreenFragmentDirections.actionSplashScreenActivityToLoginUserDetailsFragment(
                 getString(R.string.navigated_from_splash_screen)
             )
         )
@@ -290,4 +296,21 @@ class SplashScreenActivity : Fragment() {
             navDirections
         )
     }
+
+    fun savePhoneNumber() {
+        val phoneNumber = "9741028810"
+        val credential: Credential = Credential.Builder(phoneNumber)
+            .setAccountType("https://com.example.nammametromvvm")
+            .build()
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .build()
+        val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        Auth.CredentialsApi.save(mGoogleSignInClient.asGoogleApiClient(), credential)
+            .setResultCallback { status ->
+                Log.d("test1515", "savePhoneNumber: " + status.statusMessage)
+            }
+    }
+
+
 }

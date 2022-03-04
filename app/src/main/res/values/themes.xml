@@ -15,6 +15,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorSplashScreenBg</item>
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Choice</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
         <!-- Customize your theme here. -->
     </style>
@@ -26,5 +27,13 @@
         <item name="colorSecondary">@color/bmrcl_color</item>
         <item name="fontFamily">@font/solway_regular</item>
 
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 </resources>

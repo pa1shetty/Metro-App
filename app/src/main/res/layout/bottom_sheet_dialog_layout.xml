@@ -57,8 +57,9 @@
             android:id="@+id/negative_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            style="?attr/borderlessButtonStyle"
             android:text="@string/no_thanks"
+            android:layout_marginEnd="2dp"
             android:textColor="@color/bmrcl_color" />
 
         <com.google.android.material.button.MaterialButton
@@ -66,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="2dp"
             android:backgroundTint="@color/bmrcl_color"
             android:text="@string/update" />
     </LinearLayout>

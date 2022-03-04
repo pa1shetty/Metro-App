@@ -68,7 +68,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okHttpClient.build())
-                .baseUrl(getBaseUrl(BaseUrlTypeEnum.ONE_NOT_ONE.baseUrlType))
+                .baseUrl(getBaseUrl(BaseUrlTypeEnum.PavanLocal.baseUrlType))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build().create(MyApi::class.java)

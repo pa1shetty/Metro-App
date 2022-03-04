@@ -75,5 +75,9 @@
     <string name="click_here_to_add_top_up_a_card">Click here to Add,Top up a card.</string>
     <string name="click_here_to_click_here_to_purchase_or_use_qr_tickets">Click here to Click here to Purchase or Use QR Tickets.</string>
     <string name="qr_tickets">QR Tickets</string>
+    <string name="log_in">Log In</string>
+    <string name="not_now">Not Now</string>
+    <string name="login_required">Login Required</string>
+    <string name="login_required_details">You need to login to use this feature. \n Would you like to Login?</string>
 
 </resources>

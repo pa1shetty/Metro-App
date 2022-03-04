@@ -1,13 +1,18 @@
 package com.example.nammametromvvm.ui.login.ui.fragments
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -27,10 +32,13 @@ import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.StatusEnum
+import com.example.nammametromvvm.utility.broadcasts.SmsBroadcastReceiver
 import com.example.nammametromvvm.utility.logs.CustomButton
+import com.google.android.gms.auth.api.phone.SmsRetriever
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class LoginOtpDetailsFragment : Fragment() {
@@ -48,6 +56,7 @@ class LoginOtpDetailsFragment : Fragment() {
 
     @Inject
     lateinit var configurationsClass: Configurations
+    private lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
 
     @Inject
     lateinit var factory: LoginViewModelFactory
@@ -62,7 +71,56 @@ class LoginOtpDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+        startSmsUserConsent()
+        registerToSmsBroadcastReceiver()
     }
+
+    private fun startSmsUserConsent() {
+        SmsRetriever.getClient(requireActivity()).also {
+            it.startSmsUserConsent(null)
+                .addOnSuccessListener {
+                    Log.d(TAG, "LISTENING_SUCCESS")
+                }
+                .addOnFailureListener {
+                    Log.d(TAG, "LISTENING_FAILURE")
+                }
+        }
+    }
+
+    private fun registerToSmsBroadcastReceiver() {
+        smsBroadcastReceiver = SmsBroadcastReceiver().also {
+            it.smsBroadcastReceiverListener =
+                object : SmsBroadcastReceiver.SmsBroadcastReceiverListener {
+                    override fun onSuccess(intent: Intent?) {
+                        if (intent != null) {
+                            smsResultLauncher.launch(intent)
+                        }
+                    }
+
+                    override fun onFailure() {
+                    }
+                }
+        }
+
+
+        val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
+        requireActivity().registerReceiver(smsBroadcastReceiver, intentFilter)
+
+    }
+
+    var smsResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            val message = data?.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE)
+            message?.let {
+                requireActivity().unregisterReceiver(smsBroadcastReceiver)
+                binding.etOtp.setText(loginViewModel.getOTPFromMessage(message))
+            }
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -213,6 +271,8 @@ class LoginOtpDetailsFragment : Fragment() {
     }
 
     private fun resendOtp() {
+        requireActivity().unregisterReceiver(smsBroadcastReceiver)
+        registerToSmsBroadcastReceiver()
         loginViewModel.stopResendTimer()
         loginViewModel.startResendTimer()
     }
@@ -222,5 +282,12 @@ class LoginOtpDetailsFragment : Fragment() {
         super.onDetach()
     }
 
+    companion object {
+        const val TAG = "SMS_USER_CONSENT"
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        // requireActivity().unregisterReceiver(smsBroadcastReceiver)
+    }
 }

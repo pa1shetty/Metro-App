@@ -5,6 +5,7 @@ import com.example.nammametromvvm.data.repositaries.NetworkRepository
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.Configurations
+import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.UserRegistration
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import dagger.Module
@@ -25,12 +26,14 @@ object LoginScreenModule {
         configurations: Configurations,
         loggerClass: LoggerClass,
         userRegistration: UserRegistration,
+        genericMethods: GenericMethods
     ) = LoginViewModelFactory(
         app,
         networkRepository,
         dataStoreRepository,
         configurations,
         loggerClass,
-        userRegistration
+        userRegistration,
+        genericMethods
     )
 }
