@@ -32,9 +32,8 @@ With following functionalities
 Around 35% of the development has been completed.
     
 ## 📸 Video
-![Video](https://photos.app.goo.gl/FaHFbBm4EaYH5GqZ6) 
+![Video](https://user-images.githubusercontent.com/24766565/156734535-cb7a22c6-6e72-4539-81bf-7320646d016d.mp4) 
 
-[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](media/8.mp4)
 
 ## 📸 Screenshots
 
