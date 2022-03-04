@@ -33,6 +33,7 @@ Around 35% of the development has been completed.
     
 ## 📸 Video
 ![Video](media/8.mp4) 
+[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/T-D1KVIuvjA)
 
 ## 📸 Screenshots
 
