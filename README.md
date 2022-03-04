@@ -32,7 +32,7 @@ With following functionalities
 Around 35% of the development has been completed.
     
 ## 📸 Video
-[](media/8.mp4) 
+![Video](media/8.mp4) 
 
 ## 📸 Screenshots
 
