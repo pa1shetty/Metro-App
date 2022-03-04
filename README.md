@@ -17,21 +17,22 @@ With following functionalities
     
  - [x] Login Screen
     - [x] Login
-    - [ ] Auto fetch user phone number
-    - [ ] Auto fetch OTP
+    - [x] Auto fetch user phone number
+    - [x] Auto fetch OTP
 
  - [x] Settings screen
     - [x] Logout
-    - [ ] Theme change
+    - [x] Theme change
     - [ ] Language change
 
-- [ ] Home Screen
+- [x] Home Screen
 - [ ] Card functionality
 - [ ] Qr Ticket functionality
 
-Around 25% of the development has been completed.
+Around 35% of the development has been completed.
     
- 
+## 📸 Video
+
  
 ## 📸 Screenshots
 
