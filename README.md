@@ -32,8 +32,9 @@ With following functionalities
 Around 35% of the development has been completed.
     
 ## 📸 Video
-![Video](media/8.mp4) 
-[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/T-D1KVIuvjA)
+![Video](https://photos.app.goo.gl/FaHFbBm4EaYH5GqZ6) 
+
+[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](media/8.mp4)
 
 ## 📸 Screenshots
 
