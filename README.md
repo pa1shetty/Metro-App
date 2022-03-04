@@ -32,15 +32,14 @@ With following functionalities
 Around 35% of the development has been completed.
     
 ## 📸 Video
-https://photos.app.goo.gl/eUsBLq6vxHAagF6z5
-<a href="https://photos.app.goo.gl/2A5fJXQCuvkd7SNT9"><img src="https://photos.app.goo.gl/2A5fJXQCuvkd7SNT9" style="width: 500px; max-width: 100%; height: auto" title="Click for the larger version." /></a>
+media/8.mp4
 
 ## 📸 Screenshots
 
 ||||
 |:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
 | ![Splash Screen](media/1.jpg) | ![Login Screen](media/2.jpg) | ![Otp Screen](media/3.jpg) |
-| ![Home Screen](https://photos.app.goo.gl/eUsBLq6vxHAagF6z5)  | ![Settings Screen - Light](media/5.jpg) | ![Home Screen - Light](https://photos.app.goo.gl/eUsBLq6vxHAagF6z5)    |
+| ![Home Screen](media/4.jpg)  | ![Settings Screen - Light](media/5.jpg) | ![Home Screen - Light](media/6.jpg)    |
 | ![Settings Screen - Light](media/7.jpg) 
 
 ## Built With 🛠
