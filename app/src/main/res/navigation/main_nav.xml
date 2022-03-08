@@ -168,5 +168,16 @@
         android:id="@+id/qrTicketsFragment"
         android:name="com.example.nammametromvvm.ui.qrtickets.ui.QrTicketsFragment"
         android:label="fragment_qr_tickets"
-        tools:layout="@layout/fragment_qr_tickets" />
+        tools:layout="@layout/fragment_qr_tickets">
+        <action
+            android:id="@+id/action_qrTicketsFragment_to_stationSelectionScreen"
+            app:destination="@id/stationSelectionScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/stationSelectionScreen"
+        android:name="com.example.nammametromvvm.ui.qrtickets.ui.qrTicketPurchase.StationSelectionScreen"
+        android:label="fragment_station_selection_screen"
+        app:enterAnim="@anim/slide_up"
+        app:popExitAnim="@anim/slide_down"
+        tools:layout="@layout/fragment_station_selection_screen" />
 </navigation>

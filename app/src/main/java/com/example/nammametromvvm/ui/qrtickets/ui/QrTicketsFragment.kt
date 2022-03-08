@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentQrTicketsBinding
 import com.example.nammametromvvm.ui.qrtickets.adapter.ViewPagerAdapter
+import com.example.nammametromvvm.ui.qrtickets.ui.QrTicketsFragmentDirections.Companion.actionQrTicketsFragmentToStationSelectionScreen
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModel
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
@@ -64,6 +67,9 @@ class QrTicketsFragment : Fragment() {
         binding.srTickets.setOnRefreshListener {
             fetchTicketList()
         }
+        binding.fabPurchaseQrTicket.setOnClickListener {
+            navigateTo(actionQrTicketsFragmentToStationSelectionScreen())
+        }
     }
 
     private fun getTicketListFromDb() {
@@ -102,5 +108,10 @@ class QrTicketsFragment : Fragment() {
     ): View {
         binding = FragmentQrTicketsBinding.inflate(layoutInflater)
         return (binding.root)
+    }
+    private fun navigateTo(navDirections: NavDirections) {
+        findNavController().navigate(
+            navDirections
+        )
     }
 }

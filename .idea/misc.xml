@@ -25,39 +25,30 @@
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_help.xml" value="0.1" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_otp_details.xml" value="0.1796875" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_login_user_details.xml" value="0.22" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_other_ticket.xml" value="0.1140625" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_qr_tickets.xml" value="0.1140625" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_settings.xml" value="0.2" />
+        <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_station_selection_screen.xml" value="0.33" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/fragment_term_and_condition.xml" value="0.27291666666666664" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/layout/settings_activity.xml" value="0.1765625" />
         <entry key="..\:/SVN/Training/Other Training Projects/NammaMetroMVVM/app/src/main/res/xml/root_preferences.xml" value="0.25" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/ic_baseline_pending_24.xml" value="0.134" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/ic_no_qr_code.xml" value="0.127" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/ic_round_account_circle_24.xml" value="0.127" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/ic_round_arrow_back.xml" value="0.127" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/ic_round_arrow_back_ios_new_24.xml" value="0.127" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/ic_ticket.xml" value="0.137" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/rounded_dialog.xml" value="0.137" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/drawable/tab_indicator.xml" value="0.127" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/activity_login.xml" value="0.12395833333333334" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/activity_splash_screen.xml" value="0.11614583333333334" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.176" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/bus_stop_item.xml" value="0.11614583333333334" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.11614583333333334" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_card_top_up.xml" value="0.11614583333333334" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_home.xml" value="0.144" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_login_help.xml" value="0.11614583333333334" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_login_otp_details.xml" value="0.10400000000000001" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_login_user_details.xml" value="0.22826086956521738" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_other_ticket.xml" value="0.11614583333333334" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_profile.xml" value="0.22826086956521738" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_qr_tickets.xml" value="0.536" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_settings.xml" value="0.15706806282722513" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/ticket_item.xml" value="0.41007194244604317" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/unused_ticket_fragment.xml" value="0.11614583333333334" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_qr_tickets.xml" value="0.11614583333333334" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_settings.xml" value="0.2" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

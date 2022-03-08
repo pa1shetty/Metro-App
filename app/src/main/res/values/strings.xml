@@ -93,5 +93,9 @@
     <string name="from_station">From Station</string>
     <string name="to_station">To Station</string>
     <string name="status">Status</string>
+    <string name="available_stations">Available Stations</string>
+    <string name="enter_dest_station">Enter To Station</string>
+    <string name="enter_source_station">Enter From Station</string>
+    <string name="label">Label</string>
 
 </resources>

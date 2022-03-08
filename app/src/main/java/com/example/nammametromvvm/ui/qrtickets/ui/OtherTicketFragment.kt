@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nammametromvvm.databinding.FragmentOtherTicketBinding
 import com.example.nammametromvvm.ui.qrtickets.adapter.TicketAdapter
@@ -69,5 +71,11 @@ class OtherTicketFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun navigateTo(navDirections: NavDirections) {
+        findNavController().navigate(
+            navDirections
+        )
     }
 }
