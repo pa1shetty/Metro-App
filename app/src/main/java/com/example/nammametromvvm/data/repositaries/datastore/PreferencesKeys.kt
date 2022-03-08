@@ -12,6 +12,7 @@ object PreferencesKeys {
     val configLastModifiedOn = stringPreferencesKey("configLastModifiedOn")
     val userLoggedIn = booleanPreferencesKey("userLoggedIn")
     val cToken = stringPreferencesKey("cToken")
+    val splTkn = stringPreferencesKey("splTkn")
     val cKey = stringPreferencesKey("cKey")
     val loginSkipped = booleanPreferencesKey("loginSkipped")
     val currentTheme = stringPreferencesKey("theme")

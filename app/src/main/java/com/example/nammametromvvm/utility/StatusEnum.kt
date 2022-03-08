@@ -8,3 +8,12 @@ enum class StatusEnum(val statusReturn: Int) {
     ERROR(-1),
     NO_INTERNET(-2),
 }
+
+enum class TicketType(val ticketType: Int) {
+    PENDING(1),
+    FAILED(2),
+    UNUSED(4),
+    CANCELLED(5),
+    USED(7),
+    EXPIRED(8)
+}

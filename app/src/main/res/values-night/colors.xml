@@ -7,8 +7,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="splashscreen_bg">#FF000000</color>
 
-    <color name="bmrcl_color">#EC74EC</color>
-    <color name="colorSplashScreenBg">#1D1C1C</color>
+    <color name="bmrcl_color">#800080</color>
+    <color name="bmrcl_color_bg">#3c4043</color>
+
+    <color name="colorSplashScreenBg">#202124</color>
     <color name="textColor">@color/white</color>
     <color name="lightGray">#D3D3D3</color>
+    <color name="icon_color">#b7b7b7</color>
+
 </resources>

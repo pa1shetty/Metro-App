@@ -117,6 +117,7 @@ object AppModule {
     @Singleton
     fun provideUserRegistration(
         dataBaseRepository: DataBaseRepository,
-        dataStoreRepository: DataStoreRepository
-    ) = UserRegistration(dataBaseRepository, dataStoreRepository)
+        dataStoreRepository: DataStoreRepository,
+        networkRepository: NetworkRepository
+    ) = UserRegistration(dataBaseRepository, dataStoreRepository, networkRepository)
 }

@@ -47,4 +47,20 @@
     <string name="log_in">Log In</string>
     <string name="login_required">Login Required</string>
     <string name="login_required_details">You need to login to use this feature. \n Would you like to Login?</string>
+    <string name="unused">Unused</string>
+    <string name="other">Other</string>
+    <string name="no_qr_tickets_present">No QR Tickets Present</string>
+    <string name="rs_symbol">₹</string>
+    <string name="purchased_on">Purchased On  %1$s</string>
+    <string name="used_on">Used On %1$s</string>
+    <string name="cancelled_on">Cancelled On %1$s</string>
+    <string name="expired_on">Expired On %1$s</string>
+    <string name="purchase_initiated_on">Purchase Initiated On %1$s</string>
+    <string name="more">More</string>
+    <string name="purchase_new_ticket">Purchase New Ticket</string>
+    <string name="not_now">Not Now</string>
+    <string name="from_station">From Station</string>
+    <string name="to_station">To Station</string>
+    <string name="status">Status</string>
+
 </resources>

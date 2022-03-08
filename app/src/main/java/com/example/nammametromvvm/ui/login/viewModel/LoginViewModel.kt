@@ -96,6 +96,7 @@ class LoginViewModel(
         withContext(Dispatchers.IO) {
             try {
                 userRegistration.userLoggedIn(networkRepository.verifyOtp(otp))
+
                 return@withContext LoginResult(success = true)
             } catch (e: ApiException) {
                 loggerClass.error(e)

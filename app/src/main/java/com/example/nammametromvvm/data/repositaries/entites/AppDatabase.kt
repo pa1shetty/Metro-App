@@ -6,13 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [User::class, Config::class],
+    entities = [User::class, Config::class, QrTicket::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getUserDao(): UserDao
     abstract fun getConfigDao(): ConfigDao
-
+    abstract fun getQrTickets(): QrTicketsDao
     companion object {
         @Volatile
         private var instance: AppDatabase? = null

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="false"
+    android:elevation="18dp"
+    android:focusable="false"
+    android:padding="4dp"
+    app:cardCornerRadius="@dimen/corner_radius"
+    app:rippleColor="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bmrcl_color_bg"
+        android:padding="@dimen/corner_radius">
+
+        <ImageView
+            android:id="@+id/iv_from_station"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/from_station"
+            android:src="@drawable/ic_round_circle"
+            app:layout_constraintBottom_toBottomOf="@id/tv_from_station"
+            app:layout_constraintEnd_toStartOf="@id/tv_from_station"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_from_station"
+            app:tint="@color/lightGray" />
+
+        <ImageView
+            android:id="@+id/iv_to_station"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/to_station"
+            android:src="@drawable/ic_round_circle"
+            app:layout_constraintBottom_toBottomOf="@id/tv_to_station"
+            app:layout_constraintEnd_toStartOf="@id/tv_to_station"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_to_station"
+            app:tint="@color/lightGray" />
+
+        <ImageView
+            android:id="@+id/iv_status"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/status"
+            android:src="@drawable/ic_round_circle"
+            app:layout_constraintBottom_toBottomOf="@id/tv_status"
+            app:layout_constraintEnd_toStartOf="@id/tv_status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_status"
+            app:tint="@color/green" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_more"
+            app:layout_constraintStart_toEndOf="@id/iv_status"
+            app:layout_constraintTop_toBottomOf="@id/iv_to_station"
+            tools:text="Purchased On 07 March" />
+
+        <TextView
+            android:id="@+id/tv_from_station"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_fare"
+            app:layout_constraintEnd_toStartOf="@+id/btn_more"
+            app:layout_constraintStart_toEndOf="@+id/iv_from_station"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="From Station" />
+
+        <TextView
+            android:id="@+id/tv_to_station"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/corner_radius"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btn_more"
+            app:layout_constraintStart_toEndOf="@+id/iv_to_station"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fare"
+            tools:text="To Station" />
+
+        <TextView
+            android:id="@+id/tv_fare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/corner_radius"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_to_station"
+
+            app:layout_constraintStart_toStartOf="@id/tv_from_station"
+            app:layout_constraintTop_toBottomOf="@+id/tv_from_station"
+            tools:text="20Rs" />
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/lightGray"
+            app:layout_constraintBottom_toTopOf="@id/iv_to_station"
+            app:layout_constraintEnd_toEndOf="@id/iv_from_station"
+            app:layout_constraintStart_toStartOf="@id/iv_from_station"
+            app:layout_constraintTop_toBottomOf="@id/iv_from_station" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btn_more"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_margin="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/bmrcl_color_bg"
+            app:cardCornerRadius="38dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_from_station"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/bmrcl_color"
+            app:strokeWidth="2dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/more"
+                android:src="@drawable/ic_round_arrow_forward_ios_24"
+                app:tint="@color/bmrcl_color" />
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -4,11 +4,13 @@ import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.CON
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.READ_TIME_OUT
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.cTokenLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.getBaseUrl
+import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.keyLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.modifiedOnLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.mserver
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.otpLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.phoneNumberLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.requestTypeLbl
+import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.splTknLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.typeIdLbl
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.versionLbl
 import com.google.gson.Gson
@@ -19,6 +21,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
@@ -45,6 +48,13 @@ interface MyApi {
         @Query(phoneNumberLbl) phoneNumber: String,
     ): Response<JsonObject>
 
+
+    @GET("ticketList")
+    suspend fun fetchTicketList(
+        @Query(requestTypeLbl) requestType: String,
+        @Query(splTknLbl) splTkn: String
+    ): Response<JsonObject>
+
     @POST(mserver)
     suspend fun verifyOtp(
         @Query(requestTypeLbl) requestType: String,
@@ -52,6 +62,12 @@ interface MyApi {
         @Query(cTokenLbl) cToken: String
     ): Response<JsonObject>
 
+    @POST(mserver)
+    suspend fun register(
+        @Query(requestTypeLbl) requestType: String,
+        @Query(keyLbl) key: String,
+        @Query(cTokenLbl) cToken: String
+    ): Response<JsonObject>
 
     companion object {
         var gson: Gson = GsonBuilder()
@@ -68,7 +84,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okHttpClient.build())
-                .baseUrl(getBaseUrl(BaseUrlTypeEnum.PavanLocal.baseUrlType))
+                .baseUrl(getBaseUrl(BaseUrlTypeEnum.PostMan.baseUrlType))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build().create(MyApi::class.java)

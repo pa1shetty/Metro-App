@@ -166,7 +166,7 @@
         tools:layout="@layout/fragment_card_top_up" />
     <fragment
         android:id="@+id/qrTicketsFragment"
-        android:name="com.example.nammametromvvm.QrTicketsFragment"
+        android:name="com.example.nammametromvvm.ui.qrtickets.ui.QrTicketsFragment"
         android:label="fragment_qr_tickets"
         tools:layout="@layout/fragment_qr_tickets" />
 </navigation>

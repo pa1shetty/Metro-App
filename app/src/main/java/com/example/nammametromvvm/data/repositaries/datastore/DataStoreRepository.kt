@@ -82,6 +82,15 @@ class DataStoreRepository @Inject constructor(
         )
     }
 
+    suspend fun saveSplTkn(cToken: String) {
+        saveStringData(PreferencesKeys.splTkn, cToken)
+    }
+
+    suspend fun getSplTkn(): String {
+        return getStringData(
+            PreferencesKeys.splTkn
+        )
+    }
 
     suspend fun saveCKey(cKey: String = dataStoreDefaultValue) {
         saveStringData(PreferencesKeys.cKey, cKey)

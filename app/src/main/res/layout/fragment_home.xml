@@ -38,29 +38,6 @@
         app:layout_constraintStart_toEndOf="@id/cv_profile"
         app:layout_constraintTop_toTopOf="@id/cv_profile" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/splashscreen_bg"
-        app:cardCornerRadius="250dp"
-        app:layout_constraintEnd_toStartOf="@id/tv_user_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="?actionBarItemBackground"
-            android:clickable="true"
-            android:contentDescription="@string/profile"
-            android:focusable="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_round_account_circle_24"
-            app:tint="@color/bmrcl_color" />
-    </androidx.cardview.widget.CardView>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_settings"
         android:layout_width="match_parent"
@@ -80,7 +57,7 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_card_top_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,7 +137,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_qr_tickets"
@@ -242,6 +219,31 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorSplashScreenBg"
+        app:cardCornerRadius="250dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/nsv_settings"
+        app:layout_constraintEnd_toStartOf="@id/tv_user_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?actionBarItemBackground"
+            android:clickable="true"
+            android:contentDescription="@string/profile"
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_round_account_circle_24"
+            app:tint="@color/bmrcl_color" />
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

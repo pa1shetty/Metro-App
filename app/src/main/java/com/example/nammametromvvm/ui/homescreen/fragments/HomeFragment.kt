@@ -83,7 +83,9 @@ class HomeFragment : Fragment(), BottomSheetDialogueCallBackListener {
         }
         binding.cvQrTickets.setOnClickListener {
             lifecycleScope.launch {
-                if (homeFragmentViewModel.isUserLoggedIn()) {
+                //                if (homeFragmentViewModel.isUserLoggedIn()) {
+                //TODO
+                if (true) {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToQrTicketsFragment())
                 } else {
                     bottomSheet.bottomSheetLoginRequired(

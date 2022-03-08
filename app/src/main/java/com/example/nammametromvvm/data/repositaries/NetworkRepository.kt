@@ -3,6 +3,7 @@ package com.example.nammametromvvm.data.repositaries
 import android.util.Log
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.data.repositaries.entites.Config
+import com.example.nammametromvvm.data.repositaries.entites.QrTicket
 import com.example.nammametromvvm.data.repositaries.network.MyApi
 import com.example.nammametromvvm.data.repositaries.network.MyApi.Companion.gson
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.configLbl
@@ -14,6 +15,9 @@ import com.example.nammametromvvm.data.repositaries.network.responses.Login.getO
 import com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification.OtpVerification
 import com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification.OtpVerificationData
 import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.Update
+import com.example.nammametromvvm.data.repositaries.network.responses.register.Register
+import com.example.nammametromvvm.data.repositaries.network.responses.register.RegisterData
+import com.example.nammametromvvm.data.repositaries.network.responses.ticketDetails.QRTicketsResponse
 import com.example.nammametromvvm.utility.Configurations
 import org.json.JSONObject
 import java.util.*
@@ -101,11 +105,12 @@ class NetworkRepository @Inject constructor(
     suspend fun requestForOtp(phoneNumber: String): GetOtp {
         return gson.fromJson(apiRequest {
             api.requestForOtp(
-                RequestTypeEnum.Regiester.requestType,
+                RequestTypeEnum.RequestForOtp.requestType,
                 phoneNumber,
             )
         }, GetOtp::class.java)
     }
+
 
     suspend fun verifyOtp(otp: String): OtpVerificationData {
         return gson.fromJson(apiRequest {
@@ -116,5 +121,28 @@ class NetworkRepository @Inject constructor(
             )
         }, OtpVerification::class.java).data
     }
+
+    suspend fun register(): RegisterData {
+        return gson.fromJson(apiRequest {
+            api.register(
+                RequestTypeEnum.Regiester.requestType,
+                dataStoreRepository.getCKey(),
+                dataStoreRepository.getCToken()
+            )
+        }, Register::class.java).data
+    }
+
+    suspend fun fetchTicketList(): List<QrTicket> {
+        val response = gson.fromJson(apiRequest {
+            api.fetchTicketList(
+                RequestTypeEnum.FetchTicketList.requestType,
+                dataStoreRepository.getSplTkn()
+            )
+        }, QRTicketsResponse::class.java)
+        Log.d("test17", "fetchTicketList: " + response.data)
+        dataBaseRepository.saveTickets(response.data.qrTickets)
+        return response.data.qrTickets
+    }
+
 
 }
