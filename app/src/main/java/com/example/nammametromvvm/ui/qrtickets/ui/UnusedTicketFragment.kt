@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nammametromvvm.databinding.UnusedTicketFragmentBinding
-import com.example.nammametromvvm.ui.qrtickets.adapter.TicketAdapter
+import com.example.nammametromvvm.ui.qrtickets.adapter.QrTicketListAdapter
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModel
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModelFactory
+import com.example.nammametromvvm.utility.ui.GeneralUi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -53,25 +56,46 @@ class UnusedTicketFragment : Fragment() {
 
     private fun setUpRV() {
         binding.rvUnusedTickets.layoutManager = LinearLayoutManager(requireContext())
-        val ticketAdapter = TicketAdapter(requireContext(), viewModel.getDateMethods()) {}
+        val ticketAdapter =
+            QrTicketListAdapter(requireContext(), viewModel.getDateMethods()) { qrTicket ->
+                navigateTo(
+                    QrTicketsFragmentDirections.actionQrTicketsFragmentToQrTicketDetailsFragment(
+                        qrTicket.txnID
+                    )
+                )
+            }
         binding.rvUnusedTickets.adapter = ticketAdapter
         lifecycleScope.launch {
             viewModel.getUnusedTickets().collect { ticketList ->
                 ticketAdapter.submitList(ticketList)
                 withContext(Dispatchers.Main) {
                     if (ticketList.isEmpty()) {
-                        if (binding.rvUnusedTickets.visibility == GONE) {
-                            binding.rvUnusedTickets.visibility = VISIBLE
-                        }
+                        binding.rvUnusedTickets.visibility = GONE
                         binding.clNoTickets.visibility = VISIBLE
+                        GeneralUi.fadingAnimation(
+                            binding.clNoTickets,
+                            android.R.anim.fade_in,
+                            requireContext()
+                        )
                     } else {
+                        binding.clNoTickets.visibility = GONE
                         if (binding.rvUnusedTickets.visibility == GONE) {
                             binding.rvUnusedTickets.visibility = VISIBLE
+                            GeneralUi.fadingAnimation(
+                                binding.rvUnusedTickets,
+                                android.R.anim.fade_in,
+                                requireContext()
+                            )
                         }
-                        binding.clNoTickets.visibility = GONE
                     }
                 }
             }
         }
+    }
+
+    private fun navigateTo(navDirections: NavDirections) {
+        findNavController().navigate(
+            navDirections
+        )
     }
 }

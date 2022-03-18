@@ -1,41 +1,44 @@
-package com.example.nammametromvvm.utility.logs
+package com.example.nammametromvvm.utility.ui
 
 import android.app.Activity
-import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.example.nammametromvvm.R
-import com.example.nammametromvvm.utility.logs.LoginScreenEnum.ButtonStatusEnum
+import com.example.nammametromvvm.utility.ui.LoginScreenEnum.ButtonStatusEnum
 
-class CustomButton (
+class CustomButton(
     private val cvProceed: CardView,
-    private val ivLogin: ImageView,
     private val pbLogin: ProgressBar,
-    private val activity: Activity
+    private val activity: Activity,
+    private val ivLogin: ImageView? = null,
+    private val tvProceed: TextView? = null,
 ) {
-    fun enableLoginButton() {
+    fun enable() {
         loginButtonStatus(
             ButtonStatusEnum.ENABLE.status,
         )
     }
 
-    fun disableLoginButton() {
+    fun disable() {
         loginButtonStatus(
             ButtonStatusEnum.DISABLE.status,
         )
     }
 
-    fun loadingLoginButton() {
+    fun startLoading() {
         loginButtonStatus(
             ButtonStatusEnum.LOADING.status,
         )
 
     }
 
-    fun stopLoadingLoginButton() {
+    fun stopLoading() {
         loginButtonStatus(
             ButtonStatusEnum.NOT_LOADING.status,
         )
@@ -48,26 +51,56 @@ class CustomButton (
         when (status) {
             ButtonStatusEnum.ENABLE.status -> {
                 cvProceed.isEnabled = true
-                ivLogin.setColorFilter(
+                cvProceed.setCardBackgroundColor(
                     ContextCompat.getColor(
                         activity,
                         R.color.bmrcl_color
+                    )
+                )
+                ivLogin?.setColorFilter(
+                    ContextCompat.getColor(
+                        activity,
+                        R.color.bmrcl_color_bg
                     ), android.graphics.PorterDuff.Mode.SRC_IN
+                )
+                tvProceed?.setTextColor(
+                    ContextCompat.getColor(
+                        activity,
+                        R.color.white
+                    )
                 )
             }
             ButtonStatusEnum.DISABLE.status -> {
                 cvProceed.isEnabled = false
-                ivLogin.setColorFilter(
+                cvProceed.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        activity,
+                        R.color.bmrcl_color_bg
+                    )
+                )
+                ivLogin?.setColorFilter(
                     ContextCompat.getColor(
                         activity,
                         R.color.lightGray
                     ), android.graphics.PorterDuff.Mode.SRC_IN
                 )
+                tvProceed?.setTextColor(
+                    ContextCompat.getColor(
+                        activity,
+                        R.color.lightGray
+                    )
+                )
+
             }
             ButtonStatusEnum.LOADING.status -> {
                 cvProceed.isEnabled = false
-                pbLogin.visibility = View.VISIBLE
-                ivLogin.visibility = View.GONE
+                pbLogin.visibility = VISIBLE
+                ivLogin?.let {
+                    it.visibility = GONE
+                }
+                tvProceed?.let {
+                    it.visibility = GONE
+                }
                 activity.window.setFlags(
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
@@ -76,12 +109,18 @@ class CustomButton (
             else -> {
                 activity.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                 cvProceed.isEnabled = true
-                pbLogin.visibility = View.GONE
-                ivLogin.visibility = View.VISIBLE
+                pbLogin.visibility = GONE
+                ivLogin?.let {
+                    it.visibility = VISIBLE
+                }
+                tvProceed?.let {
+                    it.visibility = VISIBLE
+                }
             }
         }
     }
 }
+
 @Suppress("unused")
 class LoginScreenEnum {
     enum class ButtonStatusEnum(val status: Int) {

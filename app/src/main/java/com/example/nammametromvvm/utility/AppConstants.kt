@@ -2,7 +2,7 @@
 
 package com.example.nammametromvvm.utility
 
-import com.example.nammametromvvm.data.repositaries.entites.Config
+import com.example.nammametromvvm.data.repositaries.database.module.Config
 import com.example.nammametromvvm.utility.date.DateMethods.DateDifferenceTypeEnum.HOURS
 
 object AppConstants {

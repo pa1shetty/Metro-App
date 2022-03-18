@@ -9,6 +9,7 @@
 
     <color name="bmrcl_color">#800080</color>
     <color name="bmrcl_color_bg">#3c4043</color>
+    <color name="dialouge_line_color">#5B5C5C</color>
 
     <color name="colorSplashScreenBg">#202124</color>
     <color name="textColor">@color/white</color>

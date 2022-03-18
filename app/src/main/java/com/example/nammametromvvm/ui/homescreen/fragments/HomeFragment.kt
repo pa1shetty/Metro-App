@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +16,7 @@ import com.example.nammametromvvm.utility.AppConstants
 import com.example.nammametromvvm.utility.interfaces.BottomSheetDialogueCallBackListener
 import com.example.nammametromvvm.utility.ui.BottomSheet
 import com.example.nammametromvvm.utility.ui.BottomSheet.BottomSheetCalledFrom.*
+import com.example.nammametromvvm.utility.ui.GeneralUi.fadingAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -49,8 +49,7 @@ class HomeFragment : Fragment(), BottomSheetDialogueCallBackListener {
         super.onViewCreated(view, savedInstanceState)
         setUpUserName()
         setUpClick()
-        fadingAnimation(binding.root)
-
+        fadingAnimation(binding.root, android.R.anim.fade_in, requireContext())
     }
 
     private fun setUpClick() {
@@ -111,14 +110,6 @@ class HomeFragment : Fragment(), BottomSheetDialogueCallBackListener {
 
     }
 
-    private fun fadingAnimation(view: View) {
-        view.startAnimation(
-            AnimationUtils.loadAnimation(
-                requireContext(),
-                android.R.anim.fade_in
-            )
-        )
-    }
 
     override fun onNegativeButtonClick(requestedFrom: BottomSheet.BottomSheetCalledFrom) {
 

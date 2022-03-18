@@ -31,6 +31,9 @@ import javax.inject.Inject
 class QrTicketsFragment : Fragment() {
     private lateinit var binding: FragmentQrTicketsBinding
     private lateinit var viewModel: QrTicketsViewModel
+
+    @Inject
+    lateinit var factory: QrTicketsViewModelFactory
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Todo
@@ -54,8 +57,6 @@ class QrTicketsFragment : Fragment() {
         }.attach()
     }
 
-    @Inject
-    lateinit var factory: QrTicketsViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +110,7 @@ class QrTicketsFragment : Fragment() {
         binding = FragmentQrTicketsBinding.inflate(layoutInflater)
         return (binding.root)
     }
+
     private fun navigateTo(navDirections: NavDirections) {
         findNavController().navigate(
             navDirections

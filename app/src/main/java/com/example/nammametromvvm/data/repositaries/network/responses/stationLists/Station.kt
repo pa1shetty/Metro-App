@@ -4,6 +4,7 @@ package com.example.nammametromvvm.data.repositaries.network.responses.stationLi
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+
 @Entity(tableName = "station")
 data class Station(
     @SerializedName("englishName")

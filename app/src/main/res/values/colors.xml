@@ -6,9 +6,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="splashscreen_bg">#FFFFFFFF</color>
-    <color name="bmrcl_color">#800080</color>
+    <color name="bmrcl_color">#BC04BC</color>
     <color name="bmrcl_color_bg">#ffffff</color>
-
+    <color name="dialouge_line_color">#EAE9E9</color>
     <color name="colorSplashScreenBg">#ffffff</color>
     <color name="textColor">@color/black</color>
     <color name="lightRed">#F50057</color>

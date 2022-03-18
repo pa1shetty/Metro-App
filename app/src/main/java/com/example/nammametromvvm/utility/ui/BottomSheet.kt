@@ -4,12 +4,15 @@ import android.app.Activity
 import android.view.View
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.data.repositaries.BottomSheetDialogueData
+import com.example.nammametromvvm.data.repositaries.BottomSheetTicketConfirmationDialogueData
 import com.example.nammametromvvm.databinding.BottomSheetDialogLayoutBinding
+import com.example.nammametromvvm.databinding.BottomSheetTicketConfirmationBinding
 import com.example.nammametromvvm.utility.interfaces.BottomSheetDialogueCallBackListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class BottomSheet(private val bottomSheetDialogueCallBackListener: BottomSheetDialogueCallBackListener) {
+
     private fun bottomSheet(
         activity: Activity,
         bottomSheetDialogueData: BottomSheetDialogueData,
@@ -83,5 +86,64 @@ class BottomSheet(private val bottomSheetDialogueCallBackListener: BottomSheetDi
         HOME_PROFILE,
         HOME_TOP_UP,
         HOME_QR_TICKET
+    }
+
+    fun bottomSheetTicketConfirmation(
+        activity: Activity,
+        bottomSheetTicketConfirmationDialogueData: BottomSheetTicketConfirmationDialogueData,
+        calledFrom: BottomSheetCalledFrom
+    ) {
+        val bottomSheetDialog = BottomSheetDialog(activity)
+        val bottomSheetTicketConfirmationBinding =
+            BottomSheetTicketConfirmationBinding.inflate(activity.layoutInflater)
+        bottomSheetDialog.setContentView(bottomSheetTicketConfirmationBinding.root)
+        bottomSheetDialog.setCancelable(bottomSheetTicketConfirmationDialogueData.setCancelable)
+        bottomSheetDialog.setCanceledOnTouchOutside(bottomSheetTicketConfirmationDialogueData.setCanceledOnTouchOutside)
+        bottomSheetDialog.behavior.state = bottomSheetTicketConfirmationDialogueData.state
+        bottomSheetDialog.show()
+        if (bottomSheetTicketConfirmationDialogueData.showHeader) {
+            bottomSheetTicketConfirmationBinding.tvHeader.visibility = View.VISIBLE
+            bottomSheetTicketConfirmationBinding.tvHeader.text =
+                bottomSheetTicketConfirmationDialogueData.headerText
+        } else {
+            bottomSheetTicketConfirmationBinding.tvHeader.visibility = View.GONE
+        }
+
+        if (bottomSheetTicketConfirmationDialogueData.showNegativeButton) {
+            bottomSheetTicketConfirmationBinding.negativeButton.visibility = View.VISIBLE
+            bottomSheetTicketConfirmationBinding.negativeButton.text =
+                bottomSheetTicketConfirmationDialogueData.negativeButtonText
+        } else {
+            bottomSheetTicketConfirmationBinding.negativeButton.visibility = View.GONE
+        }
+        if (bottomSheetTicketConfirmationDialogueData.showPositiveButton) {
+            bottomSheetTicketConfirmationBinding.positiveButton.visibility = View.VISIBLE
+            bottomSheetTicketConfirmationBinding.positiveButton.text =
+                bottomSheetTicketConfirmationDialogueData.positiveButtonText
+        } else {
+            bottomSheetTicketConfirmationBinding.positiveButton.visibility = View.GONE
+        }
+        bottomSheetTicketConfirmationBinding.negativeButton.setOnClickListener {
+            bottomSheetDialog.cancel()
+            bottomSheetDialogueCallBackListener.onNegativeButtonClick(calledFrom)
+        }
+        bottomSheetTicketConfirmationBinding.positiveButton.setOnClickListener {
+            bottomSheetDialog.cancel()
+            bottomSheetDialogueCallBackListener.onPositiveButtonClick(calledFrom)
+        }
+
+        bottomSheetTicketConfirmationBinding.tvHeader.text =
+            bottomSheetTicketConfirmationDialogueData.headerText
+        bottomSheetTicketConfirmationBinding.tvFrom.text =
+            bottomSheetTicketConfirmationDialogueData.fromStation
+        bottomSheetTicketConfirmationBinding.tvTo.text =
+            bottomSheetTicketConfirmationDialogueData.toStation
+        bottomSheetTicketConfirmationBinding.tvOn.text =
+            bottomSheetTicketConfirmationDialogueData.travelDate
+        bottomSheetTicketConfirmationBinding.tvPassengerCount.text =
+            bottomSheetTicketConfirmationDialogueData.passengerCount
+        bottomSheetTicketConfirmationBinding.tvFare.text =
+            bottomSheetTicketConfirmationDialogueData.fare
+
     }
 }

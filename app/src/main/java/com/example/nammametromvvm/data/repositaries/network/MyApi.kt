@@ -55,6 +55,13 @@ interface MyApi {
         @Query(splTknLbl) splTkn: String
     ): Response<JsonObject>
 
+    @GET("stationList")
+    suspend fun fetchStationList(
+    ): Response<JsonObject>
+
+    @GET("fetchFare")
+    suspend fun fetchFare(): Response<JsonObject>
+
     @POST(mserver)
     suspend fun verifyOtp(
         @Query(requestTypeLbl) requestType: String,
@@ -68,6 +75,7 @@ interface MyApi {
         @Query(keyLbl) key: String,
         @Query(cTokenLbl) cToken: String
     ): Response<JsonObject>
+
 
     companion object {
         var gson: Gson = GsonBuilder()

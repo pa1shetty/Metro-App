@@ -1,10 +1,11 @@
 package com.example.nammametromvvm.data.repositaries
 
 import android.content.Context
-import com.example.nammametromvvm.data.repositaries.entites.AppDatabase
-import com.example.nammametromvvm.data.repositaries.entites.Config
-import com.example.nammametromvvm.data.repositaries.entites.QrTicket
-import com.example.nammametromvvm.data.repositaries.entites.User
+import com.example.nammametromvvm.data.repositaries.database.AppDatabase
+import com.example.nammametromvvm.data.repositaries.database.module.Config
+import com.example.nammametromvvm.data.repositaries.database.module.QrTicket
+import com.example.nammametromvvm.data.repositaries.database.module.User
+import com.example.nammametromvvm.data.repositaries.network.responses.stationLists.Station
 import com.example.nammametromvvm.utility.AppConstants.configurations
 import com.example.nammametromvvm.utility.TicketType.*
 import kotlinx.coroutines.flow.Flow
@@ -68,4 +69,13 @@ class DataBaseRepository @Inject constructor(
             )
         )
     }
+
+    fun saveStationList(stations: List<Station>) {
+        db.getStationDao().nukeStations()
+        db.getStationDao().saveStations(stations)
+    }
+
+    fun getStationList(searchQuery: String) =
+        db.getStationDao().getStations(searchQuery)
+
 }

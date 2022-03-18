@@ -1,9 +1,9 @@
 package com.example.nammametromvvm.data.repositaries
 
 import android.util.Log
+import com.example.nammametromvvm.data.repositaries.database.module.Config
+import com.example.nammametromvvm.data.repositaries.database.module.QrTicket
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
-import com.example.nammametromvvm.data.repositaries.entites.Config
-import com.example.nammametromvvm.data.repositaries.entites.QrTicket
 import com.example.nammametromvvm.data.repositaries.network.MyApi
 import com.example.nammametromvvm.data.repositaries.network.MyApi.Companion.gson
 import com.example.nammametromvvm.data.repositaries.network.NetworkConstants.configLbl
@@ -15,8 +15,11 @@ import com.example.nammametromvvm.data.repositaries.network.responses.Login.getO
 import com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification.OtpVerification
 import com.example.nammametromvvm.data.repositaries.network.responses.Login.otpVerification.OtpVerificationData
 import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.Update
+import com.example.nammametromvvm.data.repositaries.network.responses.fetchFare.Data
+import com.example.nammametromvvm.data.repositaries.network.responses.fetchFare.FetchFare
 import com.example.nammametromvvm.data.repositaries.network.responses.register.Register
 import com.example.nammametromvvm.data.repositaries.network.responses.register.RegisterData
+import com.example.nammametromvvm.data.repositaries.network.responses.stationLists.StationList
 import com.example.nammametromvvm.data.repositaries.network.responses.ticketDetails.QRTicketsResponse
 import com.example.nammametromvvm.utility.Configurations
 import org.json.JSONObject
@@ -144,5 +147,24 @@ class NetworkRepository @Inject constructor(
         return response.data.qrTickets
     }
 
+    suspend fun fetchStationList() {
+        val response = gson.fromJson(apiRequest {
+            api.fetchStationList(
+            )
+        }, StationList::class.java)
+        dataBaseRepository.saveStationList(response.data.stations)
+    }
+
+    suspend fun getFare(
+        fromStation: String,
+        toStation: String,
+        passengerCount: Int,
+        travelDate: Long
+    ): Data {
+        return gson.fromJson(apiRequest {
+            api.fetchFare(
+            )
+        }, FetchFare::class.java).data
+    }
 
 }

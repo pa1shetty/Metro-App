@@ -33,7 +33,7 @@ import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.StatusEnum
 import com.example.nammametromvvm.utility.broadcasts.SmsBroadcastReceiver
-import com.example.nammametromvvm.utility.logs.CustomButton
+import com.example.nammametromvvm.utility.ui.CustomButton
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -141,9 +141,9 @@ class LoginOtpDetailsFragment : Fragment() {
         loginViewModel.otpFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
             if (loginState.isDataValid) {
-                customButton.enableLoginButton()
+                customButton.enable()
             } else {
-                customButton.disableLoginButton()
+                customButton.disable()
             }
         })
     }
@@ -151,16 +151,16 @@ class LoginOtpDetailsFragment : Fragment() {
     private fun setProceedButton() {
         customButton = CustomButton(
             binding.cvProceed,
-            binding.ivLogin,
             binding.pbLogin,
-            requireActivity()
+            requireActivity(),
+            binding.ivLogin,
         )
-        customButton.disableLoginButton()
+        customButton.disable()
     }
 
     private fun proceedAfterLoginClick() {
         genericMethods.hideKeypad(requireActivity())
-        customButton.loadingLoginButton()
+        customButton.startLoading()
         lifecycleScope.launch {
             val loginResult = loginViewModel.verifyOtp(binding.etOtp.text.toString())
             if (loginResult.success) {
@@ -176,7 +176,7 @@ class LoginOtpDetailsFragment : Fragment() {
                     }
                 }
             }
-            customButton.stopLoadingLoginButton()
+            customButton.stopLoading()
         }
     }
 

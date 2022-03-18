@@ -172,12 +172,39 @@
         <action
             android:id="@+id/action_qrTicketsFragment_to_stationSelectionScreen"
             app:destination="@id/stationSelectionScreen" />
+        <action
+            android:id="@+id/action_qrTicketsFragment_to_qrTicketDetailsFragment"
+            app:destination="@id/qrTicketDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/stationSelectionScreen"
-        android:name="com.example.nammametromvvm.ui.qrtickets.ui.qrTicketPurchase.StationSelectionScreen"
+        android:name="com.example.nammametromvvm.ui.qrtickets.ui.StationSelectionScreen"
         android:label="fragment_station_selection_screen"
         app:enterAnim="@anim/slide_up"
         app:popExitAnim="@anim/slide_down"
-        tools:layout="@layout/fragment_station_selection_screen" />
+        tools:layout="@layout/fragment_station_selection_screen">
+        <action
+            android:id="@+id/action_stationSelectionScreen_to_ticketPurchaseScreen"
+            app:destination="@id/ticketPurchaseScreen"
+            app:popUpTo="@id/qrTicketsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketPurchaseScreen"
+        android:name="com.example.nammametromvvm.TicketPurchaseScreen"
+        android:label="fragment_ticket_purchase_screen"
+        tools:layout="@layout/fragment_ticket_purchase_screen" />
+    <fragment
+        android:id="@+id/qrTicketDetailsFragment"
+        android:name="com.example.nammametromvvm.ui.qrtickets.ui.QrTicketDetailsFragment"
+        android:label="fragment_qr_ticket_details"
+        tools:layout="@layout/fragment_qr_ticket_details">
+        <argument
+            android:name="ticketId"
+            app:argType="string" />
+    </fragment>
 </navigation>

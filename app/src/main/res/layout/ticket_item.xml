@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bmrcl_color_bg"
-        android:padding="@dimen/corner_radius">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/iv_from_station"
@@ -74,7 +74,7 @@
             android:id="@+id/tv_from_station"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tv_fare"
             app:layout_constraintEnd_toStartOf="@+id/btn_more"
@@ -86,21 +86,23 @@
             android:id="@+id/tv_to_station"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/corner_radius"
-            android:textSize="20sp"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/btn_more"
             app:layout_constraintStart_toEndOf="@+id/iv_to_station"
             app:layout_constraintTop_toBottomOf="@+id/tv_fare"
+            app:layout_constraintBottom_toTopOf="@+id/tv_status"
             tools:text="To Station" />
 
         <TextView
             android:id="@+id/tv_fare"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/corner_radius"
+            android:layout_marginTop="12dp"
             android:layout_weight="2"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/btn_more"
             app:layout_constraintBottom_toTopOf="@id/tv_to_station"
 
             app:layout_constraintStart_toStartOf="@id/tv_from_station"
@@ -137,8 +139,8 @@
             app:strokeWidth="2dp">
 
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/more"
                 android:src="@drawable/ic_round_arrow_forward_ios_24"

@@ -28,7 +28,7 @@ import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.StatusEnum
-import com.example.nammametromvvm.utility.logs.CustomButton
+import com.example.nammametromvvm.utility.ui.CustomButton
 import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.gms.auth.api.credentials.Credentials
 import com.google.android.gms.auth.api.credentials.HintRequest
@@ -114,9 +114,9 @@ class LoginUserDetailsFragment : Fragment() {
         loginViewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
             if (loginState.isDataValid) {
-                customButton.enableLoginButton()
+                customButton.enable()
             } else {
-                customButton.disableLoginButton()
+                customButton.disable()
             }
         })
 
@@ -135,7 +135,7 @@ class LoginUserDetailsFragment : Fragment() {
                         )
                     }
                 }
-                customButton.stopLoadingLoginButton()
+                customButton.stopLoading()
                 genericMethods.hideKeypad(requireActivity())
             }
         }
@@ -144,11 +144,11 @@ class LoginUserDetailsFragment : Fragment() {
     private fun setUpProceedButton() {
         customButton = CustomButton(
             binding.cvProceed,
-            binding.ivLogin,
             binding.pbLogin,
-            requireActivity()
+            requireActivity(),
+            binding.ivLogin,
         )
-        customButton.disableLoginButton()
+        customButton.disable()
     }
 
 
@@ -211,7 +211,7 @@ class LoginUserDetailsFragment : Fragment() {
 
     private fun proceedAfterLoginClick() {
         genericMethods.hideKeypad(requireActivity())
-        customButton.loadingLoginButton()
+        customButton.startLoading()
         requestForOtp(binding.etPhoneNumber.text.toString())
     }
 

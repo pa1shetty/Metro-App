@@ -1,6 +1,7 @@
-package com.example.nammametromvvm.data.repositaries.entites
+package com.example.nammametromvvm.data.repositaries.database.dao
 
 import androidx.room.*
+import com.example.nammametromvvm.data.repositaries.database.module.Config
 
 @Dao
 @Entity

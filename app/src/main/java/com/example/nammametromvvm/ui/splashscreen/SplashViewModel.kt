@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nammametromvvm.data.repositaries.DataBaseRepository
 import com.example.nammametromvvm.data.repositaries.NetworkRepository
+import com.example.nammametromvvm.data.repositaries.database.module.User
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
-import com.example.nammametromvvm.data.repositaries.entites.User
 import com.example.nammametromvvm.data.repositaries.network.responses.appUpdate.UpdateData
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.ConfigEnum.*
 import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.UpdateEnum
@@ -39,7 +39,7 @@ class SplashViewModel(
         withContext(Dispatchers.IO) {
             try {
                 val updateResponse = networkRepository.checkForUpdate()
-                dataStoreRepository.saveLastAppUpdateDate(dateMethods.currentTimeInString())
+                dataStoreRepository.saveLastAppUpdateDate(dateMethods.dateTimeInString())
                 dataStoreRepository.saveUpgradeFlag(updateResponse.UpdateData.upgradeFlag.toString())
                 return@withContext updateResponse.UpdateData
             } catch (e: ApiException) {
@@ -65,13 +65,13 @@ class SplashViewModel(
         } else {
             if (dateMethods.findDifferenceBetweenDates(
                     dateMethods.stringToDate(lastAppUpdateCheckTimeInString),
-                    dateMethods.stringToDate(dateMethods.currentTimeInString()),
+                    dateMethods.stringToDate(dateMethods.dateTimeInString()),
                     appUpdateTimeDifferenceType
                 ) > appUpdateCheckTime
             ) {
                 isUpdateCheckNeeded = true
             }
-            dateMethods.stringToDate(dateMethods.currentTimeInString())
+            dateMethods.stringToDate(dateMethods.dateTimeInString())
             dateMethods.stringToDate(lastAppUpdateCheckTimeInString)
         }
         return isUpdateCheckNeeded

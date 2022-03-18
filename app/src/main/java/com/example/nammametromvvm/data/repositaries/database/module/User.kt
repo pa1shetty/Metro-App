@@ -1,4 +1,4 @@
-package com.example.nammametromvvm.data.repositaries.entites
+package com.example.nammametromvvm.data.repositaries.database.module
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

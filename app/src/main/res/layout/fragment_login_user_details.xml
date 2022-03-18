@@ -123,6 +123,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:visibility="gone"
+            android:indeterminateTint="@color/bmrcl_color_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
             app:layout_constraintStart_toStartOf="@+id/etPhoneNumber"

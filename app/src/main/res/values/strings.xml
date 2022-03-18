@@ -94,8 +94,20 @@
     <string name="to_station">To Station</string>
     <string name="status">Status</string>
     <string name="available_stations">Available Stations</string>
-    <string name="enter_dest_station">Enter To Station</string>
-    <string name="enter_source_station">Enter From Station</string>
+    <string name="enter_dest_station">To Station</string>
+    <string name="enter_source_station">From Station</string>
     <string name="label">Label</string>
+    <string name="station_details">Station Details</string>
+    <string name="travelling_on">On</string>
+    <string name="travel_date">Travel date</string>
+    <string name="confirm_ticket">Confirm Ticket</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="from_">From:</string>
+    <string name="to_">To:</string>
+    <string name="on_">On:</string>
+    <string name="passenger_count_">Passenger Count:</string>
+    <string name="fare">Fare:</string>
+    <string name="ticket_details">Ticket Details</string>
 
 </resources>

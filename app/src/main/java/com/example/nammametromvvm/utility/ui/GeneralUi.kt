@@ -2,6 +2,7 @@ package com.example.nammametromvvm.utility.ui
 
 import android.content.Context
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
@@ -48,5 +49,14 @@ object GeneralUi {
 
     fun setBackgroundColorGreen(view: View, context: Context) {
         setBackgroundColor(view, context, R.color.green)
+    }
+
+    fun fadingAnimation(view: View, animationId: Int, context: Context) {
+        view.startAnimation(
+            AnimationUtils.loadAnimation(
+                context,
+                animationId
+            )
+        )
     }
 }

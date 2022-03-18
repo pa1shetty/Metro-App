@@ -6,7 +6,6 @@ import com.example.nammametromvvm.utility.date.DateMethods.DateConstants.date_fo
 import com.example.nammametromvvm.utility.date.DateMethods.DateConstants.date_format_this_week
 import com.example.nammametromvvm.utility.date.DateMethods.DateConstants.date_format_this_year
 import com.example.nammametromvvm.utility.date.DateMethods.DateConstants.yyyymmddhhmmss
-import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,6 +19,8 @@ class DateMethods {
         const val date_format_this_week = "d EEE"
         const val date_format_this_year = "MMM d"
         const val date_format_previous_year = "MMM yyyy"
+        const val date_format_dd_MMM_yyyy = "dd MMM yyyy"
+
     }
 
     enum class DateDifferenceTypeEnum(val DifferenceType: Int) {
@@ -31,9 +32,11 @@ class DateMethods {
     }
 
 
-    fun currentTimeInString(date: Date = Calendar.getInstance().time): String {
-        val dateFormat: DateFormat = SimpleDateFormat(yyyymmddhhmmss, Locale.getDefault())
-        return dateFormat.format(date)
+    fun dateTimeInString(
+        date: Date = Calendar.getInstance().time,
+        dateFormat: String = yyyymmddhhmmss
+    ): String {
+        return SimpleDateFormat(dateFormat, Locale.getDefault()).format(date)
     }
 
     fun stringToDate(dateInString: String, dateInStringFormat: String = yyyymmddhhmmss): Date {
@@ -120,6 +123,22 @@ class DateMethods {
             stringToDate(originalDateString, originalDateFormat),
             requiredDateFormat
         )
+    }
+
+    fun dateTimeInMilliSecond(dateInString: String, requiredDateFormat: String): Long {
+        return SimpleDateFormat(requiredDateFormat, Locale.getDefault()).parse(dateInString)!!.time
+    }
+
+    fun dateTimeInMilliSecond(dateInString: Date = Date()): Long {
+        return dateInString.time
+    }
+
+    private fun longToDate(dateLong: Long): Date {
+        return Date(dateLong)
+    }
+
+    fun longToFormattedDate(dateLong: Long, dateFormat: String): String {
+        return convertDateFormat(longToDate(dateLong), dateFormat)
     }
 
 }

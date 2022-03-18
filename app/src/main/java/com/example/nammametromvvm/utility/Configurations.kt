@@ -1,7 +1,7 @@
 package com.example.nammametromvvm.utility
 
 import com.example.nammametromvvm.data.repositaries.DataBaseRepository
-import com.example.nammametromvvm.data.repositaries.entites.Config
+import com.example.nammametromvvm.data.repositaries.database.module.Config
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -22,6 +22,9 @@ private const val MAX_OTP_OTP_RESEND_WAIT_DEF = "60"
 private const val LOGIN_MANDATORY = "login_mandatory"
 private const val LOGIN_MANDATORY_DEF = "0"
 
+private const val MIN_PASSENGER_COUNT = "min_passenger_count"
+private const val MIN_PASSENGER_COUNT_DEF = "2"
+
 class Configurations @Inject constructor(
     private val dataBaseRepository: DataBaseRepository
 ) {
@@ -37,7 +40,7 @@ class Configurations @Inject constructor(
         }
         return defaultValue
     }
-    @Suppress("unused")
+
     fun getMaxPassengerCount(): Int {
         return Integer.valueOf(getConfiguration(MAX_PASSENGER_COUNT, MAX_PASSENGER_COUNT_DEF))
     }
@@ -71,5 +74,9 @@ class Configurations @Inject constructor(
                 LOGIN_MANDATORY_DEF
             )
         ) == 1)
+    }
+
+    fun getMinPassengerCount(): Int {
+        return Integer.valueOf(getConfiguration(MIN_PASSENGER_COUNT, MIN_PASSENGER_COUNT_DEF))
     }
 }

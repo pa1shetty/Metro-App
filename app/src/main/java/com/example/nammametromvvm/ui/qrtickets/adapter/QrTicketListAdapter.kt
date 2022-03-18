@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nammametromvvm.R
-import com.example.nammametromvvm.data.repositaries.entites.QrTicket
+import com.example.nammametromvvm.data.repositaries.database.module.QrTicket
 import com.example.nammametromvvm.databinding.TicketItemBinding
 import com.example.nammametromvvm.utility.TicketType
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.ui.GeneralUi
 
-class TicketAdapter(
+class QrTicketListAdapter(
     private val context: Context,
     private val dateMethods: DateMethods,
     private val onItemClicked: (QrTicket) -> Unit
-) : ListAdapter<QrTicket, TicketAdapter.BusStopViewHolder>(DiffCallback) {
+) : ListAdapter<QrTicket, QrTicketListAdapter.BusStopViewHolder>(DiffCallback) {
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<QrTicket>() {
             override fun areItemsTheSame(oldItem: QrTicket, newItem: QrTicket): Boolean {
@@ -37,12 +37,8 @@ class TicketAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ), dateMethods
+            ), dateMethods, onItemClicked
         )
-        viewHolder.itemView.setOnClickListener {
-            val position = viewHolder.adapterPosition
-            onItemClicked(getItem(position))
-        }
         return viewHolder
     }
 
@@ -52,7 +48,8 @@ class TicketAdapter(
 
     class BusStopViewHolder(
         private var binding: TicketItemBinding,
-        private val dateMethods: DateMethods
+        private val dateMethods: DateMethods,
+        private val onItemClicked: (QrTicket) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(qrTicket: QrTicket, context: Context) {
             binding.tvFromStation.text = qrTicket.fromStop
@@ -154,6 +151,9 @@ class TicketAdapter(
                     GeneralUi.setDrawableColorOrange(binding.ivStatus, context)
                 }
 
+            }
+            binding.btnMore.setOnClickListener {
+                onItemClicked(qrTicket)
             }
         }
 

@@ -13,9 +13,10 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nammametromvvm.databinding.FragmentOtherTicketBinding
-import com.example.nammametromvvm.ui.qrtickets.adapter.TicketAdapter
+import com.example.nammametromvvm.ui.qrtickets.adapter.QrTicketListAdapter
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModel
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModelFactory
+import com.example.nammametromvvm.utility.ui.GeneralUi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -36,6 +37,7 @@ class OtherTicketFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory)[QrTicketsViewModel::class.java]
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,22 +53,37 @@ class OtherTicketFragment : Fragment() {
 
     private fun setUpRV() {
         binding.rvOtherTickets.layoutManager = LinearLayoutManager(requireContext())
-        val ticketAdapter = TicketAdapter(requireContext(), viewModel.getDateMethods()) {}
+        val ticketAdapter =
+            QrTicketListAdapter(requireContext(), viewModel.getDateMethods()) { qrTicket ->
+                navigateTo(
+                    QrTicketsFragmentDirections.actionQrTicketsFragmentToQrTicketDetailsFragment(
+                        qrTicket.txnID
+                    )
+                )
+            }
         binding.rvOtherTickets.adapter = ticketAdapter
         lifecycleScope.launch {
             viewModel.getOtherTickets().collect { ticketList ->
                 ticketAdapter.submitList(ticketList)
                 withContext(Dispatchers.Main) {
                     if (ticketList.isEmpty()) {
-                        if (binding.rvOtherTickets.visibility == GONE) {
-                            binding.rvOtherTickets.visibility = VISIBLE
-                        }
+                        binding.rvOtherTickets.visibility = GONE
                         binding.clNoTickets.visibility = VISIBLE
+                        GeneralUi.fadingAnimation(
+                            binding.clNoTickets,
+                            android.R.anim.fade_in,
+                            requireContext()
+                        )
                     } else {
+                        binding.clNoTickets.visibility = GONE
                         if (binding.rvOtherTickets.visibility == GONE) {
                             binding.rvOtherTickets.visibility = VISIBLE
+                            GeneralUi.fadingAnimation(
+                                binding.rvOtherTickets,
+                                android.R.anim.fade_in,
+                                requireContext()
+                            )
                         }
-                        binding.clNoTickets.visibility = GONE
                     }
                 }
             }
