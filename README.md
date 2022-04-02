@@ -36,6 +36,11 @@ Around 70% of the development has been completed.
 https://user-images.githubusercontent.com/24766565/156736631-83ae3d66-f7cb-4c2a-9bb0-13568c701b45.mp4
 
 
+
+https://user-images.githubusercontent.com/24766565/161376126-36591198-8325-43bc-bf64-652406a0bf13.mp4
+
+
+
 ## 📸 Screenshots
 
 ||||
