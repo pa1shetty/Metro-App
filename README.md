@@ -32,12 +32,15 @@ With following functionalities
 Around 70% of the development has been completed.
     
 ## 📸 Video
+#### Login HomeSreen Settings 
 
-[Login_Home_Screen_settings] https://user-images.githubusercontent.com/24766565/156736631-83ae3d66-f7cb-4c2a-9bb0-13568c701b45.mp4
+https://user-images.githubusercontent.com/24766565/156736631-83ae3d66-f7cb-4c2a-9bb0-13568c701b45.mp4
 
 
 
-[Qr Tickets] https://user-images.githubusercontent.com/24766565/161376126-36591198-8325-43bc-bf64-652406a0bf13.mp4
+#### Qr Ticket Screen
+
+https://user-images.githubusercontent.com/24766565/161376126-36591198-8325-43bc-bf64-652406a0bf13.mp4
 
 
 
@@ -80,6 +83,7 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
+Single Activity Architecture
 
 ## Contact 📩
 
