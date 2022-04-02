@@ -27,9 +27,9 @@ With following functionalities
 
 - [x] Home Screen
 - [ ] Card functionality
-- [ ] Qr Ticket functionality
+- [x] Qr Ticket functionality
 
-Around 35% of the development has been completed.
+Around 70% of the development has been completed.
     
 ## 📸 Video
 
@@ -42,7 +42,12 @@ https://user-images.githubusercontent.com/24766565/156736631-83ae3d66-f7cb-4c2a-
 |:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
 | ![Splash Screen](media/1.jpg) | ![Login Screen](media/2.jpg) | ![Otp Screen](media/3.jpg) |
 | ![Home Screen](media/4.jpg)  | ![Settings Screen - Light](media/5.jpg) | ![Home Screen - Light](media/6.jpg)    |
-| ![Settings Screen - Light](media/7.jpg) 
+| ![Settings Screen - Light](media/7.jpg) | ![Qr Ticket - Unused](media/9.jpg) | ![Qr Ticket - Other](media/10.jpg) |
+| ![Qr Ticket - Unused - Light](media/11.jpg) | ![Qr Ticket - Other - Light](media/12.jpg) | ![Qr Ticket Purchase Screen - Station Selection](media/13.jpg) |
+| ![Qr Ticket Purchase Screen](media/14.jpg) | ![Qr Ticket Purchase Screen - Travel Date](media/15.jpg) | ![Qr Ticket Purchase Screen - Confirmation](media/16.jpg) |
+| ![Qr Ticket Purchase Screen - Light](media/17.jpg) | ![Qr Ticket Details Screen ](media/18.jpg) | ![Qr Ticket Details Screen - Light](media/19.jpg) |
+
+
 
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
