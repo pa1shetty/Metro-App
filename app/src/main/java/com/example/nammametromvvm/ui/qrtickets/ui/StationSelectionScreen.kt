@@ -1,13 +1,12 @@
 package com.example.nammametromvvm.ui.qrtickets.ui
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -74,38 +73,17 @@ class StationSelectionScreen : Fragment(), BottomSheetDialogueCallBackListener {
             }
         }
 
-        binding.etFromStation.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
+        binding.etFromStation.doOnTextChanged { text, _, _, _ ->
+            searchForStation(
+                text?.trim().toString()
+            )
+        }
+        binding.etToStation.doOnTextChanged { text, _, _, _ ->
+            searchForStation(
+                text?.trim().toString()
+            )
+        }
 
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                searchForStation(s.trim().toString())
-            }
-
-        })
-        binding.etToStation.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                searchForStation(s.trim().toString())
-            }
-
-        })
 
     }
 
@@ -215,7 +193,7 @@ class StationSelectionScreen : Fragment(), BottomSheetDialogueCallBackListener {
                             fromStation = viewModel.getFromStation(),
                             toStation = viewModel.getToStation(),
                             passengerCount = viewModel.getPassengerCount().value.toString(),
-                            travelDate = viewModel.getCurrentTicketDateFormatted().toString(),
+                            travelDate = viewModel.getCurrentTicketDateFormatted(),
                             fare = viewModel.getTotalFare().toString()
                         )
                     bottomSheet.bottomSheetTicketConfirmation(
@@ -277,7 +255,7 @@ class StationSelectionScreen : Fragment(), BottomSheetDialogueCallBackListener {
     private fun fetchStationList() {
         Log.d("test15", "fetchStationList: ")
         lifecycleScope.launch(Dispatchers.IO) {
-            // viewModel.fetchStationList()
+            viewModel.fetchStationList()
         }
     }
 

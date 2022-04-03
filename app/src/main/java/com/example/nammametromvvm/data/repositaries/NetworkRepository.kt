@@ -51,7 +51,6 @@ class NetworkRepository @Inject constructor(
 
     @Suppress("unused")
     private suspend fun commonDownload(downloadType: String, modifiedOn: String): String {
-        Log.d("test155", "commonDownload: $downloadType $modifiedOn")
         return apiRequest {
             api.commonDownload(
                 RequestTypeEnum.Download.requestType,
@@ -128,7 +127,7 @@ class NetworkRepository @Inject constructor(
     suspend fun register(): RegisterData {
         return gson.fromJson(apiRequest {
             api.register(
-                RequestTypeEnum.Regiester.requestType,
+                RequestTypeEnum.Register.requestType,
                 dataStoreRepository.getCKey(),
                 dataStoreRepository.getCToken()
             )

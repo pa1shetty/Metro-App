@@ -1,12 +1,19 @@
 package com.example.nammametromvvm.utility.ui
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.example.nammametromvvm.R
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.common.BitMatrix
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
+import java.util.*
 
 object GeneralUi {
     fun setImageDrawable(imageView: ImageView, context: Context, icon: Int) {
@@ -59,4 +66,36 @@ object GeneralUi {
             )
         )
     }
+
+    private const val qRcodeWidth = 500
+
+    fun textToImageEncode(context: Context, Value: String): Bitmap? {
+        val qrColor = ContextCompat.getColor(context, R.color.qrColor)
+        val qrBackgroundColor = ContextCompat.getColor(context, R.color.qrBackgroundColor)
+        val bitMatrix: BitMatrix = try {
+            val hints: Hashtable<EncodeHintType, ErrorCorrectionLevel> = Hashtable()
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M)
+            MultiFormatWriter().encode(
+                Value,
+                BarcodeFormat.QR_CODE,
+                qRcodeWidth, qRcodeWidth, hints
+            )
+        } catch (Illegalargumentexception: IllegalArgumentException) {
+            return null
+        }
+        val bitMatrixWidth: Int = bitMatrix.getWidth()
+        val bitMatrixHeight: Int = bitMatrix.getHeight()
+        val pixels = IntArray(bitMatrixWidth * bitMatrixHeight)
+        for (y in 0 until bitMatrixHeight) {
+            val offset = y * bitMatrixWidth
+            for (x in 0 until bitMatrixWidth) {
+                pixels[offset + x] = if (bitMatrix.get(x, y)) qrColor else qrBackgroundColor
+            }
+        }
+
+        val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444)
+        bitmap.setPixels(pixels, 0, qRcodeWidth, 0, 0, bitMatrixWidth, bitMatrixHeight)
+        return bitmap
+    }
+
 }

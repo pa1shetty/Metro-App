@@ -15,5 +15,6 @@
     <color name="textColor">@color/white</color>
     <color name="lightGray">#D3D3D3</color>
     <color name="icon_color">#b7b7b7</color>
-
+    <color name="qrColor">@color/white</color>
+    <color name="qrBackgroundColor">@color/colorSplashScreenBg</color>
 </resources>

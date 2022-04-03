@@ -109,5 +109,13 @@
     <string name="passenger_count_">Passenger Count:</string>
     <string name="fare">Fare:</string>
     <string name="ticket_details">Ticket Details</string>
+    <string name="trip_details">Trip Details</string>
+    <string name="passenger_count">Passenger Count</string>
+    <string name="qr_code">Qr Code</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="txn_id_adapter">Transaction Id :</string>
+    <string name="order_id_adapter">Payment Id :</string>
+    <string name="payment_mode">Payment Mode :</string>
+    <string name="transaction_time">Transaction On :</string>
 
 </resources>

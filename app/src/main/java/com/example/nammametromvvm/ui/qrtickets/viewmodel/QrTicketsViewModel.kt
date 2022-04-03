@@ -47,5 +47,7 @@ class QrTicketsViewModel(
     }
 
     fun getDateMethods() = dateMethods
+    fun getTicketDetails(ticketId: String) = dataBaseRepository.getTicketDetails(ticketId)
+
 
 }

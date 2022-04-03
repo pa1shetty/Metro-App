@@ -78,4 +78,10 @@ class DataBaseRepository @Inject constructor(
     fun getStationList(searchQuery: String) =
         db.getStationDao().getStations(searchQuery)
 
+    fun getTicketDetails(ticketId: String): Flow<QrTicket> {
+        return db.getQrTickets().getTicketDetails(
+            ticketId
+        )
+    }
+
 }

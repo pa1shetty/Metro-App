@@ -51,10 +51,12 @@
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_login_user_details.xml" value="0.22826086956521738" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_other_ticket.xml" value="0.11614583333333334" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_profile.xml" value="0.22826086956521738" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_qr_ticket_details.xml" value="0.31511254019292606" />
-        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_qr_tickets.xml" value="0.536" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_qr_ticket_details.xml" value="0.2828282828282828" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_qr_tickets.xml" value="0.2" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_settings.xml" value="0.11834319526627218" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_splash_screen.xml" value="0.16394927536231885" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_station_selection_screen.xml" value="0.264" />
+        <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_term_and_condition.xml" value="0.16394927536231885" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/fragment_ticket_purchase_screen.xml" value="0.16394927536231885" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/station_item.xml" value="0.11614583333333334" />
         <entry key="..\:/Workspace/Metro-App/app/src/main/res/layout/ticket_item.xml" value="0.35251798561151076" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorSplashScreenBg">
@@ -71,20 +72,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rl_qr_ticket">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="Cancel"
-                android:textAllCaps="false"
-                app:cornerRadius="@dimen/corner_radius" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_trip_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorSplashScreenBg"
@@ -92,6 +86,10 @@
                 android:focusable="false"
                 app:cardCornerRadius="@dimen/corner_radius"
                 app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/cv_payment_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="@android:color/transparent"
                 app:strokeColor="@color/lightGray"
                 app:strokeWidth="1dp">
@@ -144,6 +142,19 @@
                         app:layout_constraintTop_toTopOf="@id/tv_status"
                         app:tint="@color/green" />
 
+                    <ImageView
+                        android:id="@+id/iv_passenger_count"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="4dp"
+                        android:contentDescription="@string/passenger_count"
+                        android:src="@drawable/ic_round_people_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_status"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_passenger_count"
+                        app:layout_constraintStart_toEndOf="@+id/tv_status"
+                        app:layout_constraintTop_toTopOf="@+id/tv_status"
+                        app:tint="@color/bmrcl_color" />
+
                     <TextView
                         android:id="@+id/tv_status"
                         android:layout_width="0dp"
@@ -151,13 +162,27 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Purchased On 07 March"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/iv_status"
-                        app:layout_constraintTop_toBottomOf="@id/iv_to_station" />
 
+                        app:layout_constraintEnd_toStartOf="@+id/iv_passenger_count"
+                        app:layout_constraintStart_toEndOf="@id/iv_status"
+                        app:layout_constraintTop_toBottomOf="@id/iv_to_station"
+                        tools:text="Purchased On 07 March" />
+
+                    <TextView
+                        android:id="@+id/tv_passenger_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/bmrcl_color"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_passenger_count"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_passenger_count"
+                        app:layout_constraintTop_toTopOf="@id/iv_passenger_count"
+                        tools:text="5" />
 
                     <TextView
                         android:id="@+id/tv_trip_details_header"
@@ -166,7 +191,7 @@
                         android:layout_marginEnd="10dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="Trip Details"
+                        android:text="@string/trip_details"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/v_line_2"
@@ -179,13 +204,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:text="From Station"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/tv_fare"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_from_station"
-                        app:layout_constraintTop_toBottomOf="@+id/v_line_2" />
+                        app:layout_constraintTop_toBottomOf="@+id/v_line_2"
+                        tools:text="From Station" />
 
                     <TextView
                         android:id="@+id/tv_to_station"
@@ -193,13 +218,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="10dp"
-                        android:text="To Station"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/tv_status"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_to_station"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_fare" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_fare"
+                        tools:text="To Station" />
 
                     <TextView
                         android:id="@+id/tv_fare"
@@ -208,13 +233,13 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="2"
-                        android:text="20Rs"
                         android:textSize="14sp"
-
                         app:layout_constraintBottom_toTopOf="@id/tv_to_station"
+
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/tv_from_station"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_from_station" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_from_station"
+                        tools:text="20Rs" />
 
                     <View
                         android:id="@+id/v_line_2"
@@ -241,17 +266,264 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_payment_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/colorSplashScreenBg"
+                android:clickable="false"
+                android:focusable="false"
+                app:cardCornerRadius="@dimen/corner_radius"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_trip_details"
+                app:rippleColor="@android:color/transparent"
+                app:strokeColor="@color/lightGray"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_payment_details"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/payment_details"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/v_line_3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/v_line_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightGray"
+                        app:layout_constraintBottom_toTopOf="@+id/cl_payment_details"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_payment_details" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_payment_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v_line_3">
+
+                        <LinearLayout
+                            android:id="@+id/ll_transaction_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+                            app:layout_constraintBottom_toTopOf="@+id/ll_payment_id"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="4dp"
+                                android:text="@string/txn_id_adapter"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_transaction_id_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:textSize="14sp"
+                                tools:text="Dfjhaus4654ss" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_payment_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+                            app:layout_constraintBottom_toTopOf="@id/ll_payment_mode"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_transaction_id">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="4dp"
+                                android:text="@string/order_id_adapter"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_payment_id_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:textSize="14sp"
+                                tools:text="Dfjhaus4654ss" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_payment_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+
+                            app:layout_constraintBottom_toTopOf="@+id/ll_transaction_on"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ll_payment_id">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="4dp"
+                                android:text="@string/payment_mode"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_payment_mode_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:textSize="14sp"
+                                tools:text="UPI" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_transaction_on"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+                            app:layout_constraintBottom_toTopOf="@+id/v_total_line"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ll_payment_mode">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="4dp"
+                                android:text="@string/transaction_time"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_transaction_on_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="50"
+                                android:textSize="14sp"
+                                tools:text="12:30 PM, 30 Sep 2021" />
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/tv_fare_total"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/fare"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_fare_total_amount"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/v_total_line" />
+
+                        <TextView
+                            android:id="@+id/tv_fare_total_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_fare_total"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tv_fare_total"
+                            app:layout_constraintTop_toTopOf="@+id/tv_fare_total"
+                            tools:text="Rs 50" />
+
+                        <View
+                            android:id="@+id/v_total_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/lightGray"
+                            app:layout_constraintBottom_toTopOf="@id/tv_fare_total"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ll_transaction_on" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:cornerRadius="@dimen/corner_radius"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/rl_qr_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/white"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="@color/colorSplashScreenBg"
         android:elevation="0dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
@@ -273,9 +545,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="16dp"
+                android:contentDescription="@string/qr_code"
                 android:src="@drawable/ic_qr_code"
                 app:layout_constraintBottom_toTopOf="@id/tv_qr_ticket_id"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -284,15 +558,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="145484AFE2DFR455"
-                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_qr_ticket" />
+                app:layout_constraintTop_toBottomOf="@id/iv_qr_ticket"
+                tools:text="145484AFE2DFR455" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

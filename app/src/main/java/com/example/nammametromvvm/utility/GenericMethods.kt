@@ -49,7 +49,6 @@ class GenericMethods {
     fun getOTPFromMessage(message: String): String {
         val otpLength = 6
         return Regex("(\\d{$otpLength})").find(message)?.value ?: ""
-
     }
 
-}
+   }

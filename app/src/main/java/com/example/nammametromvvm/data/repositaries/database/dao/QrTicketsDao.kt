@@ -23,4 +23,7 @@ interface QrTicketsDao {
     @Query("DELETE FROM qrTicket")
     fun nukeTickets()
 
+    @Query("SELECT * FROM qrTicket Where txnID in (:ticketId)")
+    fun getTicketDetails(ticketId: String): Flow<QrTicket>
+
 }

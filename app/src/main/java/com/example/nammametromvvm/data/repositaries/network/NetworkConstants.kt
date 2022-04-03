@@ -48,7 +48,7 @@ enum class RequestTypeEnum(val requestType: String) {
     Download("113"),
     RequestForOtp("103"),
     VerifyOtp("104"),
-    Regiester("105"),
+    Register("105"),
     FetchTicketList("121"),
 
 }
