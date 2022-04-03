@@ -28,6 +28,11 @@ With following functionalities
 - [x] Home Screen
 - [ ] Card functionality
 - [x] Qr Ticket functionality
+   - [x]  Qr Ticket list Screen
+   - [x]  Ticket Details Screen
+   - [x]  Ticket Purchase screen
+   - [x]  Creating QR Code from data.
+   - [ ]  Payment Gateway integration.
 
 Around 70% of the development has been completed.
     
