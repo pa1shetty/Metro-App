@@ -8,17 +8,14 @@ import android.view.View.*
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.data.repositaries.BottomSheetTicketConfirmationDialogueData
 import com.example.nammametromvvm.databinding.FragmentStationSelectionScreenBinding
 import com.example.nammametromvvm.ui.qrtickets.adapter.StationListAdapter
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrPurchaseTicketsViewModel
-import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrPurchaseTicketsViewModelFactory
 import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.interfaces.BottomSheetDialogueCallBackListener
 import com.example.nammametromvvm.utility.ui.BottomSheet
@@ -28,7 +25,6 @@ import com.google.android.material.datepicker.*
 import com.google.android.material.datepicker.CalendarConstraints.DateValidator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.*
@@ -38,7 +34,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StationSelectionScreen : Fragment(), BottomSheetDialogueCallBackListener {
 
-    lateinit var viewModel: QrPurchaseTicketsViewModel
     lateinit var binding: FragmentStationSelectionScreenBinding
     private lateinit var customButton: CustomButton
 
@@ -47,15 +42,8 @@ class StationSelectionScreen : Fragment(), BottomSheetDialogueCallBackListener {
     private var inputForValue = InputFor.FROM_STATION
     private var constraintsBuilderRange = CalendarConstraints.Builder()
     private val bottomSheet: BottomSheet = BottomSheet(this)
+    private val viewModel by viewModels<QrPurchaseTicketsViewModel>()
 
-
-    @Inject
-    lateinit var factory: QrPurchaseTicketsViewModelFactory
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, factory)[QrPurchaseTicketsViewModel::class.java]
-
-    }
 
     private fun setUpListeners() {
         binding.etFromStation.setOnFocusChangeListener { _, hasFocus ->
@@ -253,9 +241,8 @@ class StationSelectionScreen : Fragment(), BottomSheetDialogueCallBackListener {
     }
 
     private fun fetchStationList() {
-        Log.d("test15", "fetchStationList: ")
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.fetchStationList()
+        lifecycleScope.launch(Dispatchers.Main) {
+            // viewModel.fetchStationList()
         }
     }
 
@@ -273,12 +260,6 @@ class StationSelectionScreen : Fragment(), BottomSheetDialogueCallBackListener {
                 stationListAdapter.submitList(stationList)
             }
         }
-    }
-
-    private fun navigateTo(navDirections: NavDirections) {
-        findNavController().navigate(
-            navDirections
-        )
     }
 
     override fun onNegativeButtonClick(requestedFrom: BottomSheet.BottomSheetCalledFrom) {

@@ -9,7 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -17,20 +17,15 @@ import com.example.nammametromvvm.BuildConfig
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentSettingsBinding
 import com.example.nammametromvvm.ui.homescreen.viewModels.SettingsViewModel
-import com.example.nammametromvvm.ui.homescreen.viewModels.SettingsViewModelFactory
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
-    private lateinit var settingsViewModel: SettingsViewModel
+    private val settingsViewModel by viewModels<SettingsViewModel>()
 
-    @Inject
-    lateinit var factory: SettingsViewModelFactory
     private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
@@ -39,12 +34,6 @@ class SettingsFragment : Fragment() {
     ): View {
         binding = FragmentSettingsBinding.inflate(layoutInflater)
         return (binding.root)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        settingsViewModel = ViewModelProvider(this, factory)[SettingsViewModel::class.java]
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -138,6 +127,7 @@ class SettingsFragment : Fragment() {
         binding.ivBack.setOnClickListener { requireActivity().onBackPressed() }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.home) {
             requireActivity().onBackPressed()

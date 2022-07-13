@@ -16,8 +16,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -25,7 +25,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentLoginUserDetailsBinding
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
-import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.StatusEnum
 import com.example.nammametromvvm.utility.ui.CustomButton
@@ -39,15 +38,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginUserDetailsFragment : Fragment() {
-    private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginUserDetailsBinding
     private val safeArgs: LoginUserDetailsFragmentArgs by navArgs()
+    private val loginViewModel by viewModels<LoginViewModel>()
 
     @Inject
     lateinit var genericMethods: GenericMethods
-
-    @Inject
-    lateinit var factory: LoginViewModelFactory
 
     private lateinit var customButton: CustomButton
 
@@ -90,7 +86,6 @@ class LoginUserDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
         requestPhoneNumberHint()
     }
 

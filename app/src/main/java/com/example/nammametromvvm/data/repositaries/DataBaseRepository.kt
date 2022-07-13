@@ -1,6 +1,5 @@
 package com.example.nammametromvvm.data.repositaries
 
-import android.content.Context
 import com.example.nammametromvvm.data.repositaries.database.AppDatabase
 import com.example.nammametromvvm.data.repositaries.database.module.Config
 import com.example.nammametromvvm.data.repositaries.database.module.QrTicket
@@ -29,7 +28,7 @@ class DataBaseRepository @Inject constructor(
 
     @Suppress("unused")
     fun getUser() = db.getUserDao().getUser()
-    fun clearDb(context: Context) = db.deleteDb(context)
+
 
     fun saveTickets(ticket: List<QrTicket>) {
         db.getQrTickets().nukeTickets()
@@ -83,5 +82,7 @@ class DataBaseRepository @Inject constructor(
             ticketId
         )
     }
+
+    fun clearDb() = db.clearAllTables()
 
 }

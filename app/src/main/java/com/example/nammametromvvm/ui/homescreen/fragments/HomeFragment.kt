@@ -5,44 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.nammametromvvm.R
 import com.example.nammametromvvm.databinding.FragmentHomeBinding
 import com.example.nammametromvvm.ui.homescreen.viewModels.HomeFragmentViewModel
-import com.example.nammametromvvm.ui.homescreen.viewModels.HomeFragmentViewModelFactory
 import com.example.nammametromvvm.utility.AppConstants
 import com.example.nammametromvvm.utility.interfaces.BottomSheetDialogueCallBackListener
 import com.example.nammametromvvm.utility.ui.BottomSheet
 import com.example.nammametromvvm.utility.ui.BottomSheet.BottomSheetCalledFrom.*
 import com.example.nammametromvvm.utility.ui.GeneralUi.fadingAnimation
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), BottomSheetDialogueCallBackListener {
-    private lateinit var homeFragmentViewModel: HomeFragmentViewModel
+class HomeFragment @Inject constructor(
+) : Fragment(), BottomSheetDialogueCallBackListener {
+    private val homeFragmentViewModel by viewModels<HomeFragmentViewModel>()
 
-    @Inject
-    lateinit var factory: HomeFragmentViewModelFactory
+
     private lateinit var binding: FragmentHomeBinding
     private val bottomSheet: BottomSheet = BottomSheet(this)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        homeFragmentViewModel = ViewModelProvider(this, factory)[HomeFragmentViewModel::class.java]
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return (binding.root)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,9 +74,7 @@ class HomeFragment : Fragment(), BottomSheetDialogueCallBackListener {
         }
         binding.cvQrTickets.setOnClickListener {
             lifecycleScope.launch {
-                //                if (homeFragmentViewModel.isUserLoggedIn()) {
-                //TODO
-                if (true) {
+                if (homeFragmentViewModel.isUserLoggedIn()) {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToQrTicketsFragment())
                 } else {
                     bottomSheet.bottomSheetLoginRequired(
@@ -110,6 +100,9 @@ class HomeFragment : Fragment(), BottomSheetDialogueCallBackListener {
 
     }
 
+    fun test(requestedFrom: BottomSheet.BottomSheetCalledFrom) {
+
+    }
 
     override fun onNegativeButtonClick(requestedFrom: BottomSheet.BottomSheetCalledFrom) {
 

@@ -3,31 +3,41 @@ package com.example.nammametromvvm.utility.theme
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 var themeSetupDone = false
 private var themes: ArrayList<HandleTheme.Theme> = ArrayList()
 
+@OptIn(DelicateCoroutinesApi::class)
 class HandleTheme @Inject constructor(private val dataStoreRepository: DataStoreRepository) {
-    suspend fun init() {
-        if (!themeSetupDone) {
-            dataStoreRepository.getCurrentThemeAsFlow().collect { currentTheme ->
-                when (currentTheme) {
-                    THEMEEnum.DARK.theme -> AppCompatDelegate.setDefaultNightMode(
-                        AppCompatDelegate.MODE_NIGHT_YES
-                    )
-                    THEMEEnum.LIGHT.theme -> AppCompatDelegate.setDefaultNightMode(
-                        AppCompatDelegate.MODE_NIGHT_NO
-                    )
-                    THEMEEnum.SYSTEM.theme -> {
-                        AppCompatDelegate.setDefaultNightMode(
-                            MODE_NIGHT_FOLLOW_SYSTEM
+    init {
+        GlobalScope.launch {
+            init()
+        }
+    }
+
+    private suspend fun init() {
+        withContext(Dispatchers.Main) {
+            if (!themeSetupDone) {
+                dataStoreRepository.getCurrentThemeAsFlow().collect { currentTheme ->
+                    when (currentTheme) {
+                        THEMEEnum.DARK.theme -> AppCompatDelegate.setDefaultNightMode(
+                            AppCompatDelegate.MODE_NIGHT_YES
                         )
+                        THEMEEnum.LIGHT.theme -> AppCompatDelegate.setDefaultNightMode(
+                            AppCompatDelegate.MODE_NIGHT_NO
+                        )
+                        THEMEEnum.SYSTEM.theme -> {
+                            AppCompatDelegate.setDefaultNightMode(
+                                MODE_NIGHT_FOLLOW_SYSTEM
+                            )
+                        }
                     }
                 }
+                themeSetupDone = true
             }
-            themeSetupDone = true
+
         }
     }
 

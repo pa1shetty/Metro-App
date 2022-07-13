@@ -12,19 +12,22 @@ import com.example.nammametromvvm.ui.login.data.LoginResult
 import com.example.nammametromvvm.utility.*
 import com.example.nammametromvvm.utility.StatusEnum.*
 import com.example.nammametromvvm.utility.logs.LoggerClass
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class LoginViewModel(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val networkRepository: NetworkRepository,
     private val dataStoreRepository: DataStoreRepository,
     private val configurations: Configurations,
     private val loggerClass: LoggerClass,
     private val userRegistration: UserRegistration,
-    private val genericMethods: GenericMethods
+    private val genericMethods: GenericMethods,
 ) : ViewModel() {
 
     private val _phoneNumberForm = MutableLiveData<LoginFormState>()

@@ -1,4 +1,4 @@
-package com.example.nammametromvvm.utility
+package com.example.nammametromvvm.utility.ui
 
 import android.content.Context
 import android.util.Log

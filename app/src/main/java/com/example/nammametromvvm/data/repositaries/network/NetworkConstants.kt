@@ -33,7 +33,6 @@ object NetworkConstants {
             BaseUrlTypeEnum.MockLab.baseUrlType -> "https://nammametromvvm.mocklab.io"
             BaseUrlTypeEnum.PostMan.baseUrlType -> "https://e58d0ec4-f6a5-4ebe-9ee5-c517da7bf3dc.mock.pstmn.io"
 
-
             else -> {
                 "http://uatmetro.auminfotech.in:7004/bwi_mobile/"
             }

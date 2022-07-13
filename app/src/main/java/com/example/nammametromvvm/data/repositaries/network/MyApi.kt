@@ -81,7 +81,6 @@ interface MyApi {
         var gson: Gson = GsonBuilder()
             .setLenient()
             .create()
-
         operator fun invoke(
             networkConnectionInterceptor: NetworkConnectionInterceptor
         ): MyApi {
@@ -89,7 +88,6 @@ interface MyApi {
                 OkHttpClient.Builder().addInterceptor(networkConnectionInterceptor)
             okHttpClient.connectTimeout(CONNECTION_TIME_OUT.toLong(), TimeUnit.MILLISECONDS)
             okHttpClient.readTimeout(READ_TIME_OUT.toLong(), TimeUnit.MILLISECONDS)
-
             return Retrofit.Builder()
                 .client(okHttpClient.build())
                 .baseUrl(getBaseUrl(BaseUrlTypeEnum.PostMan.baseUrlType))

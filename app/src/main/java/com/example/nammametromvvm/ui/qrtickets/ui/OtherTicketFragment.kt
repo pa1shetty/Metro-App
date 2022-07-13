@@ -7,7 +7,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -15,27 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nammametromvvm.databinding.FragmentOtherTicketBinding
 import com.example.nammametromvvm.ui.qrtickets.adapter.QrTicketListAdapter
 import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModel
-import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModelFactory
 import com.example.nammametromvvm.utility.ui.GeneralUi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class OtherTicketFragment : Fragment() {
-    private lateinit var viewModel: QrTicketsViewModel
+    private val viewModel by viewModels<QrTicketsViewModel>()
 
-    @Inject
-    lateinit var factory: QrTicketsViewModelFactory
 
     lateinit var binding: FragmentOtherTicketBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, factory)[QrTicketsViewModel::class.java]
-    }
 
 
     override fun onCreateView(

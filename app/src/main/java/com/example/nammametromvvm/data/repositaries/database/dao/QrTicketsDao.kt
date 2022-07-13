@@ -13,7 +13,6 @@ interface QrTicketsDao {
 
 
     @Query("SELECT * FROM qrTicket Where txnStatus in (:transactionStatus)")
-    @JvmSuppressWildcards
     fun getTickets(transactionStatus: List<Int>): Flow<List<QrTicket>>
 
     @Query("SELECT COUNT(*) FROM qrTicket")

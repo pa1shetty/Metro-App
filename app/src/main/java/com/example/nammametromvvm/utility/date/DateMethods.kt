@@ -9,8 +9,9 @@ import com.example.nammametromvvm.utility.date.DateMethods.DateConstants.yyyymmd
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class DateMethods {
+class DateMethods @Inject constructor() {
 
     object DateConstants {
         const val yyyymmddhhmmss = "yyyymmddhhmmss"

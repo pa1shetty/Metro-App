@@ -32,14 +32,13 @@ class QrTicketListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusStopViewHolder {
-        val viewHolder = BusStopViewHolder(
+        return BusStopViewHolder(
             TicketItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             ), dateMethods, onItemClicked
         )
-        return viewHolder
     }
 
     override fun onBindViewHolder(holder: BusStopViewHolder, position: Int) {

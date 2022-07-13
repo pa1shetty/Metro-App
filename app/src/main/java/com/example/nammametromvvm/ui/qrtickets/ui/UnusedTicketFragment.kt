@@ -19,7 +19,6 @@ import com.example.nammametromvvm.ui.qrtickets.viewmodel.QrTicketsViewModelFacto
 import com.example.nammametromvvm.utility.ui.GeneralUi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

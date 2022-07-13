@@ -6,26 +6,28 @@ import androidx.lifecycle.viewModelScope
 import com.example.nammametromvvm.data.module.StationSelection
 import com.example.nammametromvvm.data.repositaries.DataBaseRepository
 import com.example.nammametromvvm.data.repositaries.NetworkRepository
-import com.example.nammametromvvm.data.repositaries.datastore.DataStoreRepository
 import com.example.nammametromvvm.ui.qrtickets.ui.InputFor
-import com.example.nammametromvvm.utility.*
+import com.example.nammametromvvm.utility.ApiException
+import com.example.nammametromvvm.utility.Configurations
+import com.example.nammametromvvm.utility.ErrorException
+import com.example.nammametromvvm.utility.NoInternetException
 import com.example.nammametromvvm.utility.date.DateMethods
 import com.example.nammametromvvm.utility.date.DateMethods.DateConstants.date_format_dd_MMM_yyyy
 import com.example.nammametromvvm.utility.logs.LoggerClass
 import com.google.android.material.datepicker.MaterialDatePicker
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
+import javax.inject.Inject
 
-class QrPurchaseTicketsViewModel(
+@HiltViewModel
+class QrPurchaseTicketsViewModel @Inject constructor(
     private val networkRepository: NetworkRepository,
-    private val dataStoreRepository: DataStoreRepository,
     private val configurations: Configurations,
     private val loggerClass: LoggerClass,
-    private val userRegistration: UserRegistration,
-    private val genericMethods: GenericMethods,
     private val dataBaseRepository: DataBaseRepository,
-    private val dateMethods: DateMethods
+    private val dateMethods: DateMethods,
 ) : ViewModel() {
     private val _stationFetchResponse = MutableSharedFlow<Boolean>()
     val fareFetchResponse = MutableSharedFlow<Int>(0)

@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -24,8 +24,7 @@ import com.example.nammametromvvm.ui.splashscreen.enumReturn.SplashScreenEnum.Up
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GeneralException
 import com.example.nammametromvvm.utility.logs.LoggerClass
-import com.example.nammametromvvm.utility.theme.HandleTheme
-import com.example.nammametromvvm.utility.toast
+import com.example.nammametromvvm.utility.ui.toast
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -33,7 +32,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,19 +39,15 @@ import javax.inject.Inject
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashScreenFragment : Fragment() {
-    private lateinit var viewModel: SplashViewModel
 
-    @Inject
-    lateinit var factory: SplashScreenViewModelFactory
 
-    @Inject
-    lateinit var handleTheme: HandleTheme
+    private val viewModel by viewModels<SplashViewModel>()
+
 
     @Inject
     lateinit var loggerClass: LoggerClass
 
-    @Inject
-    lateinit var testString: String
+
     private lateinit var binding: FragmentSplashScreenBinding
     private lateinit var updateDialogueBinding: BottomSheetDialogLayoutBinding
 
@@ -71,7 +65,6 @@ class SplashScreenFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, factory)[SplashViewModel::class.java]
         savePhoneNumber()
     }
 
@@ -147,8 +140,9 @@ class SplashScreenFragment : Fragment() {
     private suspend fun proceedAfterConfigCheck() {
         loadingInfo(true, getString(R.string.checking_for_login_details))
         viewModel.isUserLoggedIn().collect { isUserLoggedIn ->
+
             loadingInfo(false)
-            if (isUserLoggedIn) {
+            if (true) {
                 navigateToHomeScreen()
             } else {
                 if (viewModel.isMandatoryLogin()) {

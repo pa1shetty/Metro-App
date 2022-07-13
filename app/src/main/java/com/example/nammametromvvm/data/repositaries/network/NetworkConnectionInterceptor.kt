@@ -31,8 +31,8 @@ class NetworkConnectionInterceptor @Inject constructor(
     private fun isInternetAvailable(): Boolean {
         var result = false
         val cm =
-            applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        cm?.run {
+            applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        cm.run {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 cm.getNetworkCapabilities(cm.activeNetwork)?.run {
                     result = when {

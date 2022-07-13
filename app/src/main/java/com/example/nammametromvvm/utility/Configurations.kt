@@ -1,9 +1,10 @@
+@file:OptIn(DelicateCoroutinesApi::class)
+
 package com.example.nammametromvvm.utility
 
 import com.example.nammametromvvm.data.repositaries.DataBaseRepository
 import com.example.nammametromvvm.data.repositaries.database.module.Config
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 private const val MAX_PASSENGER_COUNT = "max_passenger_count"
@@ -28,7 +29,13 @@ private const val MIN_PASSENGER_COUNT_DEF = "2"
 class Configurations @Inject constructor(
     private val dataBaseRepository: DataBaseRepository
 ) {
-    suspend fun getConfigurationsFromDb(): List<Config> =
+    init {
+        GlobalScope.launch {
+            getConfigurationsFromDb()
+        }
+    }
+
+    private suspend fun getConfigurationsFromDb(): List<Config> =
         withContext(Dispatchers.IO) {
             dataBaseRepository.getConfigs()
         }

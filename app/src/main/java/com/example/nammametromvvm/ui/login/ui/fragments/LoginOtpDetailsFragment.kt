@@ -1,7 +1,6 @@
 package com.example.nammametromvvm.ui.login.ui.fragments
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
@@ -15,8 +14,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -28,7 +27,6 @@ import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentD
 import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentDirections.Companion.actionLoginOtpDetailsFragmentToProfileFragment
 import com.example.nammametromvvm.ui.login.ui.fragments.LoginOtpDetailsFragmentDirections.Companion.actionLoginOtpDetailsFragmentToQrTicketsFragment
 import com.example.nammametromvvm.ui.login.viewModel.LoginViewModel
-import com.example.nammametromvvm.ui.login.viewModel.LoginViewModelFactory
 import com.example.nammametromvvm.utility.Configurations
 import com.example.nammametromvvm.utility.GenericMethods
 import com.example.nammametromvvm.utility.StatusEnum
@@ -44,11 +42,9 @@ import javax.inject.Inject
 class LoginOtpDetailsFragment : Fragment() {
     private val safeArgs: LoginOtpDetailsFragmentArgs by navArgs()
 
-    private lateinit var loginViewModel: LoginViewModel
-    private lateinit var binding: FragmentLoginOtpDetailsBinding
+    private val loginViewModel by viewModels<LoginViewModel>()
 
-    @Inject
-    lateinit var applicationContext: Context
+    private lateinit var binding: FragmentLoginOtpDetailsBinding
 
     @Inject
     lateinit var genericMethods: GenericMethods
@@ -58,8 +54,7 @@ class LoginOtpDetailsFragment : Fragment() {
     lateinit var configurationsClass: Configurations
     private lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
 
-    @Inject
-    lateinit var factory: LoginViewModelFactory
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,7 +65,6 @@ class LoginOtpDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
         startSmsUserConsent()
         registerToSmsBroadcastReceiver()
     }
@@ -286,8 +280,4 @@ class LoginOtpDetailsFragment : Fragment() {
         const val TAG = "SMS_USER_CONSENT"
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        // requireActivity().unregisterReceiver(smsBroadcastReceiver)
-    }
 }
